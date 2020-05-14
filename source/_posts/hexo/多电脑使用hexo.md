@@ -25,7 +25,7 @@ hexo的部署命令，其实就是：
 
 ## 步骤如下
 
-1. 创建仓库 cksspku/cksspku.github.io
+1. 创建仓库 cksspk/cksspk.github.io
 
 2. 根据提示将仓库拉取到本地，并且添加新的分支`hexo`
 
@@ -35,7 +35,7 @@ hexo的部署命令，其实就是：
    git init
    git add .
    git commit -m "init"
-   git remote add origin  https://github.com/cksspku/cksspku.github.io.git
+   git remote add origin  https://github.com/cksspk/cksspk.github.io.git
    git push -u origin master
    
    #2. 创建新的分支
@@ -52,9 +52,9 @@ hexo的部署命令，其实就是：
    ```bash
    #1. 将新建的source分支克隆到本地
    # 使用ssh免密 git clone git@github.com:cksspk/cksspk.github.io.git
-   git clone https://github.com/cksspku/cksspku.github.io.git
+   git clone https://github.com/cksspk/cksspk.github.io.git
    #2. 进入该目录
-   cd cksspku.github.io
+   cd cksspk.github.io
    #3. 在Git Bash中查看分支,分支应该为 branch
    git branch
    ```
@@ -63,7 +63,7 @@ hexo的部署命令，其实就是：
 
    - 把除了.git 文件夹外的所有文件都删掉
 
-   - 将本地博客中除了  `.deploy_git `文件全部复制到 `cksspku.github.io`目录
+   - 将本地博客中除了  `.deploy_git `文件全部复制到 `cksspk.github.io`目录
 
    - 可以修改 ` .gitignore ` 用来忽略一些不需要的文件 ，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：
 
@@ -78,11 +78,21 @@ hexo的部署命令，其实就是：
      ```
 
       注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的`.git`文件夹删掉，因为git不能嵌套上传 
+     
+   - 上传到远程
+
+     ```bash
+     git add . 
+     git commit -m "add hexo"
+     git push 
+     ```
+
+     
 
 ##  同步到其他电脑
 
-- 在新电脑上克隆username.github.io仓库的hexo分支到本地，此时本地git仓库处于hexo分支
-- 切换到username.github.io目录，执行npm install(由于仓库有一个.gitignore文件，里面默认是忽略掉 node_modules文件夹的，也就是说仓库的hexo分支并没有存储该目录，所以需要install下)如果node_modules文件没有丢失, 可不执行该操作
+- 在新电脑上克隆`username.github.io`仓库的`hexo`分支到本地，此时本地`git`仓库处于`hexo`分支
+- 切换到`username.github.io`目录，执行`npm install`(由于仓库有一个.gitignore文件，里面默认是忽略掉 `node_modules`文件夹的，也就是说仓库的`hexo`分支并没有存储该目录，所以需要`install`下)如果`node_modules`文件没有丢失, 可不执行该操作
 - 需要注意的是每次更新博客之后, 都要把相关修改上传到`hexo`分支
 - 每次换电脑更新博客的时候, 在修改之前最好也要`git pull`拉取一下最新的更新
 
