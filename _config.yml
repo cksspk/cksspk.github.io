@@ -86,7 +86,19 @@ theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
+
+### step 1
+
+# deploy:
+  #   type: git
+  #   repo: git@github.com:cksspk/cksspk.github.io.git
+  #   repo: git@192.168.0.108:/home/git/repos/blog.git
+  #   branch: master
+
+### step 2
 deploy:
   type: git
-  repo: git@github.com:cksspk/cksspk.github.io.git
+  repo: 
+    git@github.com:cksspk/cksspk.github.io.git
+    git@192.168.0.108:/home/git/repos/blog.git
   branch: master
