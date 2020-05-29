@@ -37,7 +37,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :month-:title.md # File name of new posts  设置创建文章名称前缀 月分，不生效  2020年5月14日
+new_post_name: :year-:month-:day-:title.md # File name of new posts  设置创建文章名称前缀  --直接 hexo new title 生效
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
@@ -87,18 +87,14 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 
-### step 1
-
-# deploy:
-  #   type: git
-  #   repo: git@github.com:cksspk/cksspk.github.io.git
-  #   repo: git@192.168.0.108:/home/git/repos/blog.git
-  #   branch: master
-
 ### step 2
 deploy:
   type: git
   repo: 
-    git@github.com:cksspk/cksspk.github.io.git
-    git@192.168.0.108:/home/git/repos/blog.git
+    # 部署到github
+    # github: git@github.com:cksspk/cksspk.github.io.git
+    #部署腾讯云服务器服务器
+    TencentServer: git@119.45.13.225:/home/git/repos/blog.git
+    #部署到内网穿透服务器, 由于代理后为非22端口，需要使用ssh://name@ip:port/
+    # raspberryPi: ssh://git@119.45.13.225:22317/home/git/repos/blog.git
   branch: master
