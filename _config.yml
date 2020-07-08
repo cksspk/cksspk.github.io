@@ -92,7 +92,7 @@ deploy:
   type: git
   repo: 
     # 部署到github
-    # github: git@github.com:cksspk/cksspk.github.io.git
+    github: git@github.com:cksspk/cksspk.github.io.git
     #部署腾讯云服务器服务器
     TencentServer: git@119.45.13.225:/home/git/repos/blog.git
     #部署到内网穿透服务器, 由于代理后为非22端口，需要使用ssh://name@ip:port/
