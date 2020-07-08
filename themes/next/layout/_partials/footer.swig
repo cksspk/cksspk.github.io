@@ -6,7 +6,7 @@
     <i class="fa fa-{{ theme.footer.icon }}"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">{{ theme.footer.copyright || config.author }}</span>
-
+  
   {% if theme.post_wordcount.totalcount %}
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
@@ -31,6 +31,7 @@
   <span class="post-meta-divider">|</span>
 {% endif %}
 
+
 {% if theme.footer.theme.enable %}
   <div class="theme-info">{#
   #}{{ __('footer.theme') }} &mdash; {#
@@ -40,8 +41,17 @@
 #}</div>
 {% endif %}
 
+<!-- 备案信息 -->
+<div class="BbeiAn-info">
+   	<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602011056" style="text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">{{ __('浙公网安备 33010602011056号') }}</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
 {% if theme.footer.custom_text %}
   <div class="footer-custom">{#
   #}{{ theme.footer.custom_text }}{#
-#}</div>
+#}
+</div>
+
+
+
 {% endif %}
