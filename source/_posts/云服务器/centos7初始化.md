@@ -31,17 +31,13 @@ passwd username
 ```bash
 #1 找到sudoers文件夹
 whereis sudoers
-#2 修改权限
-chmod 777 /etc/sudoers
-#3 打开文件并编辑
+#2 打开文件并编辑
 vim /etc/sudoers
-#4 找到root    ALL=(ALL)    ALL一行 在下面添加新增的用户按照root的格式
+#3 找到root    ALL=(ALL)    ALL一行 在下面添加新增的用户按照root的格式
 username    ALL=(ALL)    ALL
-#5 保存退出
-:wq
-#6第四步 修改权限为只读
-chmod 444 /etc/sudoers
-#7最后一步 刷新权限
+#4 保存退出
+:wq!
+#5最后一步 刷新权限
 systemctl restart sshd
 ```
 
@@ -50,14 +46,12 @@ systemctl restart sshd
 ```bash
 #找到sshd_config文件
 whereis ssh
-#获取最高权限
-chmod 777 /etc/ssh/sshd_config
-//编辑文件 找到PermitRootLogin yes一行 将yes修改为no
+#编辑文件 
+vim /etc/ssh/sshd_config
+//找到PermitRootLogin yes一行 将yes修改为no
 PermitRootLogin no
 #保存退出
-:wq
-#修改权限为只读
-chmod 444 /etc/ssh/sshd_config
+:wq!
 #刷新权限
 systemctl restart sshd
 #此时root用户已经无法登录
@@ -69,7 +63,7 @@ systemctl restart sshd
 >
 > fail2ban运行机制：简单来说其功能就是防止暴力破解。工作的原理是通过分析一定时间内的相关服务日志，将满足动作的相关IP利用iptables加入到dorp（丢弃）列表一定时间。
 >
-> 官方地址：  ***\*[\*\*http://www.fail2ban.org\*\*](http://www.fail2ban.org/)\**** 
+> 官方地址： http://www.fail2ban.org/wiki/index.php/Main_Page
 
 - 安装
 
