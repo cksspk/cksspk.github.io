@@ -81,7 +81,7 @@
 <li><p>测试<strong>git仓库</strong>是否可用</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在win10找一个空文件夹</span></span><br><span class="line">git <span class="built_in">clone</span> git@server_ip:/home/git/repos/blog.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 进行正常git操作流程</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span>&gt;&gt;index.html</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init&quot;</span></span><br><span class="line">git push </span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 查看是否提交成功</span></span><br></pre></td></tr></table></figure></li>
 <li><p>建立ssh信任关系，在<strong>本地电脑</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 进入Gitbash</span></span><br><span class="line">ssh-copy-id -i C:/Users/yourname/.ssh/id_rsa.pub git@server_ip</span><br><span class="line"><span class="comment">#2. 测试能否登录</span></span><br><span class="line">ssh git@server_ip</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 进入Gitbash</span></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub git@server_ip</span><br><span class="line"><span class="comment">#2. 测试能否登录</span></span><br><span class="line">ssh git@server_ip</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：此时的 ssh 登录 git 用户不需要密码！否则就<strong>有错</strong>，请仔细重复步骤 3-5</p>
 </li>
 <li><p>为了安全起见禁用 git 用户的 shell 登录权限，从而只能用 git clone，git push 等登录</p>
@@ -94,10 +94,11 @@
 <li><p>修改<code>ngixn.config</code>文件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#1. 修改顶部user 为root</span></span><br><span class="line">user root;</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 修改server配置</span></span><br><span class="line">server &#123;</span><br><span class="line">		listen       80;</span><br><span class="line">	    server_name  localhost;</span><br><span class="line">        location / &#123;</span><br><span class="line">    		 <span class="comment">#地址修改为项目git仓库地址</span></span><br><span class="line">             root   /home/git/projects/blog;</span><br><span class="line">             index  index.html index.htm;</span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">         error_page   500 502 503 504  /50x.html;</span><br><span class="line">         location = /50x.html &#123;</span><br><span class="line">             root   html;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 
-
 </li>
 </ul>
 <h5 id="部署发布"><a href="#部署发布" class="headerlink" title="部署发布"></a>部署发布</h5><ul>
+<li><p>安装部署插件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure></li>
 <li><p>编辑<code>hexo</code>博客中的<code>_config.yml</code>文件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@server_ip:/home/git/repos/blog.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>通过命令发布</p>
