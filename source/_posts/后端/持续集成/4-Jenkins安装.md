@@ -6,9 +6,9 @@ tags: docker
 categories: [持续集成]
 ---
 
-# Jenkins安装启动
-
 *Jenkin安装启动方式有很多种，比如下载`war`包后放在`tomcat`中启动、使用`rpm`安装、或者使用`Docker`安装，这里先使用Docker进行安装。*
+
+<!-- more -->
 
 ## Docker安装Jenkin
 
