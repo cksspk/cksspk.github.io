@@ -54,28 +54,28 @@ tags: [谷歌云, 云服务器, 树莓派]
 
    
 
-   ```
-   #配置文件
+   ```bash
    [common]
-   bind_addr = 0.0.0.0				#穿透监听端口与地址(0.0.0.0表示允许任何地址)
+   bind_addr = 0.0.0.0
    bind_port = 10001
    protocol = tcp
+   token = 123
    
-   token = a123					# 客户端连接令牌
-   vhost_http_port = 80			#虚拟主机穿透监听端口(指http与https的访问端口)
-   vhost_https_port = 443
+   #配置路由，开启二级域名配置
+   #subdomain_host = cksspk.xyz
    
-   log_file = /opt/frp/frps.log	# frp日志记录路径
-   log_level = info				# 日志记录级别(trace, debug, info, warn, error)
-   log_max_days = 3				# 日志记录滚动天数
+   vhost_http_port = 81
+   vhost_https_port = 445
    
-   dashboard_addr = 0.0.0.0		#服务端控制面板访问端口
+   log_file = /opt/frp/frps/log/frps.log
+   log_level = info
+   log_max_days = 3
+   dashboard_addr = 0.0.0.0
    dashboard_port = 10002
-   dashboard_user = USER			# 服务端控制面板访问账号和密码，不设置则默认admin
-   dashboard_pwd = PASSWD
+   dashboard_user = c123456
+   dashboard_pwd = c123456
    
-   tcp_mux = true					# tcp流多路复用(可以理解为优化传输) 
-   
+   tcp_mux = true
    ```
 
 6. ​	启动
@@ -113,9 +113,10 @@ tags: [谷歌云, 云服务器, 树莓派]
    vim frpc.ini
    ```
 
-   ```
+   ```bash
    [common]
-   server_addr = ********  服务器地址
+   #服务器地址
+   server_addr = ********
    server_port = 10001
    token=a123
    
@@ -145,14 +146,15 @@ tags: [谷歌云, 云服务器, 树莓派]
    type = http
    local_ip = 127.0.0.1
    local_port = 80
-   custom_domains = cksspk.com			#域名
+   #域名
+   custom_domains = cksspk.com
    http_user = admin
    http_pwd = passwd
    ```
 
 4. 启动 34.94.17.49
 
-   ```
+   ```bash
    ./frpc -c ./frpc.ini
    ```
 
@@ -170,7 +172,7 @@ tags: [谷歌云, 云服务器, 树莓派]
 vim /lib/systemd/system/frps.service
 ```
 
-```
+```bash
 [Unit]
 Description=Frp Server Service
 After=network.target
@@ -179,7 +181,8 @@ After=network.target
 Type=simple
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s QUIT $MAINPID
-ExecStart=/opt/frp/frps -c /opt/frp/frps.ini	# "ExecStart="之后的路径要填写你的frps安装路径
+# "ExecStart="之后的路径要填写你的frps安装路径
+ExecStart=/opt/frp/frps -c /opt/frp/frps.ini
 
 [Install]
 WantedBy=multi-user.target
@@ -188,17 +191,18 @@ WantedBy=multi-user.target
 
 ### 树莓派配置
 
-```
+```bash
 vim /lib/systemd/system/frpc.service
 ```
 
-```
+```bash
 [Unit]
 Description=Frp Client Service
 After=network.target
 
 [Service]
-ExecStart=/opt/frp/frpc -c /opt/frp/frpc.ini # "ExecStart="之后的路径要填写你的frps安装路径
+# "ExecStart="之后的路径要填写你的frps安装路径
+ExecStart=/opt/frp/frpc -c /opt/frp/frpc.ini
 ExecStop=/bin/kill $MAINPID
 
 [Install]
@@ -209,31 +213,31 @@ WantedBy=multi-user.target
 
 1. 启动
 
-   ```
+   ```bash
    systemctl start frps.service
    ```
 
 2. 查看状态
 
-   ```
+   ```bash
    systemctl status frps.service
    ```
 
 3. 停止
 
-   ```
+   ```bash
    systemctl stop frps.service
    ```
 
 4. 开机自启
 
-   ```
+   ```bash
    systemctl enable frps.service
    ```
 
 5. 停止开机自启
 
-   ```
+   ```bash
    systemctl disable frps.service
    ```
 
