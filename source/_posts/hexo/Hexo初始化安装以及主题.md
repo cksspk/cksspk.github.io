@@ -205,9 +205,36 @@ local_search:
 
 - hexo/hexo：表示在`_posts`目录下生成 `hexo/hexo.md`文件（有一层文件夹）
 
-```
+```bash
 hexo new page -p hexo/hexo
 ```
+
+- ### 按日期创建文件夹
+
+  - 修改配置文件`_config.yml` 下的 `new_post_name`
+
+  - 通过日期来管理文章组合
+
+    | 变量     | 描述                               |
+    | -------- | ---------------------------------- |
+    | :title   | 标题（小写，空格将会被替换为短杠） |
+    | :year    | 建立的年份，比如， 2015            |
+    | :month   | 建立的月份（有前导零），比如， 04  |
+    | :i_month | 建立的月份（无前导零），比如， 4   |
+    | :day     | 建立的日期（有前导零），比如， 07  |
+    | :i_day   | 建立的日期（无前导零），比如， 7   |
+
+  - 参考配置
+
+    ```yml
+    new_post_name: :year/:month/:title.md 
+    ```
+
+  - 创建新的文章
+
+    ```bash
+    hexo n hexo
+    ```
 
 ## 文章分类
 
