@@ -569,10 +569,10 @@
 </ul>
 <p>在使用git clone xxx 使用 pc4 git clone xxx 即可提速（前提是开启本地1080代理）</p>
 <h3 id="操作篇"><a href="#操作篇" class="headerlink" title="操作篇"></a>操作篇</h3><h4 id="使用scp与linux文件上传下载"><a href="#使用scp与linux文件上传下载" class="headerlink" title="使用scp与linux文件上传下载"></a>使用scp与linux文件上传下载</h4><ul>
-<li>scp /home/work/source.txt <a href="mailto:&#119;&#111;&#114;&#107;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#x2e;&#x30;&#x2e;&#49;&#x30;">&#119;&#111;&#114;&#107;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#x2e;&#x30;&#x2e;&#49;&#x30;</a>:/home/work/ #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下</li>
-<li>scp <a href="mailto:&#119;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#x30;">&#119;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#x30;</a>:/home/work/source.txt /home/work/ #把192.168.0.10机器上的source.txt文件拷贝到本地的/home/work目录下</li>
-<li>scp <a href="mailto:&#x77;&#111;&#x72;&#107;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#49;&#48;">&#x77;&#111;&#x72;&#107;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#49;&#48;</a>:/home/work/source.txt <a href="mailto:&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;">&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;</a>:/home/work/ #把192.168.0.10机器上的source.txt文件拷贝到192.168.0.11机器的/home/work目录下</li>
-<li>scp -r /home/work/sourcedir <a href="mailto:&#x77;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#48;&#46;&#49;&#48;">&#x77;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#48;&#46;&#49;&#48;</a>:/home/work/ #拷贝文件夹，加-r参数</li>
+<li>scp /home/work/source.txt <a href="mailto:&#119;&#111;&#114;&#107;&#64;&#49;&#57;&#50;&#46;&#x31;&#54;&#56;&#46;&#48;&#46;&#x31;&#48;">&#119;&#111;&#114;&#107;&#64;&#49;&#57;&#50;&#46;&#x31;&#54;&#56;&#46;&#48;&#46;&#x31;&#48;</a>:/home/work/ #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下</li>
+<li>scp <a href="mailto:&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#48;&#46;&#49;&#x30;">&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#48;&#46;&#49;&#x30;</a>:/home/work/source.txt /home/work/ #把192.168.0.10机器上的source.txt文件拷贝到本地的/home/work目录下</li>
+<li>scp <a href="mailto:&#x77;&#111;&#x72;&#x6b;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#56;&#46;&#x30;&#46;&#49;&#x30;">&#x77;&#111;&#x72;&#x6b;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#56;&#46;&#x30;&#46;&#49;&#x30;</a>:/home/work/source.txt <a href="mailto:&#119;&#111;&#x72;&#x6b;&#64;&#49;&#57;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#48;&#46;&#x31;&#x31;">&#119;&#111;&#x72;&#x6b;&#64;&#49;&#57;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#48;&#46;&#x31;&#x31;</a>:/home/work/ #把192.168.0.10机器上的source.txt文件拷贝到192.168.0.11机器的/home/work目录下</li>
+<li>scp -r /home/work/sourcedir <a href="mailto:&#x77;&#x6f;&#114;&#x6b;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#48;&#x2e;&#x31;&#x30;">&#x77;&#x6f;&#114;&#x6b;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#48;&#x2e;&#x31;&#x30;</a>:/home/work/ #拷贝文件夹，加-r参数</li>
 </ul>
 ]]></content>
       <categories>
@@ -672,6 +672,78 @@
       </tags>
   </entry>
   <entry>
+    <title>谷歌云搭建</title>
+    <url>/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>谷歌云白嫖</p>
+<a id="more"></a>
+
+<h2 id="官方首页"><a href="#官方首页" class="headerlink" title="官方首页"></a>官方首页</h2><ol>
+<li>浏览器进入<a href="https://cloud.google.com/">谷歌云地址</a></li>
+<li>登陆账号</li>
+<li>点击<code>转到控制台</code></li>
+</ol>
+<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step1.png" alt="step1.png"></p>
+<h2 id="创建防火墙规则"><a href="#创建防火墙规则" class="headerlink" title="创建防火墙规则"></a>创建防火墙规则</h2><ol>
+<li><p>点击左上角打开侧边栏</p>
+</li>
+<li><p>鼠标移至<code>VPC网络</code></p>
+</li>
+<li><p>在展开的二级菜单中点击<code>防火墙规则</code></p>
+<ol>
+<li><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step3.png" alt="step3.png"></li>
+</ol>
+</li>
+<li><p>点击<code>创建防火墙</code></p>
+</li>
+<li><p>名称随便输入 比如:  <code>myrule01</code></p>
+</li>
+<li><p>目标选择 <code>网络中所有实例</code>（这个截图漏掉了）</p>
+</li>
+<li><p>来源IP地址范围  <code>0.0.0.0/0</code></p>
+</li>
+<li><p>协议和端口选择 <code>全部允许</code><br> <img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step4.png" alt="step4.png"></p>
+</li>
+</ol>
+<h2 id="创建VM实例"><a href="#创建VM实例" class="headerlink" title="创建VM实例"></a>创建VM实例</h2><ol>
+<li><p>点击左上角打开侧边栏</p>
+</li>
+<li><p>鼠标移至<code>Compute Engine</code></p>
+</li>
+<li><p>在展开的二级菜单中点击<code>VM实例</code></p>
+<ol>
+<li><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2.png" alt="step2.png"></li>
+</ol>
+</li>
+<li><p>点击<code>创建</code></p>
+<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2-1.png" alt="step2-1.png"></p>
+</li>
+<li><p>名称输入： <code>cksspk01</code></p>
+</li>
+<li><p>区域选择： <code>洛杉矶</code> 地区随意</p>
+</li>
+<li><p>机器配置：<code>f1-micro(1个vCPU, 614MB内存)</code></p>
+</li>
+<li><p>启动磁盘：<code>centos 7</code></p>
+</li>
+<li><p>防火墙：<code>允许HTTP/HTTPS流量</code></p>
+</li>
+<li><p>点开配置，在<em>网络</em>选项 <code>网络标记</code>选择刚才创建的规则</p>
+</li>
+<li><p>点击<code>创建</code></p>
+<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2-2.png" alt="step2-2.png"></p>
+</li>
+</ol>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>工具：<code>Xshell</code></p>
+<ol>
+<li>本地用xshell生成密钥匙</li>
+<li>将密钥匙配置到谷歌云上</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>云服务器 谷歌云</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谷歌云与树莓派内网穿透frp</title>
     <url>/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/</url>
     <content><![CDATA[<p>之前很无聊买了个树莓派，一直吃灰，然后刚好谷歌云免费一年使用，于是打算拿来做服务器，并且可以随时通过外网访问，这就要使用到内网穿透服务了，这里通过frp穿透进行代理。</p>
@@ -744,78 +816,6 @@
         <tag>云服务器</tag>
         <tag>谷歌云</tag>
         <tag>树莓派</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>谷歌云搭建</title>
-    <url>/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>谷歌云白嫖</p>
-<a id="more"></a>
-
-<h2 id="官方首页"><a href="#官方首页" class="headerlink" title="官方首页"></a>官方首页</h2><ol>
-<li>浏览器进入<a href="https://cloud.google.com/">谷歌云地址</a></li>
-<li>登陆账号</li>
-<li>点击<code>转到控制台</code></li>
-</ol>
-<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step1.png" alt="step1.png"></p>
-<h2 id="创建防火墙规则"><a href="#创建防火墙规则" class="headerlink" title="创建防火墙规则"></a>创建防火墙规则</h2><ol>
-<li><p>点击左上角打开侧边栏</p>
-</li>
-<li><p>鼠标移至<code>VPC网络</code></p>
-</li>
-<li><p>在展开的二级菜单中点击<code>防火墙规则</code></p>
-<ol>
-<li><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step3.png" alt="step3.png"></li>
-</ol>
-</li>
-<li><p>点击<code>创建防火墙</code></p>
-</li>
-<li><p>名称随便输入 比如:  <code>myrule01</code></p>
-</li>
-<li><p>目标选择 <code>网络中所有实例</code>（这个截图漏掉了）</p>
-</li>
-<li><p>来源IP地址范围  <code>0.0.0.0/0</code></p>
-</li>
-<li><p>协议和端口选择 <code>全部允许</code><br> <img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step4.png" alt="step4.png"></p>
-</li>
-</ol>
-<h2 id="创建VM实例"><a href="#创建VM实例" class="headerlink" title="创建VM实例"></a>创建VM实例</h2><ol>
-<li><p>点击左上角打开侧边栏</p>
-</li>
-<li><p>鼠标移至<code>Compute Engine</code></p>
-</li>
-<li><p>在展开的二级菜单中点击<code>VM实例</code></p>
-<ol>
-<li><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2.png" alt="step2.png"></li>
-</ol>
-</li>
-<li><p>点击<code>创建</code></p>
-<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2-1.png" alt="step2-1.png"></p>
-</li>
-<li><p>名称输入： <code>cksspk01</code></p>
-</li>
-<li><p>区域选择： <code>洛杉矶</code> 地区随意</p>
-</li>
-<li><p>机器配置：<code>f1-micro(1个vCPU, 614MB内存)</code></p>
-</li>
-<li><p>启动磁盘：<code>centos 7</code></p>
-</li>
-<li><p>防火墙：<code>允许HTTP/HTTPS流量</code></p>
-</li>
-<li><p>点开配置，在<em>网络</em>选项 <code>网络标记</code>选择刚才创建的规则</p>
-</li>
-<li><p>点击<code>创建</code></p>
-<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2-2.png" alt="step2-2.png"></p>
-</li>
-</ol>
-<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>工具：<code>Xshell</code></p>
-<ol>
-<li>本地用xshell生成密钥匙</li>
-<li>将密钥匙配置到谷歌云上</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>云服务器 谷歌云</tag>
       </tags>
   </entry>
   <entry>
@@ -909,53 +909,6 @@
       </categories>
       <tags>
         <tag>树莓派</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NodeJs离线环境下安装配置</title>
-    <url>/2019/06/26/%E5%89%8D%E7%AB%AF-nodejs-outline/</url>
-    <content><![CDATA[<p>这段时间由于工作原因要使用到openlayers，然后去网上找资料，发现一个神奇的东西， <a href="https://www.gitbook.com/">gitbook</a>（有可能链接点不开，qiang你懂得）。<em>GitBook 是一个基于 Node.js 的命令行工具，可使用 Github/Git 和 Markdown 来制作精美的电子书，GitBook 并非关于 Git的教程   ————百度百科 。</em> 然后我就心痒痒，想在公司（内网）使用，于是开始了离线环境下搭建之旅。</p>
-<a id="more"></a>
-
-<h1 id="一、安装配置"><a href="#一、安装配置" class="headerlink" title="一、安装配置"></a>一、安装配置</h1><ol>
-<li><p>首先下载安装NodeJs <a href="https://nodejs.org/en/">官网</a>、<a href="https://pan.baidu.com/s/1XRyaezEQJ9DcYfmO2nLE7A">百度云【提取码：emrm】</a></p>
-</li>
-<li><p>配置模块全局安装路径，方便找到位置，而且模块文件非常之多，放在c盘肯定不好</p>
-<p>先查看路径</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
-<p>设置全局模块路径</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set prefix&quot;D:\Program Files\nodejs\node_global&quot; </span><br></pre></td></tr></table></figure>
-<p> 设置缓存路径</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set cache&quot;D:\Program Files\nodejs\node_cache&quot;</span><br></pre></td></tr></table></figure>
-
-<p>设置完之后可以同通过命令查看，配置信息</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以愉快的通过命令下载模块，比如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题一："><a href="#问题一：" class="headerlink" title="问题一："></a><strong>问题一：</strong></h2><p>下载完之后通过gitbook -V命令提示：</p>
-<p><strong>‘gitbook’不是内部或外部命令，也不是可运行的程序或批量文件</strong></p>
-<p>此时需要配置环境变量，将新的全局模块路径添加到环境变量！！在path中追加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">D:\Program Files\nodejs\node_global;</span><br></pre></td></tr></table></figure>
-<h2 id="问题二："><a href="#问题二：" class="headerlink" title="问题二："></a>问题二：</h2><p>在内网条件下安装nodeJs，并且将联网机中 node_global 及node_cache文件夹拷贝到开发机，通过上述命令设置好全局路径，通过gitbook -V命令显示 CLI version 2.3.2 ，然后卡住，报错，没有gitbook版本信息</p>
-<p>解决方法：手动拷贝将<strong>联网机c盘用户文件</strong>下的**.gitbook<strong>文件拷贝到</strong>开发机c盘用户目录**。</p>
-<h1 id="gitbook命令"><a href="#gitbook命令" class="headerlink" title="gitbook命令"></a>gitbook命令</h1><p>安装完后可通过命令初始化一本书</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure>
-
-<p>发布书籍</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
-
-<p> 具体还有很多有操作可以参考这<a href="http://gitbook.zhangjikai.com/#%E5%89%8D%E8%A8%80">这篇文章</a>，里面很多gitbook相关信息及资源</p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>通过此次发现nodeJs还是挺有有意思的，有非常多的模块，比如快速发布本地服务的http-server模块。而且它的文件形式比较容易理解。最后，在复制 node_global 文件夹的时候，windows或提示文件夹名称过长，这个时候需要用解压缩软件对文件夹压缩操作。。。这也算一个有点了坑的地方！！！！！</p>
-]]></content>
-      <categories>
-        <category>nodeJs</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
       </tags>
   </entry>
   <entry>
@@ -1065,110 +1018,83 @@
       </categories>
   </entry>
   <entry>
-    <title>String类及intern方法</title>
-    <url>/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型<code>String</code>。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。</p>
+    <title>NodeJs离线环境下安装配置</title>
+    <url>/2019/06/26/%E5%89%8D%E7%AB%AF-nodejs-outline/</url>
+    <content><![CDATA[<p>这段时间由于工作原因要使用到openlayers，然后去网上找资料，发现一个神奇的东西， <a href="https://www.gitbook.com/">gitbook</a>（有可能链接点不开，qiang你懂得）。<em>GitBook 是一个基于 Node.js 的命令行工具，可使用 Github/Git 和 Markdown 来制作精美的电子书，GitBook 并非关于 Git的教程   ————百度百科 。</em> 然后我就心痒痒，想在公司（内网）使用，于是开始了离线环境下搭建之旅。</p>
 <a id="more"></a>
 
-<h3 id="String类型使用（jdk1-8）"><a href="#String类型使用（jdk1-8）" class="headerlink" title="String类型使用（jdk1.8）"></a>String类型使用（jdk1.8）</h3><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 &quot;&quot; 创建  会直接存储在 常量池中</span></span><br><span class="line">        String a = <span class="string">&quot;a1&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 创建， 会将zahngsan存储到常量池中，然后在Heap中创建对象指向b</span></span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用 字符串连接符拼接 ，会直接存储 &#x27;wangwuzhaoliu&#x27; 字符串在常量池中</span></span><br><span class="line">        String c = <span class="string">&quot;wangwu&quot;</span> + <span class="string">&quot;zhaoliu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用字符串 &quot;引用&quot; 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将 --- 存入到常量池中</span></span><br><span class="line">        String d = a + <span class="string">&quot;---&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将wang 和 jiu 两个字符串存到常量池中</span></span><br><span class="line">        String f = <span class="keyword">new</span> String(<span class="string">&quot;wang&quot;</span>) + <span class="string">&quot;jiu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中， 但是会将 zhao 和 ba 两个字符串存入到常量池中</span></span><br><span class="line">        String g = <span class="keyword">new</span> String(<span class="string">&quot;zhao&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;ba&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>变量a：</strong> “a1” 是<strong>字符串常量</strong>，在<strong>编译期就被确定</strong>了，先检查<strong>字符串常量池中是否含有”a1”字符串</strong>,若没有则<strong>添加</strong>“a1”到字符串常量池中，并且直接指向它。所以a直接指向<strong>字符串常量池</strong>的”a1”,也就是变量a指向的地址是<strong>常量池中的 a1</strong>。</li>
-<li><strong>变量b：\</strong>用new String() 创建的字符串不是常量，**不能在编译期就确定**，所以new String() 创建的字符串不放入常量池中，它们有自己的地址空间**(Java Heap 中)<strong>，</strong>变量b的引用的地址在Java Heap中**。 但是”zhangsan”字符串常量在编译期也会被加入到字符串常量池（如果常量池不存在的话）。</li>
-<li><strong>变量c：</strong>“wangwu”和”zhaoliu”也都是<strong>字符串常量</strong>，当<strong>一个字符串</strong>由<strong>多个字符串常量</strong>连接而成时，它自己<strong>肯定也是字符串常量</strong>，在编译器会被编译器优化成”wangwuzhaoliu”，所以c也同样在编译期就被解析为一个字符串常量，并且c是常量池中”wangwuzhaoliu”的一个引用，<strong>所以变量c的引用地址在常量池中</strong>。</li>
-<li><strong>变量d：</strong> JVM对于字符串引用，由于在字符串的”+”连接中，有字符串引用存在，而引用的值在程序编译期是无法确定的，即`(a+”—“)</li>
-<li><strong>变量f：</strong> 变量f同样不能在编译期确定，<strong>但是”wang”和”jiu”这两个字符串常量会添加到字符串常量池中</strong>，并且在堆中创建String对象。（字符串常量池并不会存放”wangjiu”这个字符串,除非执行f.intern()方法）</li>
-<li><strong>变量g：</strong> 同理变量f。</li>
-</ul>
-<h4 id="Sring拼接"><a href="#Sring拼接" class="headerlink" title="Sring拼接"></a>Sring拼接</h4><ul>
-<li><p><strong>字符串拼接</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span> + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>zhang和 san都是<strong>字符串</strong>，都是在编译器<strong>可知的</strong>，编译器会将这行代码优化，<strong>当一个字符串是由多个可知的字符串(非引用字符串)连接组成</strong>，将会优化为如下</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      String a = <span class="string">&quot;zhangsan&quot;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>引用拼接</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">      	String b = a + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 上下含义相同</span></span><br><span class="line">      	String c = <span class="string">&quot;li&quot;</span>;</span><br><span class="line">      	String d = <span class="string">&quot;si&quot;</span>;</span><br><span class="line">      	String f = c + d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当Java编译器遇到<strong>字符串引用</strong> 或 <strong>字符串引用和可知字符串</strong>拼接的时候，会创建一个<code>StringBuilder</code>对象，后面的append()。</p>
-<p>因为有字符串引用存在，而引用的值在程序编译期是无法确定的。<strong>另外 “zhang”、”san” 都会编译器添加到字符串常量池中（如果没有的话）</strong>，因为它们都是编译期确定的字符串常量，<strong>但是最后的”lantao”并不会添加到字符串常量池, 除非执行b.intern() 方法</strong></p>
+<h1 id="一、安装配置"><a href="#一、安装配置" class="headerlink" title="一、安装配置"></a>一、安装配置</h1><ol>
+<li><p>首先下载安装NodeJs <a href="https://nodejs.org/en/">官网</a>、<a href="https://pan.baidu.com/s/1XRyaezEQJ9DcYfmO2nLE7A">百度云【提取码：emrm】</a></p>
 </li>
-<li><p><strong>final拼接</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">     		<span class="keyword">final</span> String b = <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	String c = a + b + <span class="string">&quot;1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>final拼接和以上两者的区别就是在前边增加了final修饰，<strong>用final修饰的字符串就是在编译期可知的</strong>，编译期就会将以上代码优化为</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">				String str = <span class="string">&quot;zhangsan1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>这里 final 拼接的效果是和字符串拼接是一致的。</strong></p>
+<li><p>配置模块全局安装路径，方便找到位置，而且模块文件非常之多，放在c盘肯定不好</p>
+<p>先查看路径</p>
 </li>
-</ul>
-<h3 id="String-intern方法"><a href="#String-intern方法" class="headerlink" title="String#intern方法"></a>String#intern方法</h3><h4 id="intern方法详解"><a href="#intern方法详解" class="headerlink" title="intern方法详解"></a>intern方法详解</h4><p>String.intern()是一个Native(本地)方法，它的作用是如果<strong>字符串常量池已经包含一个等于此String对象的字符串，则返回字符串常量池中这个字符串的引用</strong>, <strong>否则将当前String对象的引用地址（堆中）添加到字符串常量池中并返回</strong>。</p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><strong>注意：基本数据类型之间的 == 是比较值，引用数据类型 == 比较的是地址值</strong></p>
-<ul>
-<li><h5 id="常量池中存在字符串"><a href="#常量池中存在字符串" class="headerlink" title="常量池中存在字符串"></a><strong>常量池中存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 基本数据类型之间的 ==  是比较值，引用数据类型 == 比较的是地址值</span></span><br><span class="line">      	<span class="comment">// 1：在Java Heap中创建对象 2：在字符串常量池中添加 zhangsan</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      	<span class="comment">// 调用 intern 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// a 的地址在Java Heap中 ， b的地址在 常量池中 ，所以结果是flase</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      	<span class="comment">// 因为常量池中已经包含zhangsan，所以直接返回</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">        <span class="comment">// b c 的地址一致，所以是true</span></span><br><span class="line">        System.out.println(b == c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<p>1：在<strong>Java Heap</strong>中<strong>创建对象</strong>然后在<strong>字符串常量</strong>池中<strong>添加</strong> zhangsan。</p>
-<p>2：调用 <strong>intern</strong> 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址。</p>
-<p>3：因 a 的地址在Heap中，b的地址在字符串常量池中。</p>
-<p>4：因为常量池中已经包含zhangsan，所以直接返回</p>
-<p>5： b c 的地址一致，所以是true</p>
-<p>地址可以使用System.identityHashCode(a)方法获取</p>
-</li>
-<li><h5 id="常量池中不存在字符串"><a href="#常量池中不存在字符串" class="headerlink" title="常量池中不存在字符串"></a><strong>常量池中不存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//1： 首先会在Heap中创建对象，然后在常量池中放入zhagnsan 和 wangwu ，但是并不会放入zhagnsanwangwu</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>) + <span class="string">&quot;wangwu&quot;</span>;</span><br><span class="line">      	<span class="comment">// 2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中String对象的引用地址添加到字符串常量池中。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// 3：因为 a 的地址和 b的地址一致，锁以是true</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//4：因常量池中已经存在 zhangsanwangwu 了，所以直接返回引用就是 a 类型 a ==b 锁 a==b==c</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsanwangwu&quot;</span>;</span><br><span class="line">        System.out.println(a == c); <span class="comment">// true</span></span><br><span class="line">      	System.out.println(b == c); <span class="comment">// true</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 5：首先会在Heap中创建对象，然后会在常量池中存储 zhang 和 san</span></span><br><span class="line">      	String d = <span class="keyword">new</span> String(<span class="string">&quot;zhang&quot;</span>) + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 6： 返回的是 常量池中的 地址，因在a变量时已经将 zhangsan 放入到了常量池中</span></span><br><span class="line">      	String f = d.intern();</span><br><span class="line">      	System.out.println(d = f); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<p>1：首先会在<strong>Heap中创建对象a，然后在</strong>常量池中放入zhagnsan 和 wangwu** ，但是<strong>并不会放入</strong>zhagnsanwangwu。</p>
-<p>2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中<strong>String对象的引用地址添加到字符串常量池中</strong>。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用。</p>
-<p>3：因为 a 的地址和 b的地址一致，所以是true。</p>
-<p>4：因常量池中<strong>已经存在 zhangsanwangwu</strong> 了，所以<strong>直接返回引用就是 a 类型</strong>， a ==b 所以 a==b==c。</p>
-<p>5：首先会在<strong>Heap中创建对象d</strong>，然后会在<strong>常量池中存储 zhang 和 san</strong>。</p>
-<p>6：因在创建对象a时，已经将 “zhangsan”放入到了常量池，所以<strong>返回的是常量池中的zhangsan地址</strong>，对象d的地址在Heap中，f的地址在常量池中，并不是一个，所以false；</p>
-</li>
-</ul>
-<h4 id="参考：-https-blog-csdn-net-qian520ao-article-details-78966179"><a href="#参考：-https-blog-csdn-net-qian520ao-article-details-78966179" class="headerlink" title="参考：     https://blog.csdn.net/qian520ao/article/details/78966179"></a>参考：     <a href="https://blog.csdn.net/qian520ao/article/details/78966179#%E5%B7%B2%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%8Dintern">https://blog.csdn.net/qian520ao/article/details/78966179</a></h4>]]></content>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
+<p>设置全局模块路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set prefix&quot;D:\Program Files\nodejs\node_global&quot; </span><br></pre></td></tr></table></figure>
+<p> 设置缓存路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set cache&quot;D:\Program Files\nodejs\node_cache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>设置完之后可以同通过命令查看，配置信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以愉快的通过命令下载模块，比如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题一："><a href="#问题一：" class="headerlink" title="问题一："></a><strong>问题一：</strong></h2><p>下载完之后通过gitbook -V命令提示：</p>
+<p><strong>‘gitbook’不是内部或外部命令，也不是可运行的程序或批量文件</strong></p>
+<p>此时需要配置环境变量，将新的全局模块路径添加到环境变量！！在path中追加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">D:\Program Files\nodejs\node_global;</span><br></pre></td></tr></table></figure>
+<h2 id="问题二："><a href="#问题二：" class="headerlink" title="问题二："></a>问题二：</h2><p>在内网条件下安装nodeJs，并且将联网机中 node_global 及node_cache文件夹拷贝到开发机，通过上述命令设置好全局路径，通过gitbook -V命令显示 CLI version 2.3.2 ，然后卡住，报错，没有gitbook版本信息</p>
+<p>解决方法：手动拷贝将<strong>联网机c盘用户文件</strong>下的**.gitbook<strong>文件拷贝到</strong>开发机c盘用户目录**。</p>
+<h1 id="gitbook命令"><a href="#gitbook命令" class="headerlink" title="gitbook命令"></a>gitbook命令</h1><p>安装完后可通过命令初始化一本书</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure>
+
+<p>发布书籍</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
+
+<p> 具体还有很多有操作可以参考这<a href="http://gitbook.zhangjikai.com/#%E5%89%8D%E8%A8%80">这篇文章</a>，里面很多gitbook相关信息及资源</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>通过此次发现nodeJs还是挺有有意思的，有非常多的模块，比如快速发布本地服务的http-server模块。而且它的文件形式比较容易理解。最后，在复制 node_global 文件夹的时候，windows或提示文件夹名称过长，这个时候需要用解压缩软件对文件夹压缩操作。。。这也算一个有点了坑的地方！！！！！</p>
+]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>nodeJs</category>
       </categories>
       <tags>
-        <tag>面试</tag>
+        <tag>nodejs</tag>
       </tags>
   </entry>
   <entry>
-    <title>Docker搭建本地私服</title>
-    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/</url>
-    <content><![CDATA[<p>​    <em>自己制作的镜像一般会上传到本地私服，首先得搭建一个docker私有仓库服务，docker的私服搭建也是非常简单</em></p>
-<a id="more"></a>
-
-<h1 id="一、搭建私服"><a href="#一、搭建私服" class="headerlink" title="一、搭建私服"></a>一、搭建私服</h1><ol>
-<li><h4 id="拉取私有仓库镜像"><a href="#拉取私有仓库镜像" class="headerlink" title="拉取私有仓库镜像"></a>拉取私有仓库镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="启动-registry仓库容器"><a href="#启动-registry仓库容器" class="headerlink" title="启动 registry仓库容器"></a>启动 <code>registry</code>仓库容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --restart&#x3D;always --privileged&#x3D;true \</span><br><span class="line">-p 5000:5000 \</span><br><span class="line">-v &#x2F;usr&#x2F;local&#x2F;docker&#x2F;data&#x2F;registry:&#x2F;var&#x2F;lib&#x2F;registry \</span><br><span class="line">--name registry registry:latest</span><br></pre></td></tr></table></figure>
-<p>参数说明，启动参数有一定顺序，可能会因为顺序不同而启动失败</p>
-<blockquote>
-<p>–restart=always 此模式容器会跟 docker daemon会随着docker服务的重启而自动恢复<br>-v /usr/local/docker/data/registry 把本地磁盘挂载到容器磁盘/var/lib/registry（默认情况下仓库存放镜像于容器内的/var/lib/registry目录下，宿主机目录需要提前创建）<br>–name registry定义容器名<br>-p 5000:5000 端口映射，本地端口5000映射到容器端口5000<br>–-privileged=true ：配置了-v /opt/data/registry:/var/lib/registry ，如果没有关闭安全模块selinux，容器将没有权限访问本地目录，设置此参数可以给容器加特权。如果没有关闭selinux以及没有加上此参数，上传传镜像时可能会报权限错误(OSError: [Errno 13] Permission denied: ‘/var/lib/registry/repositories/library’)或者（Received unexpected HTTP status: 500 Internal Server Error）错误</p>
-</blockquote>
-</li>
-<li><h4 id="启动成功后通过docker-ps查看"><a href="#启动成功后通过docker-ps查看" class="headerlink" title="启动成功后通过docker ps查看"></a>启动成功后通过<code>docker ps</code>查看</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_1.png" alt="验证"></p>
-</li>
-<li><h4 id="测试镜像仓库中所有的镜像"><a href="#测试镜像仓库中所有的镜像" class="headerlink" title="测试镜像仓库中所有的镜像"></a>测试镜像仓库中所有的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:5000/v2/_catalog</span><br><span class="line">&#123;<span class="string">&quot;repositories&quot;</span>:[]&#125;</span><br></pre></td></tr></table></figure>
-<p> 现在是空的，因为才刚运行，里面没有任何镜像内容。 </p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>启动docker容器时报错</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables failed: iptables --<span class="built_in">wait</span> -t nat -A DOCKER -p tcp -d 0/0 --dport 5000 -j DNAT --to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain/target/match by that name. (<span class="built_in">exit</span> status 1)</span><br></pre></td></tr></table></figure>
-<p>解决方案：<strong>重启docker</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
-<h1 id="二、上传镜像至私服"><a href="#二、上传镜像至私服" class="headerlink" title="二、上传镜像至私服"></a>二、上传镜像至私服</h1></li>
-<li><h4 id="首先添加可信任仓库"><a href="#首先添加可信任仓库" class="headerlink" title="首先添加可信任仓库"></a>首先添加可信任仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑文件</span><br><span class="line">vim &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line"># 添加仓库配置 192.168.125.121:5000为宿主机地址加私服启动端口</span><br><span class="line">&quot;insecure-registries&quot;:[&quot;192.168.125.121:5000&quot;]</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry.png" alt="验证"></p>
-</li>
-<li><h4 id="更新配置"><a href="#更新配置" class="headerlink" title="更新配置"></a>更新配置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="重新启动docker"><a href="#重新启动docker" class="headerlink" title="重新启动docker"></a>重新启动<code>docker</code></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="给原有镜像打标签"><a href="#给原有镜像打标签" class="headerlink" title="给原有镜像打标签"></a>给原有镜像打标签</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker tag jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="上传到私有仓库"><a href="#上传到私有仓库" class="headerlink" title="上传到私有仓库"></a>上传到私有仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker push jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="可以通过浏览器访问查看仓库"><a href="#可以通过浏览器访问查看仓库" class="headerlink" title="可以通过浏览器访问查看仓库"></a>可以通过浏览器访问查看仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.125.121:5000&#x2F;v2&#x2F;_catalog</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_3.png" alt="验证"></p>
-<p>其中仓库中出现 jdk1.8这个镜像。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>持续集成</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
+    <title>t1</title>
+    <url>/2021/07/14/t1/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c5b98f699b8cf1d182d37d999402c4173783c8bae609f8d33b3abe975a79fb8c">10d79030e8222445804370796b90fca1af3488aaccb319d5e208d2c4734b307cf152d06795f7c3f16ed95ecfcafb3c27</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
+    <title>t2</title>
+    <url>/2021/07/14/t2/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="9e2ad2f141dc3eac153ff593b8271a98fef76abc1e2e9a9ea5ca919d6147ff4b">165d50f05814027fb7fe5e4ae8a088d8c68cde6be4647fbe6c3b52fcec7e4f234098a8b43512bba24b66c0eb6a3a9c22</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
   <entry>
     <title>Docker与Maven插件</title>
@@ -1239,6 +1165,50 @@
 <p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_9.png" alt="验证"></p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker搭建本地私服</title>
+    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/</url>
+    <content><![CDATA[<p>​    <em>自己制作的镜像一般会上传到本地私服，首先得搭建一个docker私有仓库服务，docker的私服搭建也是非常简单</em></p>
+<a id="more"></a>
+
+<h1 id="一、搭建私服"><a href="#一、搭建私服" class="headerlink" title="一、搭建私服"></a>一、搭建私服</h1><ol>
+<li><h4 id="拉取私有仓库镜像"><a href="#拉取私有仓库镜像" class="headerlink" title="拉取私有仓库镜像"></a>拉取私有仓库镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="启动-registry仓库容器"><a href="#启动-registry仓库容器" class="headerlink" title="启动 registry仓库容器"></a>启动 <code>registry</code>仓库容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --restart&#x3D;always --privileged&#x3D;true \</span><br><span class="line">-p 5000:5000 \</span><br><span class="line">-v &#x2F;usr&#x2F;local&#x2F;docker&#x2F;data&#x2F;registry:&#x2F;var&#x2F;lib&#x2F;registry \</span><br><span class="line">--name registry registry:latest</span><br></pre></td></tr></table></figure>
+<p>参数说明，启动参数有一定顺序，可能会因为顺序不同而启动失败</p>
+<blockquote>
+<p>–restart=always 此模式容器会跟 docker daemon会随着docker服务的重启而自动恢复<br>-v /usr/local/docker/data/registry 把本地磁盘挂载到容器磁盘/var/lib/registry（默认情况下仓库存放镜像于容器内的/var/lib/registry目录下，宿主机目录需要提前创建）<br>–name registry定义容器名<br>-p 5000:5000 端口映射，本地端口5000映射到容器端口5000<br>–-privileged=true ：配置了-v /opt/data/registry:/var/lib/registry ，如果没有关闭安全模块selinux，容器将没有权限访问本地目录，设置此参数可以给容器加特权。如果没有关闭selinux以及没有加上此参数，上传传镜像时可能会报权限错误(OSError: [Errno 13] Permission denied: ‘/var/lib/registry/repositories/library’)或者（Received unexpected HTTP status: 500 Internal Server Error）错误</p>
+</blockquote>
+</li>
+<li><h4 id="启动成功后通过docker-ps查看"><a href="#启动成功后通过docker-ps查看" class="headerlink" title="启动成功后通过docker ps查看"></a>启动成功后通过<code>docker ps</code>查看</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_1.png" alt="验证"></p>
+</li>
+<li><h4 id="测试镜像仓库中所有的镜像"><a href="#测试镜像仓库中所有的镜像" class="headerlink" title="测试镜像仓库中所有的镜像"></a>测试镜像仓库中所有的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:5000/v2/_catalog</span><br><span class="line">&#123;<span class="string">&quot;repositories&quot;</span>:[]&#125;</span><br></pre></td></tr></table></figure>
+<p> 现在是空的，因为才刚运行，里面没有任何镜像内容。 </p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>启动docker容器时报错</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables failed: iptables --<span class="built_in">wait</span> -t nat -A DOCKER -p tcp -d 0/0 --dport 5000 -j DNAT --to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain/target/match by that name. (<span class="built_in">exit</span> status 1)</span><br></pre></td></tr></table></figure>
+<p>解决方案：<strong>重启docker</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h1 id="二、上传镜像至私服"><a href="#二、上传镜像至私服" class="headerlink" title="二、上传镜像至私服"></a>二、上传镜像至私服</h1></li>
+<li><h4 id="首先添加可信任仓库"><a href="#首先添加可信任仓库" class="headerlink" title="首先添加可信任仓库"></a>首先添加可信任仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑文件</span><br><span class="line">vim &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line"># 添加仓库配置 192.168.125.121:5000为宿主机地址加私服启动端口</span><br><span class="line">&quot;insecure-registries&quot;:[&quot;192.168.125.121:5000&quot;]</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry.png" alt="验证"></p>
+</li>
+<li><h4 id="更新配置"><a href="#更新配置" class="headerlink" title="更新配置"></a>更新配置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="重新启动docker"><a href="#重新启动docker" class="headerlink" title="重新启动docker"></a>重新启动<code>docker</code></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="给原有镜像打标签"><a href="#给原有镜像打标签" class="headerlink" title="给原有镜像打标签"></a>给原有镜像打标签</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker tag jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="上传到私有仓库"><a href="#上传到私有仓库" class="headerlink" title="上传到私有仓库"></a>上传到私有仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker push jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="可以通过浏览器访问查看仓库"><a href="#可以通过浏览器访问查看仓库" class="headerlink" title="可以通过浏览器访问查看仓库"></a>可以通过浏览器访问查看仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.125.121:5000&#x2F;v2&#x2F;_catalog</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_3.png" alt="验证"></p>
+<p>其中仓库中出现 jdk1.8这个镜像。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>持续集成</category>
@@ -1380,6 +1350,68 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String类及intern方法</title>
+    <url>/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型<code>String</code>。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。</p>
+<a id="more"></a>
+
+<h3 id="String类型使用（jdk1-8）"><a href="#String类型使用（jdk1-8）" class="headerlink" title="String类型使用（jdk1.8）"></a>String类型使用（jdk1.8）</h3><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 &quot;&quot; 创建  会直接存储在 常量池中</span></span><br><span class="line">        String a = <span class="string">&quot;a1&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 创建， 会将zahngsan存储到常量池中，然后在Heap中创建对象指向b</span></span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用 字符串连接符拼接 ，会直接存储 &#x27;wangwuzhaoliu&#x27; 字符串在常量池中</span></span><br><span class="line">        String c = <span class="string">&quot;wangwu&quot;</span> + <span class="string">&quot;zhaoliu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用字符串 &quot;引用&quot; 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将 --- 存入到常量池中</span></span><br><span class="line">        String d = a + <span class="string">&quot;---&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将wang 和 jiu 两个字符串存到常量池中</span></span><br><span class="line">        String f = <span class="keyword">new</span> String(<span class="string">&quot;wang&quot;</span>) + <span class="string">&quot;jiu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中， 但是会将 zhao 和 ba 两个字符串存入到常量池中</span></span><br><span class="line">        String g = <span class="keyword">new</span> String(<span class="string">&quot;zhao&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;ba&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>变量a：</strong> “a1” 是<strong>字符串常量</strong>，在<strong>编译期就被确定</strong>了，先检查<strong>字符串常量池中是否含有”a1”字符串</strong>,若没有则<strong>添加</strong>“a1”到字符串常量池中，并且直接指向它。所以a直接指向<strong>字符串常量池</strong>的”a1”,也就是变量a指向的地址是<strong>常量池中的 a1</strong>。</li>
+<li><strong>变量b：\</strong>用new String() 创建的字符串不是常量，**不能在编译期就确定**，所以new String() 创建的字符串不放入常量池中，它们有自己的地址空间**(Java Heap 中)<strong>，</strong>变量b的引用的地址在Java Heap中**。 但是”zhangsan”字符串常量在编译期也会被加入到字符串常量池（如果常量池不存在的话）。</li>
+<li><strong>变量c：</strong>“wangwu”和”zhaoliu”也都是<strong>字符串常量</strong>，当<strong>一个字符串</strong>由<strong>多个字符串常量</strong>连接而成时，它自己<strong>肯定也是字符串常量</strong>，在编译器会被编译器优化成”wangwuzhaoliu”，所以c也同样在编译期就被解析为一个字符串常量，并且c是常量池中”wangwuzhaoliu”的一个引用，<strong>所以变量c的引用地址在常量池中</strong>。</li>
+<li><strong>变量d：</strong> JVM对于字符串引用，由于在字符串的”+”连接中，有字符串引用存在，而引用的值在程序编译期是无法确定的，即`(a+”—“)</li>
+<li><strong>变量f：</strong> 变量f同样不能在编译期确定，<strong>但是”wang”和”jiu”这两个字符串常量会添加到字符串常量池中</strong>，并且在堆中创建String对象。（字符串常量池并不会存放”wangjiu”这个字符串,除非执行f.intern()方法）</li>
+<li><strong>变量g：</strong> 同理变量f。</li>
+</ul>
+<h4 id="Sring拼接"><a href="#Sring拼接" class="headerlink" title="Sring拼接"></a>Sring拼接</h4><ul>
+<li><p><strong>字符串拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span> + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>zhang和 san都是<strong>字符串</strong>，都是在编译器<strong>可知的</strong>，编译器会将这行代码优化，<strong>当一个字符串是由多个可知的字符串(非引用字符串)连接组成</strong>，将会优化为如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      String a = <span class="string">&quot;zhangsan&quot;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>引用拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">      	String b = a + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 上下含义相同</span></span><br><span class="line">      	String c = <span class="string">&quot;li&quot;</span>;</span><br><span class="line">      	String d = <span class="string">&quot;si&quot;</span>;</span><br><span class="line">      	String f = c + d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当Java编译器遇到<strong>字符串引用</strong> 或 <strong>字符串引用和可知字符串</strong>拼接的时候，会创建一个<code>StringBuilder</code>对象，后面的append()。</p>
+<p>因为有字符串引用存在，而引用的值在程序编译期是无法确定的。<strong>另外 “zhang”、”san” 都会编译器添加到字符串常量池中（如果没有的话）</strong>，因为它们都是编译期确定的字符串常量，<strong>但是最后的”lantao”并不会添加到字符串常量池, 除非执行b.intern() 方法</strong></p>
+</li>
+<li><p><strong>final拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">     		<span class="keyword">final</span> String b = <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	String c = a + b + <span class="string">&quot;1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>final拼接和以上两者的区别就是在前边增加了final修饰，<strong>用final修饰的字符串就是在编译期可知的</strong>，编译期就会将以上代码优化为</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">				String str = <span class="string">&quot;zhangsan1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这里 final 拼接的效果是和字符串拼接是一致的。</strong></p>
+</li>
+</ul>
+<h3 id="String-intern方法"><a href="#String-intern方法" class="headerlink" title="String#intern方法"></a>String#intern方法</h3><h4 id="intern方法详解"><a href="#intern方法详解" class="headerlink" title="intern方法详解"></a>intern方法详解</h4><p>String.intern()是一个Native(本地)方法，它的作用是如果<strong>字符串常量池已经包含一个等于此String对象的字符串，则返回字符串常量池中这个字符串的引用</strong>, <strong>否则将当前String对象的引用地址（堆中）添加到字符串常量池中并返回</strong>。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><strong>注意：基本数据类型之间的 == 是比较值，引用数据类型 == 比较的是地址值</strong></p>
+<ul>
+<li><h5 id="常量池中存在字符串"><a href="#常量池中存在字符串" class="headerlink" title="常量池中存在字符串"></a><strong>常量池中存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 基本数据类型之间的 ==  是比较值，引用数据类型 == 比较的是地址值</span></span><br><span class="line">      	<span class="comment">// 1：在Java Heap中创建对象 2：在字符串常量池中添加 zhangsan</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      	<span class="comment">// 调用 intern 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// a 的地址在Java Heap中 ， b的地址在 常量池中 ，所以结果是flase</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      	<span class="comment">// 因为常量池中已经包含zhangsan，所以直接返回</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">        <span class="comment">// b c 的地址一致，所以是true</span></span><br><span class="line">        System.out.println(b == c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：在<strong>Java Heap</strong>中<strong>创建对象</strong>然后在<strong>字符串常量</strong>池中<strong>添加</strong> zhangsan。</p>
+<p>2：调用 <strong>intern</strong> 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址。</p>
+<p>3：因 a 的地址在Heap中，b的地址在字符串常量池中。</p>
+<p>4：因为常量池中已经包含zhangsan，所以直接返回</p>
+<p>5： b c 的地址一致，所以是true</p>
+<p>地址可以使用System.identityHashCode(a)方法获取</p>
+</li>
+<li><h5 id="常量池中不存在字符串"><a href="#常量池中不存在字符串" class="headerlink" title="常量池中不存在字符串"></a><strong>常量池中不存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//1： 首先会在Heap中创建对象，然后在常量池中放入zhagnsan 和 wangwu ，但是并不会放入zhagnsanwangwu</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>) + <span class="string">&quot;wangwu&quot;</span>;</span><br><span class="line">      	<span class="comment">// 2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中String对象的引用地址添加到字符串常量池中。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// 3：因为 a 的地址和 b的地址一致，锁以是true</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//4：因常量池中已经存在 zhangsanwangwu 了，所以直接返回引用就是 a 类型 a ==b 锁 a==b==c</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsanwangwu&quot;</span>;</span><br><span class="line">        System.out.println(a == c); <span class="comment">// true</span></span><br><span class="line">      	System.out.println(b == c); <span class="comment">// true</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 5：首先会在Heap中创建对象，然后会在常量池中存储 zhang 和 san</span></span><br><span class="line">      	String d = <span class="keyword">new</span> String(<span class="string">&quot;zhang&quot;</span>) + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 6： 返回的是 常量池中的 地址，因在a变量时已经将 zhangsan 放入到了常量池中</span></span><br><span class="line">      	String f = d.intern();</span><br><span class="line">      	System.out.println(d = f); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：首先会在<strong>Heap中创建对象a，然后在</strong>常量池中放入zhagnsan 和 wangwu** ，但是<strong>并不会放入</strong>zhagnsanwangwu。</p>
+<p>2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中<strong>String对象的引用地址添加到字符串常量池中</strong>。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用。</p>
+<p>3：因为 a 的地址和 b的地址一致，所以是true。</p>
+<p>4：因常量池中<strong>已经存在 zhangsanwangwu</strong> 了，所以<strong>直接返回引用就是 a 类型</strong>， a ==b 所以 a==b==c。</p>
+<p>5：首先会在<strong>Heap中创建对象d</strong>，然后会在<strong>常量池中存储 zhang 和 san</strong>。</p>
+<p>6：因在创建对象a时，已经将 “zhangsan”放入到了常量池，所以<strong>返回的是常量池中的zhangsan地址</strong>，对象d的地址在Heap中，f的地址在常量池中，并不是一个，所以false；</p>
+</li>
+</ul>
+<h4 id="参考：-https-blog-csdn-net-qian520ao-article-details-78966179"><a href="#参考：-https-blog-csdn-net-qian520ao-article-details-78966179" class="headerlink" title="参考：     https://blog.csdn.net/qian520ao/article/details/78966179"></a>参考：     <a href="https://blog.csdn.net/qian520ao/article/details/78966179#%E5%B7%B2%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%8Dintern">https://blog.csdn.net/qian520ao/article/details/78966179</a></h4>]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
