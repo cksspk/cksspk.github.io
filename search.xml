@@ -260,7 +260,7 @@
   <entry>
     <title>将Hexo部署在个人服务器</title>
     <url>/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/</url>
-    <content><![CDATA[<p> &ensp;&ensp;之前是对<code>hexo</code>进行了<code>git</code>配置，可以实现多台电脑对<code>hexo</code>博客进行维护。但是在使用过程中发现访问速度非常慢（部署在<code>github</code>上），这里通过<code>git</code>裸仓库+<code>nginx</code>作为网页服务器，实现将<code>hexo</code>博客部署在自己的服务器上。</p>
+    <content><![CDATA[<p> &ensp;&ensp;之前是对<code>hexo</code>进行了<code>git</code>配置，可以实现多台电脑对<code>hexo</code>博客进行维护。但是在使用过程中发现访问速度非常慢（部署在<code>Github</code>上），这里通过<code>git</code>裸仓库+<code>nginx</code>作为网页服务器，实现将<code>Hexo</code>博客部署在自己的服务器上。</p>
 <a id="more"></a>
 
 <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><ul>
@@ -276,33 +276,43 @@
 </ul>
 </li>
 </ul>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h5 id="搭建远程Git私库"><a href="#搭建远程Git私库" class="headerlink" title="搭建远程Git私库"></a>搭建远程Git私库</h5><ul>
-<li><p>登录到服务器 可以通过<code>xshell 5</code>等软件</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h4 id="搭建远程Git私库"><a href="#搭建远程Git私库" class="headerlink" title="搭建远程Git私库"></a>搭建远程Git私库</h4><ul>
+<li><p>登录到服务器 可以通过<code>xshell </code>等软件</p>
 </li>
 <li><p>创建用户并配置仓库</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 创建用户</span></span><br><span class="line">useradd git</span><br><span class="line"><span class="comment">#1.1 debain创建用户语法有差异</span></span><br><span class="line">useradd -m -s /bin/bash git</span><br><span class="line"><span class="comment">#2. 设置密码</span></span><br><span class="line">passwd git</span><br><span class="line"><span class="comment">#3. 切换用户 这步很重要，不切换用户后面会很麻烦</span></span><br><span class="line">su git</span><br><span class="line"><span class="built_in">cd</span> /home/git/</span><br><span class="line"><span class="comment">#4. 项目存在的真实目录</span></span><br><span class="line">mkdir -p projects/blog</span><br><span class="line">mkdir repos &amp;&amp; <span class="built_in">cd</span> repos</span><br><span class="line"><span class="comment">#5. 创建一个裸露的仓库</span></span><br><span class="line">git init --bare blog.git</span><br><span class="line"><span class="built_in">cd</span> blog.git/hooks</span><br><span class="line"><span class="comment">#6. 创建 hook 钩子函数，输入了内容如下</span></span><br><span class="line">vi post-receive</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure></li>
 <li><p>添加完毕后修改权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line"><span class="built_in">exit</span> // 退出到 root 登录</span><br><span class="line">chown -R git:git /home/git/repos/blog.git // 添加权限</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p>测试<strong>git仓库</strong>是否可用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在win10找一个空文件夹</span></span><br><span class="line">git <span class="built_in">clone</span> git@server_ip:/home/git/repos/blog.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 进行正常git操作流程</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span>&gt;&gt;index.html</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init&quot;</span></span><br><span class="line">git push </span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 查看是否提交成功</span></span><br></pre></td></tr></table></figure></li>
-<li><p>建立ssh信任关系，在<strong>本地电脑</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line"><span class="comment"># 退出到 root 登录</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 添加权限</span></span><br><span class="line">chown -R git:git /home/git/repos/blog.git</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h4 id="测试git仓库是否可用"><a href="#测试git仓库是否可用" class="headerlink" title="测试git仓库是否可用"></a>测试<strong>git仓库</strong>是否可用</h4><ul>
+<li><h5 id="win操作"><a href="#win操作" class="headerlink" title="win操作"></a>win操作</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1. 在桌面找一个空文件夹</span></span><br><span class="line">git <span class="built_in">clone</span> git@server_ip:/home/git/repos/blog.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 进行正常git操作流程</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span>&gt;&gt;index.html</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init&quot;</span></span><br><span class="line">git push </span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 查看是否提交成功</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h4 id="建立ssh信任关系"><a href="#建立ssh信任关系" class="headerlink" title="建立ssh信任关系"></a>建立ssh信任关系</h4><ul>
+<li><p>在<strong>本地电脑</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 进入Gitbash</span></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub git@server_ip</span><br><span class="line"><span class="comment">#2. 测试能否登录</span></span><br><span class="line">ssh git@server_ip</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：此时的 ssh 登录 git 用户不需要密码！否则就<strong>有错</strong>，请仔细重复步骤 3-5</p>
 </li>
-<li><p>为了安全起见禁用 git 用户的 shell 登录权限，从而只能用 git clone，git push 等登录</p>
+</ul>
+<h4 id="安全防护"><a href="#安全防护" class="headerlink" title="安全防护"></a>安全防护</h4><ul>
+<li><p>为了安全起见禁用 <code>git</code> 用户的 <code>shell</code> 登录权限，从而只能用 git clone，git push 等登录</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 查看 git-shell 是否在登录方式里面</span></span><br><span class="line">cat /etc/shells</span><br><span class="line"><span class="comment">#2. 查看是否安装</span></span><br><span class="line"><span class="built_in">which</span> git-shell</span><br><span class="line">vim /etc/shells</span><br><span class="line"><span class="comment">#3. 添加上2步显示出来的路径，通常是 /usr/bin/git-shell</span></span><br></pre></td></tr></table></figure></li>
 <li><p>修改<code>/etc/passwd</code>中的权限</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/passwd</span><br><span class="line"><span class="comment">#1.  将原来的</span></span><br><span class="line">git:x:1000:1000::/home/git:/bin/bash</span><br><span class="line"><span class="comment">#2. 修改为</span></span><br><span class="line">git:x:1000:1000:,,,:/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
-
 <p> <strong>注</strong>：<code>git:x:1000:1000::/home/git:/bin/bash</code>中的<code>userId</code>不要随便修改，使用原来的值</p>
-<h5 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h5></li>
+<h4 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h4></li>
 <li><p>修改<code>ngixn.config</code>文件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#1. 修改顶部user 为root</span></span><br><span class="line">user root;</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 修改server配置</span></span><br><span class="line">server &#123;</span><br><span class="line">		listen       80;</span><br><span class="line">	    server_name  localhost;</span><br><span class="line">        location / &#123;</span><br><span class="line">    		 <span class="comment">#地址修改为项目git仓库地址</span></span><br><span class="line">             root   /home/git/projects/blog;</span><br><span class="line">             index  index.html index.htm;</span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">         error_page   500 502 503 504  /50x.html;</span><br><span class="line">         location = /50x.html &#123;</span><br><span class="line">             root   html;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h5 id="部署发布"><a href="#部署发布" class="headerlink" title="部署发布"></a>部署发布</h5><ul>
+<h4 id="部署发布"><a href="#部署发布" class="headerlink" title="部署发布"></a>部署发布</h4><ul>
 <li><p>安装部署插件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure></li>
 <li><p>编辑<code>hexo</code>博客中的<code>_config.yml</code>文件</p>
