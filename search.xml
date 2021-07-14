@@ -306,9 +306,15 @@
 <li><p>修改<code>/etc/passwd</code>中的权限</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/passwd</span><br><span class="line"><span class="comment">#1.  将原来的</span></span><br><span class="line">git:x:1000:1000::/home/git:/bin/bash</span><br><span class="line"><span class="comment">#2. 修改为</span></span><br><span class="line">git:x:1000:1000:,,,:/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
 <p> <strong>注</strong>：<code>git:x:1000:1000::/home/git:/bin/bash</code>中的<code>userId</code>不要随便修改，使用原来的值</p>
-<h4 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h4></li>
+</li>
+</ul>
+<h4 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a><code>Nginx</code>配置</h4><p>​    默认已安装Nginx</p>
+<ul>
 <li><p>修改<code>ngixn.config</code>文件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#1. 修改顶部user 为root</span></span><br><span class="line">user root;</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 修改server配置</span></span><br><span class="line">server &#123;</span><br><span class="line">		listen       80;</span><br><span class="line">	    server_name  localhost;</span><br><span class="line">        location / &#123;</span><br><span class="line">    		 <span class="comment">#地址修改为项目git仓库地址</span></span><br><span class="line">             root   /home/git/projects/blog;</span><br><span class="line">             index  index.html index.htm;</span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">         error_page   500 502 503 504  /50x.html;</span><br><span class="line">         location = /50x.html &#123;</span><br><span class="line">             root   html;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
 </li>
 </ul>
@@ -319,6 +325,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@server_ip:/home/git/repos/blog.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>通过命令发布</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
 
 </li>
 </ul>
@@ -362,7 +369,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#配置路由，开启二级域名配置</span><br><span class="line">subdomain &#x3D; api.cksspk.site</span><br><span class="line"></span><br><span class="line">#记得将cuttom_domains注释掉</span><br></pre></td></tr></table></figure>
 <p>重启<code>frp</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart frpc</span><br></pre></td></tr></table></figure>
-<h4 id="nginx配置-1"><a href="#nginx配置-1" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h4></li>
+<h4 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h4></li>
 <li><p>修改<code>nginx.conf</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2. 修改server配置</span></span><br><span class="line">server &#123;</span><br><span class="line">		listen       80;</span><br><span class="line">		<span class="comment">#将server_name修改改成对应域名</span></span><br><span class="line">	    server_name  www.blog.cksspk.site;</span><br><span class="line">        location / &#123;</span><br><span class="line">    		 <span class="comment">#地址修改为项目git仓库地址</span></span><br><span class="line">             root   /home/hexo/projects/blog;</span><br><span class="line">             index  index.html index.htm;</span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">         error_page   500 502 503 504  /50x.html;</span><br><span class="line">         location = /50x.html &#123;</span><br><span class="line">             root   html;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>重启<code>nginx</code></p>
