@@ -340,9 +340,9 @@
 <p><img src="/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/1-2.png"></p>
 </li>
 <li><p>点击保存，而后可以在<code>cmd</code>中<code>Ping</code>地址，查看是否通过，但是一般生效需要时间。</p>
-</li>
+<h4 id="frp配置"><a href="#frp配置" class="headerlink" title="frp配置"></a><code>frp</code>配置</h4></li>
 </ul>
-<h4 id="frp配置"><a href="#frp配置" class="headerlink" title="frp配置"></a><code>frp</code>配置</h4><blockquote>
+<blockquote>
 <h3 id="自定义二级域名-官方地址"><a href="#自定义二级域名-官方地址" class="headerlink" title="自定义二级域名                    官方地址"></a>自定义二级域名                    <a href="https://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D">官方地址</a></h3><p>在多人同时使用一个 frps 时，通过自定义二级域名的方式来使用会更加方便。</p>
 <p>通过在 frps 的配置文件中配置 <code>subdomain_host</code>，就可以启用该特性。之后在 frpc 的 http、https 类型的代理中可以不配置 <code>custom_domains</code>，而是配置一个 <code>subdomain</code> 参数。</p>
 <p>只需要将 <code>*.&#123;subdomain_host&#125;</code> 解析到 frps 所在服务器。之后用户可以通过 <code>subdomain</code> 自行指定自己的 web 服务所需要使用的二级域名，通过 <code>&#123;subdomain&#125;.&#123;subdomain_host&#125;</code> 来访问自己的 web 服务。</p>
@@ -1480,5 +1480,24 @@
       <tags>
         <tag>docker</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>acme.sh签发证书</title>
+    <url>/2021/07/14/acme-sh%E7%AD%BE%E5%8F%91%E8%AF%81%E4%B9%A6/</url>
+    <content><![CDATA[<p>​        使用<code>acme.sh</code>申请数字证书，实现HTTPS。并到期自动续订。</p>
+<a id="more"></a>
+
+<h2 id="安装acme-sh"><a href="#安装acme-sh" class="headerlink" title="安装acme.sh"></a>安装acme.sh</h2><p>在服务器上操作</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<p>遇到无法下载问题，可通过其他方式下载传到服务器</p>
+<p>仓库地址: <a href="https://github.com/acmesh-official/acme.sh">https://github.com/acmesh-official/acme.sh</a></p>
+<h2 id="准备DNS环境"><a href="#准备DNS环境" class="headerlink" title="准备DNS环境"></a>准备DNS环境</h2><p>默认使用阿里云 地址：<a href="https://ak-console.aliyun.com/#/accesskey">https://ak-console.aliyun.com/#/accesskey</a></p>
+<p>获取阿里云控制台获取的<code>Ali_Key</code>，<code>Ali_Secret</code>，在服务器中执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">&quot;xxxxxxxx&quot;</span> </span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">&quot;xxxxxxxx&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果是新用户，要给用户赋予DNS操作权限</p>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --issue -d <span class="string">&quot;*.cksspk.top&quot;</span> --dns dns_ali</span><br></pre></td></tr></table></figure>
+<p>新版本CA证书，需要申请新账号</p>
+<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --install-cert -d *.cksspk.top \</span><br><span class="line">--key-file       /path/to/keyfile/<span class="keyword">in</span>/nginx/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/nginx/cert.pem \</span><br><span class="line">--reloadcmd     <span class="string">&quot;service nginx force-reload&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
   </entry>
 </search>
