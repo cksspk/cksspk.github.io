@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型String。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String类及intern方法">
+<meta property="og:url" content="http://example.com/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Cksspk (｡•̀ᴗ-)✧。">
+<meta property="og:description" content="​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型String。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-26T04:04:57.000Z">
+<meta property="article:modified_time" content="2021-07-14T00:52:14.214Z">
+<meta property="article:author" content="cksspk">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>String类及intern方法 | Cksspk (｡•̀ᴗ-)✧。</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cksspk (｡•̀ᴗ-)✧。</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/kenan.jpg">
+      <meta itemprop="name" content="cksspk">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cksspk (｡•̀ᴗ-)✧。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          String类及intern方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-26 12:04:57" itemprop="dateCreated datePublished" datetime="2020-07-26T12:04:57+08:00">2020-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-14 08:52:14" itemprop="dateModified" datetime="2021-07-14T08:52:14+08:00">2021-07-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型<code>String</code>。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。</p>
+<a id="more"></a>
+
+<h3 id="String类型使用（jdk1-8）"><a href="#String类型使用（jdk1-8）" class="headerlink" title="String类型使用（jdk1.8）"></a>String类型使用（jdk1.8）</h3><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 &quot;&quot; 创建  会直接存储在 常量池中</span></span><br><span class="line">        String a = <span class="string">&quot;a1&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 创建， 会将zahngsan存储到常量池中，然后在Heap中创建对象指向b</span></span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用 字符串连接符拼接 ，会直接存储 &#x27;wangwuzhaoliu&#x27; 字符串在常量池中</span></span><br><span class="line">        String c = <span class="string">&quot;wangwu&quot;</span> + <span class="string">&quot;zhaoliu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用字符串 &quot;引用&quot; 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将 --- 存入到常量池中</span></span><br><span class="line">        String d = a + <span class="string">&quot;---&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将wang 和 jiu 两个字符串存到常量池中</span></span><br><span class="line">        String f = <span class="keyword">new</span> String(<span class="string">&quot;wang&quot;</span>) + <span class="string">&quot;jiu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中， 但是会将 zhao 和 ba 两个字符串存入到常量池中</span></span><br><span class="line">        String g = <span class="keyword">new</span> String(<span class="string">&quot;zhao&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;ba&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>变量a：</strong> “a1” 是<strong>字符串常量</strong>，在<strong>编译期就被确定</strong>了，先检查<strong>字符串常量池中是否含有”a1”字符串</strong>,若没有则<strong>添加</strong>“a1”到字符串常量池中，并且直接指向它。所以a直接指向<strong>字符串常量池</strong>的”a1”,也就是变量a指向的地址是<strong>常量池中的 a1</strong>。</li>
+<li><strong>变量b：\</strong>用new String() 创建的字符串不是常量，**不能在编译期就确定**，所以new String() 创建的字符串不放入常量池中，它们有自己的地址空间**(Java Heap 中)<strong>，</strong>变量b的引用的地址在Java Heap中**。 但是”zhangsan”字符串常量在编译期也会被加入到字符串常量池（如果常量池不存在的话）。</li>
+<li><strong>变量c：</strong>“wangwu”和”zhaoliu”也都是<strong>字符串常量</strong>，当<strong>一个字符串</strong>由<strong>多个字符串常量</strong>连接而成时，它自己<strong>肯定也是字符串常量</strong>，在编译器会被编译器优化成”wangwuzhaoliu”，所以c也同样在编译期就被解析为一个字符串常量，并且c是常量池中”wangwuzhaoliu”的一个引用，<strong>所以变量c的引用地址在常量池中</strong>。</li>
+<li><strong>变量d：</strong> JVM对于字符串引用，由于在字符串的”+”连接中，有字符串引用存在，而引用的值在程序编译期是无法确定的，即`(a+”—“)</li>
+<li><strong>变量f：</strong> 变量f同样不能在编译期确定，<strong>但是”wang”和”jiu”这两个字符串常量会添加到字符串常量池中</strong>，并且在堆中创建String对象。（字符串常量池并不会存放”wangjiu”这个字符串,除非执行f.intern()方法）</li>
+<li><strong>变量g：</strong> 同理变量f。</li>
+</ul>
+<h4 id="Sring拼接"><a href="#Sring拼接" class="headerlink" title="Sring拼接"></a>Sring拼接</h4><ul>
+<li><p><strong>字符串拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span> + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>zhang和 san都是<strong>字符串</strong>，都是在编译器<strong>可知的</strong>，编译器会将这行代码优化，<strong>当一个字符串是由多个可知的字符串(非引用字符串)连接组成</strong>，将会优化为如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      String a = <span class="string">&quot;zhangsan&quot;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>引用拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">      	String b = a + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 上下含义相同</span></span><br><span class="line">      	String c = <span class="string">&quot;li&quot;</span>;</span><br><span class="line">      	String d = <span class="string">&quot;si&quot;</span>;</span><br><span class="line">      	String f = c + d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当Java编译器遇到<strong>字符串引用</strong> 或 <strong>字符串引用和可知字符串</strong>拼接的时候，会创建一个<code>StringBuilder</code>对象，后面的append()。</p>
+<p>因为有字符串引用存在，而引用的值在程序编译期是无法确定的。<strong>另外 “zhang”、”san” 都会编译器添加到字符串常量池中（如果没有的话）</strong>，因为它们都是编译期确定的字符串常量，<strong>但是最后的”lantao”并不会添加到字符串常量池, 除非执行b.intern() 方法</strong></p>
+</li>
+<li><p><strong>final拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">     		<span class="keyword">final</span> String b = <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	String c = a + b + <span class="string">&quot;1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>final拼接和以上两者的区别就是在前边增加了final修饰，<strong>用final修饰的字符串就是在编译期可知的</strong>，编译期就会将以上代码优化为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">				String str = <span class="string">&quot;zhangsan1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这里 final 拼接的效果是和字符串拼接是一致的。</strong></p>
+</li>
+</ul>
+<h3 id="String-intern方法"><a href="#String-intern方法" class="headerlink" title="String#intern方法"></a>String#intern方法</h3><h4 id="intern方法详解"><a href="#intern方法详解" class="headerlink" title="intern方法详解"></a>intern方法详解</h4><p>String.intern()是一个Native(本地)方法，它的作用是如果<strong>字符串常量池已经包含一个等于此String对象的字符串，则返回字符串常量池中这个字符串的引用</strong>, <strong>否则将当前String对象的引用地址（堆中）添加到字符串常量池中并返回</strong>。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><strong>注意：基本数据类型之间的 == 是比较值，引用数据类型 == 比较的是地址值</strong></p>
+<ul>
+<li><h5 id="常量池中存在字符串"><a href="#常量池中存在字符串" class="headerlink" title="常量池中存在字符串"></a><strong>常量池中存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 基本数据类型之间的 ==  是比较值，引用数据类型 == 比较的是地址值</span></span><br><span class="line">      	<span class="comment">// 1：在Java Heap中创建对象 2：在字符串常量池中添加 zhangsan</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      	<span class="comment">// 调用 intern 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// a 的地址在Java Heap中 ， b的地址在 常量池中 ，所以结果是flase</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      	<span class="comment">// 因为常量池中已经包含zhangsan，所以直接返回</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">        <span class="comment">// b c 的地址一致，所以是true</span></span><br><span class="line">        System.out.println(b == c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：在<strong>Java Heap</strong>中<strong>创建对象</strong>然后在<strong>字符串常量</strong>池中<strong>添加</strong> zhangsan。</p>
+<p>2：调用 <strong>intern</strong> 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址。</p>
+<p>3：因 a 的地址在Heap中，b的地址在字符串常量池中。</p>
+<p>4：因为常量池中已经包含zhangsan，所以直接返回</p>
+<p>5： b c 的地址一致，所以是true</p>
+<p>地址可以使用System.identityHashCode(a)方法获取</p>
+</li>
+<li><h5 id="常量池中不存在字符串"><a href="#常量池中不存在字符串" class="headerlink" title="常量池中不存在字符串"></a><strong>常量池中不存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//1： 首先会在Heap中创建对象，然后在常量池中放入zhagnsan 和 wangwu ，但是并不会放入zhagnsanwangwu</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>) + <span class="string">&quot;wangwu&quot;</span>;</span><br><span class="line">      	<span class="comment">// 2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中String对象的引用地址添加到字符串常量池中。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// 3：因为 a 的地址和 b的地址一致，锁以是true</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//4：因常量池中已经存在 zhangsanwangwu 了，所以直接返回引用就是 a 类型 a ==b 锁 a==b==c</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsanwangwu&quot;</span>;</span><br><span class="line">        System.out.println(a == c); <span class="comment">// true</span></span><br><span class="line">      	System.out.println(b == c); <span class="comment">// true</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 5：首先会在Heap中创建对象，然后会在常量池中存储 zhang 和 san</span></span><br><span class="line">      	String d = <span class="keyword">new</span> String(<span class="string">&quot;zhang&quot;</span>) + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 6： 返回的是 常量池中的 地址，因在a变量时已经将 zhangsan 放入到了常量池中</span></span><br><span class="line">      	String f = d.intern();</span><br><span class="line">      	System.out.println(d = f); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：首先会在<strong>Heap中创建对象a，然后在</strong>常量池中放入zhagnsan 和 wangwu** ，但是<strong>并不会放入</strong>zhagnsanwangwu。</p>
+<p>2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中<strong>String对象的引用地址添加到字符串常量池中</strong>。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用。</p>
+<p>3：因为 a 的地址和 b的地址一致，所以是true。</p>
+<p>4：因常量池中<strong>已经存在 zhangsanwangwu</strong> 了，所以<strong>直接返回引用就是 a 类型</strong>， a ==b 所以 a==b==c。</p>
+<p>5：首先会在<strong>Heap中创建对象d</strong>，然后会在<strong>常量池中存储 zhang 和 san</strong>。</p>
+<p>6：因在创建对象a时，已经将 “zhangsan”放入到了常量池，所以<strong>返回的是常量池中的zhangsan地址</strong>，对象d的地址在Heap中，f的地址在常量池中，并不是一个，所以false；</p>
+</li>
+</ul>
+<h4 id="参考：-https-blog-csdn-net-qian520ao-article-details-78966179"><a href="#参考：-https-blog-csdn-net-qian520ao-article-details-78966179" class="headerlink" title="参考：     https://blog.csdn.net/qian520ao/article/details/78966179"></a>参考：     <a target="_blank" rel="noopener" href="https://blog.csdn.net/qian520ao/article/details/78966179#%E5%B7%B2%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%8Dintern">https://blog.csdn.net/qian520ao/article/details/78966179</a></h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/" rel="prev" title="Nginx反向代理frps">
+      <i class="fa fa-chevron-left"></i> Nginx反向代理frps
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-08-09-manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" rel="next" title="manjaro安装及基本配置">
+      manjaro安装及基本配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#String%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8%EF%BC%88jdk1-8%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">String类型使用（jdk1.8）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sring%E6%8B%BC%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">Sring拼接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-intern%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">String#intern方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#intern%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">intern方法详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0%E4%B8%AD%E5%AD%98%E5%9C%A8%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.2.1.</span> <span class="nav-text">常量池中存在字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0%E4%B8%AD%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.2.2.</span> <span class="nav-text">常量池中不存在字符串</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A-https-blog-csdn-net-qian520ao-article-details-78966179"><span class="nav-number">2.3.</span> <span class="nav-text">参考：     https:&#x2F;&#x2F;blog.csdn.net&#x2F;qian520ao&#x2F;article&#x2F;details&#x2F;78966179</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cksspk"
+      src="/uploads/kenan.jpg">
+  <p class="site-author-name" itemprop="name">cksspk</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cksspk</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

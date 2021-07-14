@@ -1,0 +1,1435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo初始化及 Next主题配置</title>
+    <url>/2019/10/27/hexo-Hexo%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p>hexo初始化安装及主题配置</p>
+<a id="more"></a>
+
+<p>在Hexo中有两个很重要的名为<code>_config.yml</code>的文件，其中一个在站点安装的根目录下，另一个在主题目录下。</p>
+<p>前者提供了Hexo自身的一些基本配置信息，后者为你所安装的主题的相关配置。</p>
+<p>为了方便区分，我们把前者称为<strong>站点配置文件</strong>，后者称为<strong>主题配置文件</strong>。</p>
+<p>Hexo的版本设置有差异，本次使用版本<code>hexo: 5.3.0</code>，<code>hexo-cli: 4.2.0</code>，next主题版本为<code>7.8.0</code></p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><ul>
+<li><p>安装hexo-cli</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
+<li><p>使用vscode打开，执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">1. 初始化</span></span><br><span class="line">hexo init</span><br><span class="line"><span class="meta">#</span><span class="bash">2. 更新依赖</span> </span><br><span class="line">npm install</span><br><span class="line"><span class="meta">#</span><span class="bash">3. 运行</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<h3 id="使用Next主题"><a href="#使用Next主题" class="headerlink" title="使用Next主题"></a>使用Next主题</h3></li>
+<li><p>在博客根目录执行<code>git命令</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
+<li><p>修改<code>主题配置文件</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+<h3 id="修改语言"><a href="#修改语言" class="headerlink" title="修改语言"></a>修改语言</h3><ul>
+<li><p>编辑<code>站点配置文件</code>，将<code>language</code>设置成所需要的语言</p>
+</li>
+<li><p>具体支持语言可以查看 <a href="http://theme-next.iissnan.com/getting-started.html#select-language">官方说明</a></p>
+</li>
+<li><p>例如设置成简体中文</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
+<h3 id="修改布局"><a href="#修改布局" class="headerlink" title="修改布局"></a>修改布局</h3></li>
+<li><p>编辑<code>主题配置文件</code></p>
+</li>
+<li><p>修改 <code>Schemes</code>配置</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes 四种布局</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line"><span class="comment"># scheme: Mist</span></span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="添加标签页"><a href="#添加标签页" class="headerlink" title="添加标签页"></a>添加标签页</h3><ul>
+<li><p>在博客根目录进入<code>cmd</code>执行命令</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">tags</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>编辑<code>source/tags/index.md</code>文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019-06-30 02:59:16</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h3></li>
+<li><p>在博客根目录下进入<code>cmd</code>执行命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑<code>source/categories/index.md</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  title: 分类</span><br><span class="line">date: 2019-06-30 03:01:37</span><br><span class="line">  type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="设置菜单"><a href="#设置菜单" class="headerlink" title="设置菜单"></a>设置菜单</h3><ul>
+<li><p>编辑<code>主题配置文件</code></p>
+</li>
+<li><p>修改<code>menu</code>配置</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span>	<span class="string">首页</span></span><br><span class="line">  <span class="comment">#about: /about/ || user	关于</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span>	<span class="string">标签页</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span>	<span class="string">分类页</span></span><br><span class="line"><span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span>	<span class="string">归档页</span></span><br><span class="line">  <span class="comment"># schedule: /schedule/ || calendar</span></span><br><span class="line"><span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3></li>
+<li><p>编辑<code>主题配置文件</code>,修改<code>avatar</code>字段，设置头像的地址</p>
+</li>
+<li><p>头像地址有两种</p>
+<ul>
+<li><p>完整的互联网URL</p>
+</li>
+<li><p>站点下的地址</p>
+<ul>
+<li>可以是<code>source/uploads</code>/目录下</li>
+</ul>
+</li>
+<li><p>或者是<code>source/images/</code>目录下</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">avatar:</span> <span class="string">/uploads/kenan.jpg</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="设置网站Favicon图标"><a href="#设置网站Favicon图标" class="headerlink" title="设置网站Favicon图标"></a>设置网站Favicon图标</h3><ul>
+<li><p>编辑<code>主题配置文件</code></p>
+</li>
+<li><p>首先选择想要设置的图片通过favicon转换网站制作，如：<a href="http://www.bitbug.net/">比特虫</a>，制作一个32 * 32.icon</p>
+</li>
+<li><p>将图片改名为：favicon.ico, 放到/themes/next/source/images目录下</p>
+<ul>
+<li><p>修改<code>favicon</code>配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon.ico</span> 		<span class="comment">#修改这一行</span></span><br><span class="line"><span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="添加本地搜索"><a href="#添加本地搜索" class="headerlink" title="添加本地搜索"></a>添加本地搜索</h3><ul>
+<li>在博客根目录下进入<code>cmd</code>中执行命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. 下载依赖</span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑<code>站点配置文件</code>，添加以下配置</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑<code>主题配置文件</code>，修改<code>local_search</code>属性，将false修改为true</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成新的文章"><a href="#生成新的文章" class="headerlink" title="生成新的文章"></a>生成新的文章</h3><ul>
+<li><p>-p：表示path 路径</p>
+</li>
+<li><p>hexo/hexo：表示在<code>_posts</code>目录下生成 <code>hexo/hexo.md</code>文件（有一层文件夹）</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page -p hexo/hexo</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="按日期创建文件夹"><a href="#按日期创建文件夹" class="headerlink" title="按日期创建文件夹"></a>按日期创建文件夹</h3><ul>
+<li><p>修改配置文件<code>_config.yml</code> 下的 <code>new_post_name</code></p>
+</li>
+<li><p>通过日期来管理文章组合</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:title</td>
+<td>标题（小写，空格将会被替换为短杠）</td>
+</tr>
+<tr>
+<td>:year</td>
+<td>建立的年份，比如， 2015</td>
+</tr>
+<tr>
+<td>:month</td>
+<td>建立的月份（有前导零），比如， 04</td>
+</tr>
+<tr>
+<td>:i_month</td>
+<td>建立的月份（无前导零），比如， 4</td>
+</tr>
+<tr>
+<td>:day</td>
+<td>建立的日期（有前导零），比如， 07</td>
+</tr>
+<tr>
+<td>:i_day</td>
+<td>建立的日期（无前导零），比如， 7</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>参考配置</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:month/:title.md</span> </span><br></pre></td></tr></table></figure></li>
+<li><p>创建新的文章</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo n hexo</span><br></pre></td></tr></table></figure>
+<h2 id="文章分类"><a href="#文章分类" class="headerlink" title="文章分类"></a>文章分类</h2></li>
+</ul>
+</li>
+</ul>
+<p>​    <code>categoryies</code>这个选项有两种配置</p>
+<ul>
+<li><p><strong>子分类</strong>  </p>
+<p>下面的分类配置会将该文章放到 <code>Sports/Baseball</code> 这个分类下。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">categories:</span><br><span class="line">  - Sports</span><br><span class="line">  - Baseball</span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">categories: [Sports,Baseball]</span><br></pre></td></tr></table></figure>
+<p>上面两种写法最终的效果都是一样的，都是将文章放在了一个子分类目录下。</p>
+</li>
+<li><p><strong>多个分类</strong></p>
+<p>将文章同时分到两个或者多个不同的类目下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - [Sports]</span><br><span class="line">  - [Baseball]</span><br></pre></td></tr></table></figure>
+<p>只需要用中括号将独立的分类括起来即可，这样上面的文章就会被分类在 <code>Sports</code> 和 <code>Baseball</code> 这两个不同的目录中了。</p>
+<p>扩展一下，如果我们要将其分类到 <code>Sports/Baseball</code> 和 <code>Play</code> 两个不同的目录下（一个是子目录，一个是一级目录），我们该怎么写呢？如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - [Sports,Baseball]</span><br><span class="line">  - [Play]</span><br></pre></td></tr></table></figure>
+<h2 id="文章标签"><a href="#文章标签" class="headerlink" title="文章标签"></a>文章标签</h2></li>
+</ul>
+<p>​    将文章添加多个 <code>tag</code>，这里也有两种写法</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">tags: [jQuery, 表格， 表单验证]</span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">tags:</span><br><span class="line">- jQuery</span><br><span class="line">- 表格</span><br><span class="line">- 表单验证</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="设置文章摘要"><a href="#设置文章摘要" class="headerlink" title="设置文章摘要"></a>设置文章摘要</h3><p>​    在内容中插入一行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/10/27/hexo-Hexo%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98/1-1.png"></p>
+<p>​    效果如下</p>
+<p>​    <img src="/2019/10/27/hexo-Hexo%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98/1-2.png"></p>
+<h3 id="生成本地生成静态文件：hexo-g"><a href="#生成本地生成静态文件：hexo-g" class="headerlink" title="生成本地生成静态文件：hexo g"></a>生成本地生成静态文件：<code>hexo g</code></h3><h3 id="将本地静态文件推送至Github：hexo-d"><a href="#将本地静态文件推送至Github：hexo-d" class="headerlink" title="将本地静态文件推送至Github：hexo d"></a>将本地静态文件推送至Github：<code>hexo d</code></h3><h3 id="在文章中使用图片"><a href="#在文章中使用图片" class="headerlink" title="在文章中使用图片"></a>在文章中使用图片</h3><ul>
+<li><p>在hexo根目录配置文件<code>_config.yml</code>设置属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">post_asset_folder:true</span><br></pre></td></tr></table></figure></li>
+<li><p>在hexo的目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install https:&#x2F;&#x2F;github.com&#x2F;CodeFalling&#x2F;hexo-asset-image --save   </span><br></pre></td></tr></table></figure></li>
+<li><p>使用图片</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![logo](hexo使用文章使用图片&#x2F;a.jpg)</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/10/27/hexo-Hexo%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98/a.jpg" alt="logo"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>多台电脑使用Hexo</title>
+    <url>/2020/05/14/hexo-%E5%A4%9A%E7%94%B5%E8%84%91%E4%BD%BF%E7%94%A8hexo/</url>
+    <content><![CDATA[<p> &ensp;&ensp;一般使用hexo都是在一台电脑进行写作，但是有时候在公司，在家或者其他地方想要提交博客，原始方式就不方便，我们一般将hexo通过git部署，因此可以git特性实现同一仓库管理源文件和博客页面。</p>
+<a id="more"></a>
+
+<h2 id="简单原理"><a href="#简单原理" class="headerlink" title="简单原理"></a>简单原理</h2><p>先简单说说Hexo生产的静态博客的特点，首先它是一个静态博客生成工具，可以根据你的配置和md文件生成一系列的html、css、js等文件，组成一个站点，部署到github pages，这样网站就可以访问了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>hexo的部署命令，其实就是：</p>
+<ol>
+<li>生成站点有关文件到 <code>.deploy_git</code> </li>
+<li>把它初始化为git目录，并根据你的配置指定remote和branch(一般是master)</li>
+<li>进行<code>git commit</code>，并把修改push到指定的remote branch</li>
+<li>命令执行完成后，到你的github仓库，你会发现master分支上的内容和’.deploy_git’中一样</li>
+</ol>
+<h2 id="步骤如下"><a href="#步骤如下" class="headerlink" title="步骤如下"></a>步骤如下</h2><ol>
+<li><p>创建仓库 cksspk/cksspk.github.io</p>
+</li>
+<li><p>根据提示将仓库拉取到本地，并且添加新的分支<code>hexo</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 拉取分支提交</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# hello &quot;</span> &gt;&gt; READ.md</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init&quot;</span></span><br><span class="line">git remote add origin  https://github.com/cksspk/cksspk.github.io.git</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 创建新的分支</span></span><br><span class="line">git checkout -b hexo</span><br><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure></li>
+<li><p>设置默认分支</p>
+<p> 在该仓库<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>中将默认分支 </p>
+</li>
+<li><p>克隆<code>source</code>分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 将新建的source分支克隆到本地</span></span><br><span class="line"><span class="comment"># 使用ssh免密 git clone git@github.com:cksspk/cksspk.github.io.git</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cksspk/cksspk.github.io.git</span><br><span class="line"><span class="comment">#2. 进入该目录</span></span><br><span class="line"><span class="built_in">cd</span> cksspk.github.io</span><br><span class="line"><span class="comment">#3. 在Git Bash中查看分支,分支应该为 branch</span></span><br><span class="line">git branch</span><br></pre></td></tr></table></figure></li>
+<li><p>上传部署文件</p>
+<ul>
+<li><p>把除了.git 文件夹外的所有文件都删掉</p>
+</li>
+<li><p>将本地博客中除了  <code>.deploy_git </code>文件全部复制到 <code>cksspk.github.io</code>目录</p>
+</li>
+<li><p>可以修改 <code>.gitignore</code> 用来忽略一些不需要的文件 ，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br></pre></td></tr></table></figure>
+<p> 注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传 </p>
+</li>
+<li><p>上传到远程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m <span class="string">&quot;add hexo&quot;</span></span><br><span class="line">git push </span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="同步到其他电脑"><a href="#同步到其他电脑" class="headerlink" title="同步到其他电脑"></a>同步到其他电脑</h2><ul>
+<li>在新电脑上克隆<code>username.github.io</code>仓库的<code>hexo</code>分支到本地，此时本地<code>git</code>仓库处于<code>hexo</code>分支</li>
+<li>切换到<code>username.github.io</code>目录，执行<code>npm install</code>(由于仓库有一个.gitignore文件，里面默认是忽略掉 <code>node_modules</code>文件夹的，也就是说仓库的<code>hexo</code>分支并没有存储该目录，所以需要<code>install</code>下)如果<code>node_modules</code>文件没有丢失, 可不执行该操作</li>
+<li>需要注意的是每次更新博客之后, 都要把相关修改上传到<code>hexo</code>分支</li>
+<li>每次换电脑更新博客的时候, 在修改之前最好也要<code>git pull</code>拉取一下最新的更新</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>将Hexo部署在个人服务器</title>
+    <url>/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/</url>
+    <content><![CDATA[<p> &ensp;&ensp;之前是对<code>hexo</code>进行了<code>git</code>配置，可以实现多台电脑对<code>hexo</code>博客进行维护。但是在使用过程中发现访问速度非常慢（部署在<code>github</code>上），这里通过<code>git</code>裸仓库+<code>nginx</code>作为网页服务器，实现将<code>hexo</code>博客部署在自己的服务器上。</p>
+<a id="more"></a>
+
+<h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><ul>
+<li>服务器 <ul>
+<li>可以是云主机、<code>vm</code>上的虚拟机、我这里使用树莓派</li>
+<li>服务器已安装<code>nginx</code>、<code>git</code></li>
+</ul>
+</li>
+<li>本地<ul>
+<li><code>win10</code>安装<code>node</code>环境</li>
+<li>基本的<code>hexo</code>博客创建、运行、部署</li>
+<li><code>git</code>环境</li>
+</ul>
+</li>
+</ul>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h5 id="搭建远程Git私库"><a href="#搭建远程Git私库" class="headerlink" title="搭建远程Git私库"></a>搭建远程Git私库</h5><ul>
+<li><p>登录到服务器 可以通过<code>xshell 5</code>等软件</p>
+</li>
+<li><p>创建用户并配置仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 创建用户</span></span><br><span class="line">useradd git</span><br><span class="line"><span class="comment">#1.1 debain创建用户语法有差异</span></span><br><span class="line">useradd -m -s /bin/bash git</span><br><span class="line"><span class="comment">#2. 设置密码</span></span><br><span class="line">passwd git</span><br><span class="line"><span class="comment">#3. 切换用户 这步很重要，不切换用户后面会很麻烦</span></span><br><span class="line">su git</span><br><span class="line"><span class="built_in">cd</span> /home/git/</span><br><span class="line"><span class="comment">#4. 项目存在的真实目录</span></span><br><span class="line">mkdir -p projects/blog</span><br><span class="line">mkdir repos &amp;&amp; <span class="built_in">cd</span> repos</span><br><span class="line"><span class="comment">#5. 创建一个裸露的仓库</span></span><br><span class="line">git init --bare blog.git</span><br><span class="line"><span class="built_in">cd</span> blog.git/hooks</span><br><span class="line"><span class="comment">#6. 创建 hook 钩子函数，输入了内容如下</span></span><br><span class="line">vi post-receive</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure></li>
+<li><p>添加完毕后修改权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line"><span class="built_in">exit</span> // 退出到 root 登录</span><br><span class="line">chown -R git:git /home/git/repos/blog.git // 添加权限</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>测试<strong>git仓库</strong>是否可用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在win10找一个空文件夹</span></span><br><span class="line">git <span class="built_in">clone</span> git@server_ip:/home/git/repos/blog.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 进行正常git操作流程</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span>&gt;&gt;index.html</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init&quot;</span></span><br><span class="line">git push </span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 查看是否提交成功</span></span><br></pre></td></tr></table></figure></li>
+<li><p>建立ssh信任关系，在<strong>本地电脑</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 进入Gitbash</span></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub git@server_ip</span><br><span class="line"><span class="comment">#2. 测试能否登录</span></span><br><span class="line">ssh git@server_ip</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：此时的 ssh 登录 git 用户不需要密码！否则就<strong>有错</strong>，请仔细重复步骤 3-5</p>
+</li>
+<li><p>为了安全起见禁用 git 用户的 shell 登录权限，从而只能用 git clone，git push 等登录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 查看 git-shell 是否在登录方式里面</span></span><br><span class="line">cat /etc/shells</span><br><span class="line"><span class="comment">#2. 查看是否安装</span></span><br><span class="line"><span class="built_in">which</span> git-shell</span><br><span class="line">vim /etc/shells</span><br><span class="line"><span class="comment">#3. 添加上2步显示出来的路径，通常是 /usr/bin/git-shell</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改<code>/etc/passwd</code>中的权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/passwd</span><br><span class="line"><span class="comment">#1.  将原来的</span></span><br><span class="line">git:x:1000:1000::/home/git:/bin/bash</span><br><span class="line"><span class="comment">#2. 修改为</span></span><br><span class="line">git:x:1000:1000:,,,:/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
+
+<p> <strong>注</strong>：<code>git:x:1000:1000::/home/git:/bin/bash</code>中的<code>userId</code>不要随便修改，使用原来的值</p>
+<h5 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h5></li>
+<li><p>修改<code>ngixn.config</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#1. 修改顶部user 为root</span></span><br><span class="line">user root;</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 修改server配置</span></span><br><span class="line">server &#123;</span><br><span class="line">		listen       80;</span><br><span class="line">	    server_name  localhost;</span><br><span class="line">        location / &#123;</span><br><span class="line">    		 <span class="comment">#地址修改为项目git仓库地址</span></span><br><span class="line">             root   /home/git/projects/blog;</span><br><span class="line">             index  index.html index.htm;</span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">         error_page   500 502 503 504  /50x.html;</span><br><span class="line">         location = /50x.html &#123;</span><br><span class="line">             root   html;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="部署发布"><a href="#部署发布" class="headerlink" title="部署发布"></a>部署发布</h5><ul>
+<li><p>安装部署插件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure></li>
+<li><p>编辑<code>hexo</code>博客中的<code>_config.yml</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@server_ip:/home/git/repos/blog.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>通过命令发布</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="二级域名配置"><a href="#二级域名配置" class="headerlink" title="二级域名配置"></a>二级域名配置</h2><h4 id="域名配置"><a href="#域名配置" class="headerlink" title="域名配置"></a>域名配置</h4><p>这里使用的<code>GoDaddy</code>，地址：<a href="https://sg.godaddy.com/zh?ci=%EF%BC%8C">https://sg.godaddy.com/zh?ci=，</a></p>
+<ul>
+<li><p>进入<code>DNS</code>管理</p>
+<p>查看记录所示</p>
+<p><img src="/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/1-1.png"></p>
+</li>
+<li><p>添加记录</p>
+<p>比如类型：A; 主机：api; 服务器地址：xx.xx.x.xx</p>
+<p><img src="/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/1-2.png"></p>
+</li>
+<li><p>点击保存，而后可以在<code>cmd</code>中<code>Ping</code>地址，查看是否通过，但是一般生效需要时间。</p>
+</li>
+</ul>
+<h4 id="frp配置"><a href="#frp配置" class="headerlink" title="frp配置"></a><code>frp</code>配置</h4><blockquote>
+<h3 id="自定义二级域名-官方地址"><a href="#自定义二级域名-官方地址" class="headerlink" title="自定义二级域名                    官方地址"></a>自定义二级域名                    <a href="https://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D">官方地址</a></h3><p>在多人同时使用一个 frps 时，通过自定义二级域名的方式来使用会更加方便。</p>
+<p>通过在 frps 的配置文件中配置 <code>subdomain_host</code>，就可以启用该特性。之后在 frpc 的 http、https 类型的代理中可以不配置 <code>custom_domains</code>，而是配置一个 <code>subdomain</code> 参数。</p>
+<p>只需要将 <code>*.&#123;subdomain_host&#125;</code> 解析到 frps 所在服务器。之后用户可以通过 <code>subdomain</code> 自行指定自己的 web 服务所需要使用的二级域名，通过 <code>&#123;subdomain&#125;.&#123;subdomain_host&#125;</code> 来访问自己的 web 服务。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># frps.ini</span><br><span class="line">[common]</span><br><span class="line">subdomain_host &#x3D; frps.com</span><br></pre></td></tr></table></figure>
+
+<p>将泛域名 <code>*.frps.com</code> 解析到 frps 所在服务器的 IP 地址。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># frpc.ini</span><br><span class="line">[web]</span><br><span class="line">type &#x3D; http</span><br><span class="line">local_port &#x3D; 80</span><br><span class="line">subdomain &#x3D; test</span><br></pre></td></tr></table></figure>
+
+<p>frps 和 frpc 都启动成功后，通过 <code>test.frps.com</code> 就可以访问到内网的 web 服务。</p>
+<p><strong>注：如果 frps 配置了 <code>subdomain_host</code>，则 <code>custom_domains</code> 中不能是属于 <code>subdomain_host</code> 的子域名或者泛域名。</strong></p>
+<p>同一个 http 或 https 类型的代理中 <code>custom_domains</code> 和 <code>subdomain</code> 可以同时配置。</p>
+</blockquote>
+<ul>
+<li><p>进入云服务器，修改<code>frps.ini</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line">[common]</span><br><span class="line">subdomain_host = cksspk.site</span><br></pre></td></tr></table></figure>
+<p>重启<code>frp</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart frps</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p>进入树莓派，打开<code>frpc.ini</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#配置路由，开启二级域名配置</span><br><span class="line">subdomain &#x3D; api.cksspk.site</span><br><span class="line"></span><br><span class="line">#记得将cuttom_domains注释掉</span><br></pre></td></tr></table></figure>
+<p>重启<code>frp</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart frpc</span><br></pre></td></tr></table></figure>
+<h4 id="nginx配置-1"><a href="#nginx配置-1" class="headerlink" title="nginx配置"></a><code>nginx</code>配置</h4></li>
+<li><p>修改<code>nginx.conf</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2. 修改server配置</span></span><br><span class="line">server &#123;</span><br><span class="line">		listen       80;</span><br><span class="line">		<span class="comment">#将server_name修改改成对应域名</span></span><br><span class="line">	    server_name  www.blog.cksspk.site;</span><br><span class="line">        location / &#123;</span><br><span class="line">    		 <span class="comment">#地址修改为项目git仓库地址</span></span><br><span class="line">             root   /home/hexo/projects/blog;</span><br><span class="line">             index  index.html index.htm;</span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">         error_page   500 502 503 504  /50x.html;</span><br><span class="line">         location = /50x.html &#123;</span><br><span class="line">             root   html;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>重启<code>nginx</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
+</ul>
+<p>浏览器访问<a href="http://www.blog.cksspk.site/">www.blog.cksspk.site</a> 即可出现，锤子，配置了半天，外网访问还是慢，可能因为服务器是国外的原因，白嫖的缺点。。。。</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>内网穿透</tag>
+        <tag>nginx静态页面</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos7安装nginx</title>
+    <url>/2020/06/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-06-15-centos7%E5%AE%89%E8%A3%85nginx/</url>
+    <content><![CDATA[<p><code>centos7</code>安装<code>nginx</code></p>
+<a id="more"></a>
+
+<h1 id="cenots7安装nginx"><a href="#cenots7安装nginx" class="headerlink" title="cenots7安装nginx"></a>cenots7安装nginx</h1><h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><ol>
+<li><p>gcc</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install gcc</span><br></pre></td></tr></table></figure></li>
+<li><p>pcre、pcre-devel安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y pcre pcre-devel</span><br></pre></td></tr></table></figure></li>
+<li><p>zlib安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y zlib zlib-devel</span><br></pre></td></tr></table></figure></li>
+<li><p>安装openssl</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<h4 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h4></li>
+</ol>
+<ul>
+<li><p><strong>上传服务器</strong> <a href="https://pan.baidu.com/s/1GPt4McwvCjMB7fkQaO8Djg">资源地址：nginx-1.10.0</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nginx-1.10.0.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>解压</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf nginx-1.10.0.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进入nginx目录</span></span><br><span class="line"><span class="built_in">cd</span> nginx-1.10.0.tar.gz</span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line">./configure --prefix=/opt/nginx --sbin-path=/usr/bin/nginx</span><br><span class="line"><span class="comment"># 编译安装</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>操作</strong></p>
+<p>nginx可以通过以下指令启动，停止</p>
+<ul>
+<li>启动 <code>nginx</code></li>
+<li>停止 <code>nginx -s stop</code></li>
+<li>重新加载 <code>nginx -s reload</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="配置开机自启"><a href="#配置开机自启" class="headerlink" title="配置开机自启"></a>配置开机自启</h3><p> <strong>第一步：进入到/lib/systemd/system/目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /lib/systemd/system/</span><br></pre></td></tr></table></figure>
+<p><strong>第二步：创建nginx.service文件，并编辑</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim nginx.service</span><br><span class="line"><span class="comment"># 内容如下</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=nginx service</span><br><span class="line">After=network.target </span><br><span class="line">   </span><br><span class="line">[Service] </span><br><span class="line">Type=forking </span><br><span class="line">ExecStart=/usr/bin/nginx</span><br><span class="line">ExecReload=/usr/bin/nginx -s reload</span><br><span class="line">ExecStop=/usr/bin/nginx -s quit</span><br><span class="line">PrivateTmp=<span class="literal">true</span> </span><br><span class="line">   </span><br><span class="line">[Install] </span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p><strong>第三步：加入开机自启动</strong></p>
+<ul>
+<li><p>启动开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>查看状态</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>取消开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> nginx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>软件安装</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx反向代理frps</title>
+    <url>/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/</url>
+    <content><![CDATA[<p>​        申请的域名终于下来了，再加上之前买的云服务器，终于可以搞一搞了。由于服务器只有一个<code>IP</code>和域名，80端口用来访问很方便，但是有些接口回调只支持80端口，比如微信公众号。因此，需要将80端口配置的更加通用一些。</p>
+<a id="more"></a>
+
+<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
+<li>frp</li>
+<li>nginx</li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p><img src="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%88%B0frps.png" alt="流程"></p>
+<p>​    整体流程如图所示，<code>nginx</code>根据一级域名和二级域名进行方向代理，这样的话主域名代理到<code>Hexo</code>博客，二级域名通过<code>frp</code>还可以穿透到其他机器，扩展起来也很方便，添加一个<code>frp</code>客户端就可以了。：</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
+<li><h4 id="添加域名解析"><a href="#添加域名解析" class="headerlink" title="添加域名解析"></a>添加域名解析</h4><p>域名解析一般在购买的服务商那里都会有配置，这里我买的是腾讯云，所以展示腾讯云配置</p>
+<p><img src="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/1.jpg" alt="流程1"></p>
+</li>
+<li><h4 id="nginx配置代理规则"><a href="#nginx配置代理规则" class="headerlink" title="nginx配置代理规则"></a>nginx配置代理规则</h4><p>nginx代理规则很简单，根据一级域名和二级域名的不同进行代理就好了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#二级域名配置 转发到本机frps</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen          80;</span><br><span class="line">    server_name     *.yourdomain.com;</span><br><span class="line">    location /&#123;</span><br><span class="line">            <span class="comment">#服务器的ip和端口   http://[ip]:[port]   vhost_http_port</span></span><br><span class="line">            proxy_pass http://127.0.0.1:81;</span><br><span class="line">            proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">            proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">            proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">            proxy_hide_header X-Powered-By;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#主域名配置</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  yourdomain.com;</span><br><span class="line">    <span class="comment">#配置hexo博客地址</span></span><br><span class="line">    location / &#123;</span><br><span class="line">         root   /home/git/projects/blog;</span><br><span class="line">         index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="frp配置"><a href="#frp配置" class="headerlink" title="frp配置"></a>frp配置</h4><p>frps.ini这里没有什么需要特别改动的，使用的方式还是通过二级域名管理客户端 <a href="%5Bhttps://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%5D(https://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D)">frp官方说明</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line">subdomain_host = yourdomain.com</span><br><span class="line"><span class="comment"># 注意启动端口与 nginx 代理二级域名后的端口一致</span></span><br><span class="line">vhost_http_port = 81</span><br><span class="line">vhost_https_port = 443</span><br></pre></td></tr></table></figure>
+<p>服务器配置到这里就ok了，接下来只要在<code>frpc</code>客户端对二级域名配置即可。通过test.yourdomain.com就可以访问内网的web服务，接口回调也很方便~</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>manjaro安装及基本配置</title>
+    <url>/2020/08/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-08-09-manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>非常好看的linux桌面版</p>
+<a id="more"></a>
+
+<h2 id="磁盘分区方案"><a href="#磁盘分区方案" class="headerlink" title="磁盘分区方案"></a>磁盘分区方案</h2><p>磁盘大小一共给了80G，主要分了4个分区。</p>
+<table>
+<thead>
+<tr>
+<th>大小</th>
+<th>分区类型</th>
+<th>文件系统</th>
+<th>挂载点</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>512MB</td>
+<td>主分区</td>
+<td>fat32</td>
+<td>/boot</td>
+<td>boot</td>
+</tr>
+<tr>
+<td>8192MB</td>
+<td>主分区</td>
+<td>linuxswap</td>
+<td>-</td>
+<td>swap</td>
+</tr>
+<tr>
+<td>40960MB</td>
+<td>主分区</td>
+<td>xfs</td>
+<td>/</td>
+<td>lvm</td>
+</tr>
+<tr>
+<td>剩余</td>
+<td>主分区</td>
+<td>xfs</td>
+<td>/home</td>
+<td>lvm</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 分区配置</span></span><br><span class="line">/boot 	512MB fat32</span><br><span class="line">/swap 4096MB Linux swap</span><br><span class="line">/ 30720MB lvm</span><br><span class="line">/home 剩余 lvm</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="manjaro安装后基本配置"><a href="#manjaro安装后基本配置" class="headerlink" title="manjaro安装后基本配置"></a>manjaro安装后基本配置</h2><h3 id="自动选择中国源"><a href="#自动选择中国源" class="headerlink" title="自动选择中国源"></a>自动选择中国源</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank     //选择中国源并更新</span><br><span class="line"><span class="comment"># 使用清华源</span></span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/manjaro/stable/<span class="variable">$repo</span>/<span class="variable">$arch</span></span><br><span class="line"><span class="comment"># 中科大</span></span><br><span class="line">Server = https://mirrors.ustc.edu.cn/manjaro/stable/<span class="variable">$repo</span>/<span class="variable">$arch</span></span><br><span class="line"></span><br><span class="line">sudo pacman -Syyu                           //更新系统</span><br></pre></td></tr></table></figure>
+<h4 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo pacman -S vim</span><br></pre></td></tr></table></figure>
+<h4 id="添加Archlinuxcn源"><a href="#添加Archlinuxcn源" class="headerlink" title="添加Archlinuxcn源"></a>添加Archlinuxcn源</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf <span class="comment"># 打开文件</span></span><br><span class="line"><span class="comment"># 在文件末尾添加以下两行</span></span><br><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustedOnly</span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装archlinuxcn签名钥匙-导入-GPG-key，否则的话key验证失败会导致无法安装软件"><a href="#安装archlinuxcn签名钥匙-导入-GPG-key，否则的话key验证失败会导致无法安装软件" class="headerlink" title="安装archlinuxcn签名钥匙(导入 GPG key，否则的话key验证失败会导致无法安装软件)"></a>安装archlinuxcn签名钥匙(导入 GPG key，否则的话key验证失败会导致无法安装软件)</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+<h4 id="解决终端间隙过大"><a href="#解决终端间隙过大" class="headerlink" title="解决终端间隙过大"></a>解决终端间隙过大</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S wqy-bitmapfont</span><br><span class="line">sudo pacman -S wqy-zenhei</span><br></pre></td></tr></table></figure>
+<h4 id="修改主目录为英文"><a href="#修改主目录为英文" class="headerlink" title="修改主目录为英文"></a>修改主目录为英文</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S xdg-user-dirs-gtk</span><br><span class="line"><span class="built_in">export</span> LANG=en_US</span><br><span class="line">xdg-user-dirs-gtk-update</span><br><span class="line"><span class="comment">#会有窗体提示语言更改，修改文件夹名称，按照提示使用英文即可</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装zsh-amp-oh-my-zsh-普通用户和root用户需要单独配置"><a href="#安装zsh-amp-oh-my-zsh-普通用户和root用户需要单独配置" class="headerlink" title="安装zsh &amp; oh-my-zsh(普通用户和root用户需要单独配置)"></a>安装zsh &amp; oh-my-zsh(普通用户和root用户需要单独配置)</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. 安装zsh</span><br><span class="line">sudo pacman -S zsh</span><br><span class="line">2. 使用zsh替换bash</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">3. 安装oh-my-zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="oh-my-zsh插件"><a href="#oh-my-zsh插件" class="headerlink" title="oh-my-zsh插件"></a>oh-my-zsh插件</h4><h5 id="语法高亮-zsh-syntax-highlighting"><a href="#语法高亮-zsh-syntax-highlighting" class="headerlink" title="语法高亮 zsh-syntax-highlighting"></a>语法高亮 zsh-syntax-highlighting</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 执行下面指令自动安装</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+<h5 id="自动补全插件-zsh-autosuggestions"><a href="#自动补全插件-zsh-autosuggestions" class="headerlink" title="自动补全插件 zsh-autosuggestions"></a>自动补全插件 zsh-autosuggestions</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 执行下面指令自动安装</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+<h5 id="自动跳转插件-autojump"><a href="#自动跳转插件-autojump" class="headerlink" title="自动跳转插件 autojump"></a>自动跳转插件 autojump</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># clone 到本地</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/wting/autojump.git <span class="variable">$ZSH_CUSTOM</span>/plugins/autojump</span><br><span class="line"><span class="comment"># 进入clone目录，接着执行安装文件</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$ZSH_CUSTOM</span>/plugins/autojump</span><br><span class="line">./install.py</span><br><span class="line"><span class="comment"># 接着根据安装完成后的提示，在~/.zshrc最后添加下面语句：</span></span><br><span class="line">vim ~/.zshrc    </span><br><span class="line">[[ -s /home/xxxx/.autojump/etc/profile.d/autojump.sh ]] &amp;&amp; <span class="built_in">source</span> /home/xxxx/.autojump/etc/profile.d/autojump.sh</span><br><span class="line"><span class="built_in">autoload</span> -U compinit &amp;&amp; compinit -u</span><br></pre></td></tr></table></figure>
+<h5 id="安装完后启用插件"><a href="#安装完后启用插件" class="headerlink" title="安装完后启用插件"></a>安装完后启用插件</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 编辑~/.zshrc   </span></span><br><span class="line">vim ~/.zshrc    </span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;ys&quot;</span></span><br><span class="line"><span class="comment"># 在plugins后括号里添加安装的插件名字</span></span><br><span class="line">plugins=(   git </span><br><span class="line">            autojump </span><br><span class="line">            zsh-autosuggestions </span><br><span class="line">            zsh-syntax-highlighting</span><br><span class="line">            )</span><br><span class="line"><span class="comment"># 最后刷新</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+<h4 id="安装oh-m-zsh导致小键盘失效问题"><a href="#安装oh-m-zsh导致小键盘失效问题" class="headerlink" title="安装oh-m-zsh导致小键盘失效问题"></a>安装oh-m-zsh导致小键盘失效问题</h4><p>​    在 ~/.zshrc 中将 HOME/END 等键值重新 MAP</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># key bindings</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[1~&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[4~&quot;</span> end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[5~&quot;</span> beginning-of-history</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[6~&quot;</span> end-of-history</span><br><span class="line"></span><br><span class="line"><span class="comment"># for rxvt</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[8~&quot;</span> end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[7~&quot;</span> beginning-of-line</span><br><span class="line"><span class="comment"># for non RH/Debian xterm, can&#x27;t hurt for RH/DEbian xterm</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\eOH&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\eOF&quot;</span> end-of-line</span><br><span class="line"><span class="comment"># for freebsd console</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[H&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[F&quot;</span> end-of-line</span><br><span class="line"><span class="comment"># completion in the middle of a line</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&#x27;^i&#x27;</span> expand-or-complete-prefix</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fix numeric keypad  </span></span><br><span class="line"><span class="comment"># 0 . Enter  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Op&quot;</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[On&quot;</span> <span class="string">&quot;.&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[OM&quot;</span> <span class="string">&quot;^M&quot;</span></span><br><span class="line"><span class="comment"># 1 2 3  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oq&quot;</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Or&quot;</span> <span class="string">&quot;2&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Os&quot;</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"><span class="comment"># 4 5 6  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ot&quot;</span> <span class="string">&quot;4&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ou&quot;</span> <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ov&quot;</span> <span class="string">&quot;6&quot;</span></span><br><span class="line"><span class="comment"># 7 8 9  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ow&quot;</span> <span class="string">&quot;7&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ox&quot;</span> <span class="string">&quot;8&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oy&quot;</span> <span class="string">&quot;9&quot;</span></span><br><span class="line"><span class="comment"># + - * /  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ol&quot;</span> <span class="string">&quot;+&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Om&quot;</span> <span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oj&quot;</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oo&quot;</span> <span class="string">&quot;/&quot;</span></span><br></pre></td></tr></table></figure>
+<p>​    保存退出</p>
+<p>​    刷新 <code>source ~/.zshrc</code></p>
+<h4 id="设置桌面快捷键"><a href="#设置桌面快捷键" class="headerlink" title="设置桌面快捷键"></a>设置桌面快捷键</h4><p>​    使用super + D 快捷键显示桌面，类似在windows快捷键</p>
+<p>​    设置 -&gt; 窗口管理器 -&gt; 键盘 </p>
+<p>​    找到 <strong>显示桌面项</strong>, 编辑修改即可</p>
+<h4 id="设置终端快捷键"><a href="#设置终端快捷键" class="headerlink" title="设置终端快捷键"></a>设置终端快捷键</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置-&gt;键盘-&gt;应用程序快捷键-&gt;添加</span></span><br><span class="line"><span class="comment"># 命令：</span></span><br><span class="line">xfce4-terminal</span><br><span class="line"></span><br><span class="line"><span class="comment">#随着版本的升级，可能需要启动的命令也不一样，列出终端命令</span></span><br><span class="line"><span class="built_in">cd</span> /usr/bin</span><br><span class="line">ls | grep terminal</span><br></pre></td></tr></table></figure>
+<h4 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h4><p>本来想装搜狗输入法，但是一直报错 <code>错误：未找到目标：fcitx-sogoupinyin</code>，换成谷歌，能用。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin</span><br><span class="line"><span class="comment"># 在用户根目录创建文件</span></span><br><span class="line">vim ~/.xprofile</span><br><span class="line"><span class="comment"># 内容</span></span><br><span class="line"><span class="built_in">export</span> LC_ALL=zh_CN.UTF-8</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=“@im=fcitx”</span><br><span class="line"><span class="comment"># 注销重新登录即可,按 crtl + space 切换</span></span><br></pre></td></tr></table></figure>
+<h4 id="时间同步"><a href="#时间同步" class="headerlink" title="时间同步"></a>时间同步</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 配置chrony服务，实现服务器时间自动同步</span></span><br><span class="line">sudo pacman -S chrony</span><br><span class="line"><span class="comment">#2 修改配置，同步阿里云时间</span></span><br><span class="line">sudo vim /etc/chrony.conf</span><br><span class="line"><span class="comment">#3 将 四个源 注释掉， 添加如下 保存退出</span></span><br><span class="line">server ntp.aliyun.com iburst</span><br><span class="line"></span><br><span class="line"><span class="comment">#同步</span></span><br><span class="line">sudo chronyc -a makestep</span><br><span class="line">sudo systemctl start chronyd.service</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> chronyd.service	</span><br></pre></td></tr></table></figure>
+<h4 id="开启ssh"><a href="#开启ssh" class="headerlink" title="开启ssh"></a>开启ssh</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl start sshd</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sshd</span><br></pre></td></tr></table></figure>
+<h4 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S ttf-hack</span><br></pre></td></tr></table></figure>
+<h3 id="软件篇"><a href="#软件篇" class="headerlink" title="软件篇"></a>软件篇</h3><h4 id="安装maven环境"><a href="#安装maven环境" class="headerlink" title="安装maven环境"></a>安装maven环境</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 将下载好的maven上传到服务器</span></span><br><span class="line">scp apache-maven-3.6.3-bin.tar.gz your_name@192.168.xx.xxx:/opt/xxx/</span><br><span class="line"><span class="comment">#2 创建目录</span></span><br><span class="line">sudo mkdir /usr/<span class="built_in">local</span>/maven</span><br><span class="line"><span class="comment">#3 移动maven到指定目录</span></span><br><span class="line">sudo mv apache-maven-3.6.3-bin.tar.gz ./maven</span><br><span class="line"><span class="comment">#4 解压</span></span><br><span class="line">sudo tar -zxvf apache-maven-3.6.3-bin.tar.gz</span><br><span class="line"><span class="comment">#5 配置环境变量</span></span><br><span class="line">sudo vim /etc/profile</span><br><span class="line"><span class="comment">#6 在文件末尾添加</span></span><br><span class="line"><span class="built_in">export</span> MAVEN_HOME=/usr/<span class="built_in">local</span>/maven/apache-maven-3.6.3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:<span class="variable">$&#123;MAVEN_HOME&#125;</span>/bin</span><br><span class="line"><span class="comment">#7 让配置文件生效</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="comment">#8 验证</span></span><br><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 nodejs安装</span></span><br><span class="line">sudo pacman -S nodejs</span><br><span class="line"><span class="comment">#2 npm安装</span></span><br><span class="line">sudo pacman -S npm</span><br><span class="line"><span class="comment">#3 设置npm源</span></span><br><span class="line">sudo npm config <span class="built_in">set</span> -g registry https://registry.npm.taobao.org</span><br><span class="line"><span class="comment">#查看源是否修改成功</span></span><br><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+<h4 id="安装谷歌浏览器"><a href="#安装谷歌浏览器" class="headerlink" title="安装谷歌浏览器"></a>安装谷歌浏览器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S google-chrome</span><br></pre></td></tr></table></figure>
+<h4 id="安装vscode"><a href="#安装vscode" class="headerlink" title="安装vscode"></a>安装vscode</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S visual-studio-code-bin</span><br></pre></td></tr></table></figure>
+<h4 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h4><p><a href="https://pan.baidu.com/s/1bhcqnnxqgEtqtZMWphGqqA">mysql文件</a> 提取码: xb7f</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 将下载好的MySQL上传到服务器 </span></span><br><span class="line">scp mysql-5.7.31-linux-glibc2.12-x86_64.tar xxx@192.168.xx.xxx:/tmp</span><br><span class="line"><span class="comment">#2 移动到指定目录解压</span></span><br><span class="line">sudo tar -zxvf mysql-5.7.31-linux-glibc2.12-x86_64.tar.gz</span><br><span class="line"><span class="comment">##3.1 创建用户组</span></span><br><span class="line">sudo groupadd mysql </span><br><span class="line"><span class="comment">##3.2 创建用户</span></span><br><span class="line">sudo useradd -r -g mysql mysql</span><br><span class="line"><span class="comment">##3.3 修改文件权限</span></span><br><span class="line">sudo chown -R mysql:mysql mysql-5.7.31-linux-glibc2.12-x86_64</span><br><span class="line"><span class="comment">#4.1 创建MySQL数据存放目录,在MySQL安装目录下</span></span><br><span class="line">sudo mkdir data</span><br><span class="line"><span class="comment">#4.2 创建日志文件 并修改所有者</span></span><br><span class="line">sudo vim /var/<span class="built_in">log</span>/mysqld.log</span><br><span class="line">sudo chown -R mysql:mysql /var/<span class="built_in">log</span>/mysqld.log </span><br><span class="line"><span class="comment">#4.3 创建pid文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql/mysql-5.7.31-linux-glibc2.12-x86_64/data</span><br><span class="line">sudo touch mysqld.pid</span><br><span class="line"><span class="comment">#4.4 创建配置文件</span></span><br><span class="line">sudo  /etc/my.cnf</span><br><span class="line"><span class="comment">#5 初始化数据库,在bin目录下</span></span><br><span class="line">sudo ./mysqld --initialize --user=mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">#5.1 报错./mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory</span></span><br><span class="line"><span class="comment"># 执行解决</span></span><br><span class="line">sudo pacman -S numactl</span><br><span class="line"></span><br><span class="line"><span class="comment">#6 启动MySQL</span></span><br><span class="line">$ sudo ./mysql.server start                </span><br><span class="line">Starting MySQL. SUCCESS!</span><br><span class="line"></span><br><span class="line"><span class="comment">#7 连接MySQL报错 mysql: error while loading shared libraries: libncurses.so.5: cannot open shared object file: No such file or directory，</span></span><br><span class="line">sudo pacman  -S ncurses5-compat-libs</span><br><span class="line"></span><br><span class="line"><span class="comment">#8 重新启动MySQL 登录</span></span><br><span class="line">sudo ./mysql.server restart</span><br><span class="line">$ mysql -uroot -p</span><br><span class="line">Enter password: </span><br><span class="line">ERROR 1045 (28000): Access denied <span class="keyword">for</span> user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> (using password: NO)</span><br><span class="line"><span class="comment">#8.1 初始密码不对，停止MySQL</span></span><br><span class="line">sudo ./mysql.server stop</span><br><span class="line"><span class="comment">#8.2 修改my.cnf文件，将skip-grant-tables注释放开</span></span><br><span class="line">sudo vim /etc/my.cnf</span><br><span class="line"></span><br><span class="line"><span class="comment">#9 启动MySQL，这个时候不需要密码进行登录</span></span><br><span class="line">use mysql;	//切换数据库</span><br><span class="line">update user <span class="built_in">set</span> authentication_string=password(<span class="string">&#x27;123456&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span>;	//修改密码</span><br><span class="line">flush privileges;	//刷新权限</span><br><span class="line"><span class="comment">#9.1 修改my.cnf文件，将skip-grant-tables注释 重新启动mysql即可</span></span><br></pre></td></tr></table></figure>
+
+
+<h5 id="etc-my-cnf配置文件"><a href="#etc-my-cnf配置文件" class="headerlink" title="/etc/my.cnf配置文件"></a>/etc/my.cnf配置文件</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line">port &#x3D; 3306</span><br><span class="line">socket &#x3D; &#x2F;tmp&#x2F;mysql.sock</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line">port &#x3D; 3306</span><br><span class="line">socket &#x3D; &#x2F;tmp&#x2F;mysql.sock</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">character_set_server&#x3D;utf8</span><br><span class="line">init_connect&#x3D;&#39;SET NAMES utf8&#39;</span><br><span class="line">basedir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;mysql-5.7.31-linux-glibc2.12-x86_64</span><br><span class="line">datadir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;mysql-5.7.31-linux-glibc2.12-x86_64&#x2F;data</span><br><span class="line">socket&#x3D;&#x2F;tmp&#x2F;mysql.sock</span><br><span class="line">log-error&#x3D;&#x2F;var&#x2F;log&#x2F;mysqld.log</span><br><span class="line">pid-file&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;mysql-5.7.31-linux-glibc2.12-x86_64&#x2F;data&#x2F;mysqld.pid</span><br><span class="line">#不区分大小写</span><br><span class="line">lower_case_table_names &#x3D; 1</span><br><span class="line">sql_mode&#x3D;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br><span class="line">max_connections&#x3D;5000</span><br><span class="line">default-time_zone &#x3D; &#39;+8:00&#39;</span><br><span class="line"></span><br><span class="line"># skip-grant-tables</span><br></pre></td></tr></table></figure>
+<h5 id="自动启动"><a href="#自动启动" class="headerlink" title="自动启动"></a>自动启动</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 创建systemctl管理文件</span></span><br><span class="line">sudo vim /usr/lib/systemd/system/mysqld.service</span><br><span class="line"><span class="comment">#2 内容如下</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">After=network.target</span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">TimeoutSec=0</span><br><span class="line">PermissionsStartOnly=<span class="literal">true</span></span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/mysql/mysql-5.7.31-linux-glibc2.12-x86_64/support-files/mysql.server start</span><br><span class="line">LimitNOFILE = 65535</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=3</span><br><span class="line">RestartPreventExitStatus=1</span><br><span class="line">PrivateTmp=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装Idea"><a href="#安装Idea" class="headerlink" title="安装Idea"></a>安装Idea</h4><ul>
+<li><p>指定版本破解。先将<code>ideaIU-2020.2.tar.gz</code>与<code>jetbrains-agent-latest.zip</code>文件上传到服务器。<a href="https://pan.baidu.com/s/1MTUe6i7Y5KQhveUGxYxqQw">链接地址</a> 提取码：e9uw</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 解压</span></span><br><span class="line">tar -zxvf ideaIU-2020.2.tar.gz</span><br><span class="line"><span class="comment">#2 安装 移动到bin目录下</span></span><br><span class="line">./idea.sh</span><br><span class="line"><span class="comment">#3 安装完成后先进去试用30天</span></span><br><span class="line"><span class="comment">#4 新建一个类</span></span><br><span class="line"><span class="comment">#5 将 jetbrains-agent-latest.zip 文件拖进类中</span></span><br><span class="line"><span class="comment">#6 重启idea，查看Help-&gt;About 2089过期</span></span><br></pre></td></tr></table></figure></li>
+<li><p>最新地址</p>
+<p><a href="https://tech.souyunku.com/?p=30970">https://tech.souyunku.com/?p=30970</a></p>
+</li>
+</ul>
+<h4 id="安装Dock"><a href="#安装Dock" class="headerlink" title="安装Dock"></a>安装Dock</h4><p>​    在开始菜单中，输入“面板”并点击，将弹出选项中的“锁定面板”的勾选去掉，然后将任务栏拖到顶部，再勾选上“锁定面板”<br>​    进入shell输入，安装plank：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S plank</span><br></pre></td></tr></table></figure>
+<h5 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h5><p>  在开始菜单中，输入“回话和启动”，点击“应用程序自启动”选显卡，点击“添加”，弹出的框里，“名称”填“plank”,命令填“/usr/bin/plank”，触发器选“on login”，设置dock开机启动。</p>
+<h3 id="网络篇"><a href="#网络篇" class="headerlink" title="网络篇"></a>网络篇</h3><h4 id="安装Shadowsocks-qt5，实现科学上网"><a href="#安装Shadowsocks-qt5，实现科学上网" class="headerlink" title="安装Shadowsocks-qt5，实现科学上网"></a>安装Shadowsocks-qt5，实现科学上网</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S shadowsocks-qt5</span><br></pre></td></tr></table></figure>
+<h4 id="利用代理执行命令-proxychains"><a href="#利用代理执行命令-proxychains" class="headerlink" title="利用代理执行命令-proxychains"></a>利用代理执行命令-proxychains</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 安装proxychains</span></span><br><span class="line">sudo pacman -S proxychains-ng</span><br><span class="line"><span class="comment">#2 修改配置文件</span></span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line"><span class="comment">#3 将socks4 127.0.0.1 9050 删除，添加一行，如下</span></span><br><span class="line">socks5 127.0.0.1 1080</span><br><span class="line"><span class="comment">#4 在zshrc中添加别名,打开文件</span></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="comment">#5 在文件末尾添加一行</span></span><br><span class="line"><span class="built_in">alias</span> pc4=<span class="string">&#x27;proxychains4&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装chrome插件SwitchyOmega"><a href="#安装chrome插件SwitchyOmega" class="headerlink" title="安装chrome插件SwitchyOmega"></a>安装chrome插件SwitchyOmega</h4><ul>
+<li><p>在github上下载.crx文件 地址<a href="https://github.com/FelisCatus/SwitchyOmega/releases">https://github.com/FelisCatus/SwitchyOmega/releases</a></p>
+</li>
+<li><p>将文件后缀改成zip,解压到文件夹</p>
+</li>
+<li><p>将文件夹传到服务器目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp -r SwitchyOmega_Chromium you_name@192.168.xx.xxx:/home/ckss/workspace/application/</span><br></pre></td></tr></table></figure></li>
+<li><p>在chrome浏览器打开扩展程序 -&gt; 加载已解压的扩展程序 -&gt; 选择SwitchyOmega_Chromium</p>
+</li>
+<li><p>在SwitchyOmega界面点击导入/导出</p>
+</li>
+<li><p>选择从备份文件恢复 <a href="https://pan.baidu.com/s/1FNvvTQ9IzmlcPc3p-JbX5A">文件地址</a> 提取码: nsbh</p>
+</li>
+<li><p>开启的时候记得要先开Shadowsocks-qt5，然后选择自动切换模式，即可实现chrome访问google</p>
+</li>
+</ul>
+<p>在使用git clone xxx 使用 pc4 git clone xxx 即可提速（前提是开启本地1080代理）</p>
+<h3 id="操作篇"><a href="#操作篇" class="headerlink" title="操作篇"></a>操作篇</h3><h4 id="使用scp与linux文件上传下载"><a href="#使用scp与linux文件上传下载" class="headerlink" title="使用scp与linux文件上传下载"></a>使用scp与linux文件上传下载</h4><ul>
+<li>scp /home/work/source.txt <a href="mailto:&#119;&#111;&#114;&#107;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#x2e;&#x30;&#x2e;&#49;&#x30;">&#119;&#111;&#114;&#107;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#x2e;&#x30;&#x2e;&#49;&#x30;</a>:/home/work/ #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下</li>
+<li>scp <a href="mailto:&#119;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#x30;">&#119;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#x30;</a>:/home/work/source.txt /home/work/ #把192.168.0.10机器上的source.txt文件拷贝到本地的/home/work目录下</li>
+<li>scp <a href="mailto:&#x77;&#111;&#x72;&#107;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#49;&#48;">&#x77;&#111;&#x72;&#107;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#49;&#48;</a>:/home/work/source.txt <a href="mailto:&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;">&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;</a>:/home/work/ #把192.168.0.10机器上的source.txt文件拷贝到192.168.0.11机器的/home/work目录下</li>
+<li>scp -r /home/work/sourcedir <a href="mailto:&#x77;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#48;&#46;&#49;&#48;">&#x77;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#48;&#46;&#49;&#48;</a>:/home/work/ #拷贝文件夹，加-r参数</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+        <category>manjaro</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>centos7初始化配置及基本软件</title>
+    <url>/2020/05/29/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-centos7%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%9F%BA%E6%9C%AC%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<p>​    <code>centos7</code>初始化配置以及基本软件。</p>
+<a id="more"></a>
+
+<h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 新建用户</span></span><br><span class="line">adduser username</span><br><span class="line"><span class="comment">#2. 设置密码</span></span><br><span class="line">passwd username</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="添加sudu权限"><a href="#添加sudu权限" class="headerlink" title="添加sudu权限"></a>添加sudu权限</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1 找到sudoers文件夹</span></span><br><span class="line">whereis sudoers</span><br><span class="line"><span class="comment">#2 打开文件并编辑</span></span><br><span class="line">vim /etc/sudoers</span><br><span class="line"><span class="comment">#3 找到root    ALL=(ALL)    ALL一行 在下面添加新增的用户按照root的格式</span></span><br><span class="line">username    ALL=(ALL)    ALL</span><br><span class="line"><span class="comment">#4 保存退出</span></span><br><span class="line">:wq!</span><br><span class="line"><span class="comment">#5最后一步 刷新权限</span></span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+<h2 id="禁止root远程登录"><a href="#禁止root远程登录" class="headerlink" title="禁止root远程登录"></a>禁止root远程登录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#找到sshd_config文件</span></span><br><span class="line">whereis ssh</span><br><span class="line"><span class="comment">#编辑文件 </span></span><br><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line">//找到PermitRootLogin yes一行 将yes修改为no</span><br><span class="line">PermitRootLogin no</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">:wq!</span><br><span class="line"><span class="comment">#刷新权限</span></span><br><span class="line">systemctl restart sshd</span><br><span class="line"><span class="comment">#此时root用户已经无法登录</span></span><br></pre></td></tr></table></figure>
+<h2 id="fail2ban防暴力破解"><a href="#fail2ban防暴力破解" class="headerlink" title="fail2ban防暴力破解"></a>fail2ban防暴力破解</h2><blockquote>
+<p>fail2ban可以监视你的系统日志，然后匹配日志的错误信息（正则式匹配）执行相应的屏蔽动作（一般情况下是防火墙），而且可以发送e-mail通知系统管理员！</p>
+<p>fail2ban运行机制：简单来说其功能就是防止暴力破解。工作的原理是通过分析一定时间内的相关服务日志，将满足动作的相关IP利用iptables加入到dorp（丢弃）列表一定时间。</p>
+<p>官方地址： <a href="http://www.fail2ban.org/wiki/index.php/Main_Page">http://www.fail2ban.org/wiki/index.php/Main_Page</a></p>
+</blockquote>
+<ul>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install shorewall gamin-python shorewall-shell shorewall-perl shorewall-common python-inotify python-ctypes fail2ban</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>fail2ban</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 编辑配置文件 jail.local  并实现防暴力破解　</span></span><br><span class="line">vim /etc/fail2ban/jail.d/jail.local</span><br></pre></td></tr></table></figure>
+<p>文件内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#defalut这里是设定全局设置，如果下面的监控没有设置就以全局设置的值设置。</span></span><br><span class="line">[DEFAULT]</span><br><span class="line"><span class="comment"># 用于指定哪些地址ip可以忽略 fail2ban 防御,以空格间隔。</span></span><br><span class="line">ignoreip = 127.0.0.1/8</span><br><span class="line"><span class="comment"># 客户端主机被禁止的时长（默认单位为秒）</span></span><br><span class="line">bantime  = 3600</span><br><span class="line"><span class="comment"># 过滤的时长（秒）</span></span><br><span class="line">findtime  = 600</span><br><span class="line"><span class="comment"># 匹配到的阈值（次数）</span></span><br><span class="line">maxretry = 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[ssh-iptables]</span><br><span class="line"><span class="comment"># 是否开启</span></span><br><span class="line">enabled  = <span class="literal">true</span></span><br><span class="line"><span class="comment"># 过滤规则</span></span><br><span class="line">filter   = sshd</span><br><span class="line"><span class="comment"># 动作</span></span><br><span class="line">action   = iptables[name=SSH, port=ssh, protocol=tcp]</span><br><span class="line"><span class="comment"># 日志文件的路径</span></span><br><span class="line">logpath  = /var/<span class="built_in">log</span>/secure</span><br><span class="line"><span class="comment"># 匹配到的阈值（次数）</span></span><br><span class="line">maxretry = 3</span><br></pre></td></tr></table></figure>
+<p> 在这里需要注意一点就是：我们上面的action设置的时候，port=ssh，如果我们更改了sshd服务的端口号，我能需要在这里设置对应的端口号，否则配置不生效。 </p>
+</li>
+<li><p>启动 暂停 停止</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl   start&#x2F;restart&#x2F;stop&#x2F;status   fail2ban</span><br></pre></td></tr></table></figure></li>
+<li><p>防暴力破解测试</p>
+<ul>
+<li><p>测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 首先要让配置文件生效</span></span><br><span class="line">fail2ban-client reload</span><br></pre></td></tr></table></figure>
+<p><strong>测试：故意输入错误密码3次，再进行登录时，会拒绝登录</strong></p>
+<p><strong>警告：测试前注意修改被禁时长！！！！上面配置文件中时间为1个小时！！！！</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@121~]<span class="comment"># ssh 192.168.1.121</span></span><br><span class="line">root@192.168.1.121<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">Permission denied, please try again.</span></span><br><span class="line"><span class="string">root@192.168.1.121&#x27;</span>s password: </span><br><span class="line">Permission denied, please try again.</span><br><span class="line">root@192.168.1.121<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">Permission denied (publickey,password).</span></span><br><span class="line"><span class="string">[root@121~]# ssh 192.168.1.121</span></span><br><span class="line"><span class="string">ssh: connect to host 192.168.1.121 port 22: Connection refused</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前被禁止登陆的ip </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@121]<span class="comment"># fail2ban-client status ssh-iptables </span></span><br><span class="line">Status <span class="keyword">for</span> the jail: ssh-iptables</span><br><span class="line">|- filter</span><br><span class="line">|  |- File list:    /var/<span class="built_in">log</span>/secure     <span class="comment">#日志文件路径</span></span><br><span class="line">|  |- Currently failed:    0        <span class="comment">#当前失败次数</span></span><br><span class="line">|  `- Total failed:    3            <span class="comment">#总失败次数</span></span><br><span class="line">`- action</span><br><span class="line">   |- Currently banned:    1        <span class="comment">#当前禁止的ip数量</span></span><br><span class="line">   |  `- IP list:    192.168.1.112        <span class="comment">#当前禁止的ip</span></span><br><span class="line">   `- Total banned:    1        <span class="comment">#禁止的ip总数</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前使用配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1. 查看配置文件列表</span></span><br><span class="line">[root@VM_0_16_centos jail.d]$ sudo fail2ban-client status</span><br><span class="line">Status</span><br><span class="line">|- Number of jail:	1</span><br><span class="line">`- Jail list:	ssh-iptables</span><br><span class="line"><span class="comment">#2. 查看指定配置文件情况 与上面相同</span></span><br><span class="line">sudo fail2ban-client status ssh-iptables </span><br></pre></td></tr></table></figure>
+<h2 id="添加sudu权限-1"><a href="#添加sudu权限-1" class="headerlink" title="添加sudu权限"></a>添加sudu权限</h2></li>
+</ul>
+</li>
+</ul>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><ol>
+<li><p>gcc</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install gcc</span><br></pre></td></tr></table></figure></li>
+<li><p>pcre、pcre-devel安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y pcre pcre-devel</span><br></pre></td></tr></table></figure></li>
+<li><p>zlib安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y zlib zlib-devel</span><br></pre></td></tr></table></figure></li>
+<li><p>安装openssl</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3></li>
+</ol>
+<ul>
+<li><p><strong>上传服务器</strong> <a href="https://pan.baidu.com/s/1GPt4McwvCjMB7fkQaO8Djg">资源地址：nginx-1.10.0</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nginx-1.10.0.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>解压</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf nginx-1.10.0.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进入nginx目录</span></span><br><span class="line"><span class="built_in">cd</span> nginx-1.10.0.tar.gz</span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line">./configure --prefix=/opt/nginx --sbin-path=/usr/bin/nginx</span><br><span class="line"><span class="comment"># 编译安装</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>操作</strong></p>
+<p>nginx可以通过以下指令启动，停止</p>
+<ul>
+<li>启动 <code>nginx</code></li>
+<li>停止 <code>nginx -s stop</code></li>
+<li>重新加载 <code>nginx -s reload</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="配置开机自启"><a href="#配置开机自启" class="headerlink" title="配置开机自启"></a>配置开机自启</h3><p> <strong>第一步：进入到/lib/systemd/system/目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /lib/systemd/system/</span><br></pre></td></tr></table></figure>
+<p><strong>第二步：创建nginx.service文件，并编辑</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim nginx.service</span><br><span class="line"><span class="comment"># 内容如下</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=nginx service</span><br><span class="line">After=network.target </span><br><span class="line">   </span><br><span class="line">[Service] </span><br><span class="line">Type=forking </span><br><span class="line">ExecStart=/usr/bin/nginx</span><br><span class="line">ExecReload=/usr/bin/nginx -s reload</span><br><span class="line">ExecStop=/usr/bin/nginx -s quit</span><br><span class="line">PrivateTmp=<span class="literal">true</span> </span><br><span class="line">   </span><br><span class="line">[Install] </span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p><strong>第三步：加入开机自启动</strong></p>
+<ul>
+<li><p>启动开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>查看状态</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>取消开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> nginx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>云服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谷歌云与树莓派内网穿透frp</title>
+    <url>/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/</url>
+    <content><![CDATA[<p>之前很无聊买了个树莓派，一直吃灰，然后刚好谷歌云免费一年使用，于是打算拿来做服务器，并且可以随时通过外网访问，这就要使用到内网穿透服务了，这里通过frp穿透进行代理。</p>
+<a id="more"></a>
+
+<h2 id="配置工具"><a href="#配置工具" class="headerlink" title="配置工具"></a>配置工具</h2><ol>
+<li>谷歌云服务器 <code>centos7</code></li>
+<li>树莓派<code>Debian</code></li>
+<li>连接工具<code>xshell</code></li>
+</ol>
+<h2 id="云服务器配置"><a href="#云服务器配置" class="headerlink" title="云服务器配置"></a>云服务器配置</h2><p>在一台刚创建的服务器上下载<code>frp</code>，使用<code>xshell</code>登录云服务器，在<a href="https://github.com/fatedier/frp/releases">github</a>中找到系统所对应版本, 这里使用 <code>frp_0.27.1_linux_amd64.tar.gz</code></p>
+<ol>
+<li><p>下载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.27.1&#x2F;frp_0.27.1_linux_amd64.tar.gz</span><br><span class="line">#提示 -bash: wget: command not found</span><br><span class="line">yum install wget -y</span><br></pre></td></tr></table></figure></li>
+<li><p>解压</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf frp_0.27.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>修改名称</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv frp_0.27.1_linux_amd64 frp</span><br></pre></td></tr></table></figure></li>
+<li><p>进入文件夹，删除不需要文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd frp</span><br><span class="line">rm -f frpc*</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>frps.ini</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim frps.ini</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 10001</span><br><span class="line">protocol = tcp</span><br><span class="line">token = 123</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line"><span class="comment">#subdomain_host = cksspk.xyz</span></span><br><span class="line"></span><br><span class="line">vhost_http_port = 81</span><br><span class="line">vhost_https_port = 445</span><br><span class="line"></span><br><span class="line">log_file = /opt/frp/frps/<span class="built_in">log</span>/frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 10002</span><br><span class="line">dashboard_user = c123456</span><br><span class="line">dashboard_pwd = c123456</span><br><span class="line"></span><br><span class="line">tcp_mux = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li><p>​    启动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;frps -c .&#x2F;frps.ini</span><br></pre></td></tr></table></figure></li>
+<li><p>启动成功，可登录服务器地址:<code>10002</code>，访问控制面板</p>
+<p>   <img src="/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/frps_dashboard.png" alt="frps_dashboard.png"></p>
+</li>
+</ol>
+<h2 id="树莓派配置"><a href="#树莓派配置" class="headerlink" title="树莓派配置"></a>树莓派配置</h2><p>由于树莓派是<code>arm架构</code>,(如何查看<code>linux</code>架构，可通过<code>uname -a</code>命令查看)，所以需要使用<code>frp_0.27.1_linux_arm64.tar.gz</code>版本</p>
+<ol>
+<li><p>下载(或者通过<code>ftp</code>工具传输)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.27.1&#x2F;frp_0.27.1_linux_arm.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>解压、修改名称、删除不需要文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf frp_0.27.1_linux_arm.tar.gz</span><br><span class="line">mv frp_0.27.1_linux_arm frp</span><br><span class="line">cd frp</span><br><span class="line">rm -f frps*</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>frpc.ini</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim frpc.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line"><span class="comment">#服务器地址</span></span><br><span class="line">server_addr = ********</span><br><span class="line">server_port = 10001</span><br><span class="line">token=a123</span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志记录路径</span></span><br><span class="line">log_file = ./frpc.log</span><br><span class="line"><span class="comment"># 日志记录级别(trace, debug, info, warn, error)</span></span><br><span class="line">log_level = info</span><br><span class="line"><span class="comment"># 日志记录滚动天数</span></span><br><span class="line">log_max_days = 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># frpc客户端管理界面</span></span><br><span class="line">admin_addr = 127.0.0.1</span><br><span class="line">admin_port = 7400</span><br><span class="line">admin_user = admin</span><br><span class="line">admin_passwd = passwd</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 22315</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#http或者https模式主要针对于虚拟主机，访问的取决于frps.ini文件中的vhost_http_port设置</span></span><br><span class="line">[web01]</span><br><span class="line"><span class="built_in">type</span> = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 80</span><br><span class="line"><span class="comment">#域名</span></span><br><span class="line">custom_domains = cksspk.com</span><br><span class="line">http_user = admin</span><br><span class="line">http_pwd = passwd</span><br></pre></td></tr></table></figure></li>
+<li><p>启动 34.94.17.49</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure></li>
+<li><p>验证</p>
+<p>可通过<code>xshell</code>新建会话，输入 <code>谷歌云IP</code>地址，加上 <code>frpc.ini</code>文件中 <code>remote_port = 22315</code>端口，连接即可</p>
+</li>
+</ol>
+<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><p>通过上面的方式启动会占用当前shell, 一般会通过使用<code>systemctl</code>来控制启动</p>
+<h3 id="谷歌云配置"><a href="#谷歌云配置" class="headerlink" title="谷歌云配置"></a>谷歌云配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;frps.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Server Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> -s QUIT <span class="variable">$MAINPID</span></span><br><span class="line"><span class="comment"># &quot;ExecStart=&quot;之后的路径要填写你的frps安装路径</span></span><br><span class="line">ExecStart=/opt/frp/frps -c /opt/frp/frps.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="树莓派配置-1"><a href="#树莓派配置-1" class="headerlink" title="树莓派配置"></a>树莓派配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /lib/systemd/system/frpc.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Client Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"><span class="comment"># &quot;ExecStart=&quot;之后的路径要填写你的frps安装路径</span></span><br><span class="line">ExecStart=/opt/frp/frpc -c /opt/frp/frpc.ini</span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> <span class="variable">$MAINPID</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<h3 id="systemctl相关命令"><a href="#systemctl相关命令" class="headerlink" title="systemctl相关命令"></a><code>systemctl</code>相关命令</h3><ol>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>查看状态</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>停止</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>停止开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> frps.service</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>云服务器</tag>
+        <tag>谷歌云</tag>
+        <tag>树莓派</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谷歌云搭建</title>
+    <url>/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>谷歌云白嫖</p>
+<a id="more"></a>
+
+<h2 id="官方首页"><a href="#官方首页" class="headerlink" title="官方首页"></a>官方首页</h2><ol>
+<li>浏览器进入<a href="https://cloud.google.com/">谷歌云地址</a></li>
+<li>登陆账号</li>
+<li>点击<code>转到控制台</code></li>
+</ol>
+<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step1.png" alt="step1.png"></p>
+<h2 id="创建防火墙规则"><a href="#创建防火墙规则" class="headerlink" title="创建防火墙规则"></a>创建防火墙规则</h2><ol>
+<li><p>点击左上角打开侧边栏</p>
+</li>
+<li><p>鼠标移至<code>VPC网络</code></p>
+</li>
+<li><p>在展开的二级菜单中点击<code>防火墙规则</code></p>
+<ol>
+<li><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step3.png" alt="step3.png"></li>
+</ol>
+</li>
+<li><p>点击<code>创建防火墙</code></p>
+</li>
+<li><p>名称随便输入 比如:  <code>myrule01</code></p>
+</li>
+<li><p>目标选择 <code>网络中所有实例</code>（这个截图漏掉了）</p>
+</li>
+<li><p>来源IP地址范围  <code>0.0.0.0/0</code></p>
+</li>
+<li><p>协议和端口选择 <code>全部允许</code><br> <img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step4.png" alt="step4.png"></p>
+</li>
+</ol>
+<h2 id="创建VM实例"><a href="#创建VM实例" class="headerlink" title="创建VM实例"></a>创建VM实例</h2><ol>
+<li><p>点击左上角打开侧边栏</p>
+</li>
+<li><p>鼠标移至<code>Compute Engine</code></p>
+</li>
+<li><p>在展开的二级菜单中点击<code>VM实例</code></p>
+<ol>
+<li><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2.png" alt="step2.png"></li>
+</ol>
+</li>
+<li><p>点击<code>创建</code></p>
+<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2-1.png" alt="step2-1.png"></p>
+</li>
+<li><p>名称输入： <code>cksspk01</code></p>
+</li>
+<li><p>区域选择： <code>洛杉矶</code> 地区随意</p>
+</li>
+<li><p>机器配置：<code>f1-micro(1个vCPU, 614MB内存)</code></p>
+</li>
+<li><p>启动磁盘：<code>centos 7</code></p>
+</li>
+<li><p>防火墙：<code>允许HTTP/HTTPS流量</code></p>
+</li>
+<li><p>点开配置，在<em>网络</em>选项 <code>网络标记</code>选择刚才创建的规则</p>
+</li>
+<li><p>点击<code>创建</code></p>
+<p><img src="/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/step2-2.png" alt="step2-2.png"></p>
+</li>
+</ol>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>工具：<code>Xshell</code></p>
+<ol>
+<li>本地用xshell生成密钥匙</li>
+<li>将密钥匙配置到谷歌云上</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>云服务器 谷歌云</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树莓派基本设置</title>
+    <url>/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<p>树莓派硬件为3b+，系统版本debian9.9</p>
+<a id="more"></a>
+
+<p>查看树莓派系统参数命令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">getconf LONG_BIT        <span class="comment"># 查看系统位数</span></span><br><span class="line">uname -a            <span class="comment"># kernel 版本</span></span><br><span class="line">/opt/vc/bin/vcgencmd  version   <span class="comment"># firmware版本</span></span><br><span class="line">strings /boot/start.elf  |  grep VC_BUILD_ID    <span class="comment"># firmware版本</span></span><br><span class="line">cat /proc/version       <span class="comment"># kernel</span></span><br><span class="line">cat /etc/os-release     <span class="comment"># OS版本资讯</span></span><br><span class="line">cat /etc/issue          <span class="comment"># Linux distro 版本</span></span><br><span class="line">cat /etc/debian_version     <span class="comment"># Debian版本编号</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置wifi连接"><a href="#配置wifi连接" class="headerlink" title="配置wifi连接"></a>配置wifi连接</h2><ol>
+<li><p>打开文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>增加配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">&quot;wifi名称&quot;</span></span><br><span class="line">    psk=<span class="string">&quot;wifi密码&quot;</span></span><br><span class="line">    priority=4 连接优先级，数字越大优先级越高（不可以是负数）</span><br><span class="line">    <span class="comment">#scan_ssid:连接隐藏WiFi时需要指定该值为1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>拔网线，重启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h2></li>
+</ol>
+<p>路由器的WiFi一般为自动分配，如果经常开关机都要去路由器上查看IP地址，很麻烦，因此这种情况配置静态IP就很方便</p>
+<ol>
+<li><p>打开文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/dhcpcd.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>增加配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 指定接口 eth0</span></span><br><span class="line">interface eth0</span><br><span class="line"><span class="comment"># 指定静态IP，/24表示子网掩码为 255.255.255.0</span></span><br><span class="line">static ip_address=192.168.1.20/24</span><br><span class="line"><span class="comment"># 路由器/网关IP地址</span></span><br><span class="line">static routers=192.168.1.1</span><br><span class="line"><span class="comment"># 手动自定义DNS服务器</span></span><br><span class="line">static domain_name_servers=114.114.114.114</span><br></pre></td></tr></table></figure></li>
+<li><p>重启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="JAVA环境（jdk1-8）"><a href="#JAVA环境（jdk1-8）" class="headerlink" title="JAVA环境（jdk1.8）"></a>JAVA环境（jdk1.8）</h2></li>
+</ol>
+<h3 id="下载jdk"><a href="#下载jdk" class="headerlink" title="下载jdk"></a>下载jdk</h3><ol>
+<li>进入java<a href="https://www.oracle.com/java/technologies/javase-jdk8-downloads.html">官网</a></li>
+<li>选择 <code>Linux ARM 32 Hard Float ABI</code> 版本下载</li>
+<li>通过<code>xshell</code>软件上传至树莓派</li>
+</ol>
+<h3 id="解压配置环境"><a href="#解压配置环境" class="headerlink" title="解压配置环境"></a>解压配置环境</h3><ol>
+<li><p>在软件目录解压</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf jdk-8u241-linux-arm32-vfp-hflt.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>编辑配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li><p>在后面写入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;opt&#x2F;java&#x2F;jdk1.8.0_241</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre></td></tr></table></figure>
+<h3 id="保存验证"><a href="#保存验证" class="headerlink" title="保存验证"></a>保存验证</h3></li>
+<li><p>修改文件后立即生效</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li><p>验证，输入 <code>java -version</code>，查看打印输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/yanzheng.jpg" alt="验证"></p>
+</li>
+</ol>
+<h2 id="安装SVN服务器"><a href="#安装SVN服务器" class="headerlink" title="安装SVN服务器"></a>安装SVN服务器</h2><h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><ol>
+<li><p>安装svn服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install subversion -y</span><br></pre></td></tr></table></figure></li>
+<li><p>创建仓库, 使用/home/pi/svn/svn_ckss作为仓库根路径</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">svnadmin create /home/pi/svn/svn_ckss</span><br></pre></td></tr></table></figure></li>
+<li><p>修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/svnserve.conf </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_1.png" alt="验证"></p>
+<p>​    <strong>去掉注释，一定要删除空格！！！ 让配置顶格写！！！</strong></p>
+</li>
+<li><p>配置用户信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/passwd </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_2.jpg" alt="验证"></p>
+</li>
+<li><p>修改权限配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/authz </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_3.png" alt="验证"></p>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">svnserve -d -r /home/pi/svn/svn_ckss</span><br></pre></td></tr></table></figure></li>
+<li><p>查看启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep svnserve</span><br></pre></td></tr></table></figure>
+<p>启动成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root     19497     1  0 12:54 ?        00:00:00 svnserve -d -r /home/pi/svn/svn_taoge/</span><br><span class="line">root     19530 19172  0 13:13 pts/0    00:00:00 grep svnserve</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="8">
+<li><p>停止服务</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">killall svnserve</span><br></pre></td></tr></table></figure>
+<p>如果使用防火墙需要将3690端口开放</p>
+</li>
+</ol>
+<h3 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h3><p>客户端通过**<em>tortoiseSVN**</em>进行连接，下载地址 <a href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a></p>
+<p>另外，中文语言包需要通版本保持一致</p>
+<p>输入SVN服务器地址 :svn://192.168.0.108进行检出</p>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_4.png" alt="验证"></p>
+]]></content>
+      <categories>
+        <category>raspberryPi</category>
+      </categories>
+      <tags>
+        <tag>树莓派</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NodeJs离线环境下安装配置</title>
+    <url>/2019/06/26/%E5%89%8D%E7%AB%AF-nodejs-outline/</url>
+    <content><![CDATA[<p>这段时间由于工作原因要使用到openlayers，然后去网上找资料，发现一个神奇的东西， <a href="https://www.gitbook.com/">gitbook</a>（有可能链接点不开，qiang你懂得）。<em>GitBook 是一个基于 Node.js 的命令行工具，可使用 Github/Git 和 Markdown 来制作精美的电子书，GitBook 并非关于 Git的教程   ————百度百科 。</em> 然后我就心痒痒，想在公司（内网）使用，于是开始了离线环境下搭建之旅。</p>
+<a id="more"></a>
+
+<h1 id="一、安装配置"><a href="#一、安装配置" class="headerlink" title="一、安装配置"></a>一、安装配置</h1><ol>
+<li><p>首先下载安装NodeJs <a href="https://nodejs.org/en/">官网</a>、<a href="https://pan.baidu.com/s/1XRyaezEQJ9DcYfmO2nLE7A">百度云【提取码：emrm】</a></p>
+</li>
+<li><p>配置模块全局安装路径，方便找到位置，而且模块文件非常之多，放在c盘肯定不好</p>
+<p>先查看路径</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
+<p>设置全局模块路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set prefix&quot;D:\Program Files\nodejs\node_global&quot; </span><br></pre></td></tr></table></figure>
+<p> 设置缓存路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set cache&quot;D:\Program Files\nodejs\node_cache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>设置完之后可以同通过命令查看，配置信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以愉快的通过命令下载模块，比如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题一："><a href="#问题一：" class="headerlink" title="问题一："></a><strong>问题一：</strong></h2><p>下载完之后通过gitbook -V命令提示：</p>
+<p><strong>‘gitbook’不是内部或外部命令，也不是可运行的程序或批量文件</strong></p>
+<p>此时需要配置环境变量，将新的全局模块路径添加到环境变量！！在path中追加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">D:\Program Files\nodejs\node_global;</span><br></pre></td></tr></table></figure>
+<h2 id="问题二："><a href="#问题二：" class="headerlink" title="问题二："></a>问题二：</h2><p>在内网条件下安装nodeJs，并且将联网机中 node_global 及node_cache文件夹拷贝到开发机，通过上述命令设置好全局路径，通过gitbook -V命令显示 CLI version 2.3.2 ，然后卡住，报错，没有gitbook版本信息</p>
+<p>解决方法：手动拷贝将<strong>联网机c盘用户文件</strong>下的**.gitbook<strong>文件拷贝到</strong>开发机c盘用户目录**。</p>
+<h1 id="gitbook命令"><a href="#gitbook命令" class="headerlink" title="gitbook命令"></a>gitbook命令</h1><p>安装完后可通过命令初始化一本书</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure>
+
+<p>发布书籍</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
+
+<p> 具体还有很多有操作可以参考这<a href="http://gitbook.zhangjikai.com/#%E5%89%8D%E8%A8%80">这篇文章</a>，里面很多gitbook相关信息及资源</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>通过此次发现nodeJs还是挺有有意思的，有非常多的模块，比如快速发布本地服务的http-server模块。而且它的文件形式比较容易理解。最后，在复制 node_global 文件夹的时候，windows或提示文件夹名称过长，这个时候需要用解压缩软件对文件夹压缩操作。。。这也算一个有点了坑的地方！！！！！</p>
+]]></content>
+      <categories>
+        <category>nodeJs</category>
+      </categories>
+      <tags>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux-manjaro双系统安装</title>
+    <url>/2021/05/10/linux-manjaro/</url>
+    <content><![CDATA[<p>​    之前在虚拟机上装过 Manjar-xfce版本，感觉还不错。这次直接在笔记本上安装双系统，版本使用 <code>Manjaro-Kde</code></p>
+<a id="more"></a>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><ul>
+<li>笔记本电脑</li>
+<li>u盘</li>
+</ul>
+<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
+<li>Rufus    <a href="https://rufus.ie/zh/">下载地址</a></li>
+<li>Manjaro Kde <a href="https://manjaro.org/downloads/official/kde/">下载地址</a></li>
+</ul>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h4 id="制作启动盘"><a href="#制作启动盘" class="headerlink" title="制作启动盘"></a>制作启动盘</h4><ol>
+<li><p>打开 <code>Rufus</code>软件</p>
+</li>
+<li><p>点击 【选择】找到下载好的 ios</p>
+<p><img src="/2021/05/10/linux-manjaro/1.png"></p>
+</li>
+<li><p>点击【开始】</p>
+</li>
+</ol>
+<h4 id="win10-分区"><a href="#win10-分区" class="headerlink" title="win10 分区"></a>win10 分区</h4><p>在原有win10 磁盘中分区一块分区给新的系统使用</p>
+<ol>
+<li><p>右键【我的电脑】-【管理】-【存储】-【磁盘管理】</p>
+</li>
+<li><p>找一块比较大的磁盘，【右键】-【压缩卷】</p>
+<p>压缩完后不用格式化，由于我的笔记本上还装了一块固态，所有我压缩了两个分区出来(200G固态，300G机械)，后面系统手动分区使用。</p>
+<p><img src="/2021/05/10/linux-manjaro/2.png"></p>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h4 id="设置从U盘启动"><a href="#设置从U盘启动" class="headerlink" title="设置从U盘启动"></a>设置从U盘启动</h4><p>各种品牌的笔记本启动方式可能不一样，我的是惠普光影精灵，开机后按【esc】键，然后【F9】进入启动方式。</p>
+<h4 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h4><ul>
+<li><p>设置语言为简体中文</p>
+</li>
+<li><p>如果是双显卡就选择 <code>Boot with proprietary drivers</code> , 不是就选择 <code>Boot with open source drivers</code></p>
+</li>
+<li><p>回车键启动</p>
+</li>
+</ul>
+<img src="/2021/05/10/linux-manjaro/3.png" style="zoom:75%;">
+
+
+
+<h4 id="正式安装"><a href="#正式安装" class="headerlink" title="正式安装"></a>正式安装</h4><h5 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h5><p>选择中文简体</p>
+<h5 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h5><p>选择上海</p>
+<h5 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h5><p>选择【手动分区】</p>
+<p>点击【Free Space】创建分区</p>
+<p>由于我这里有两块磁盘，所以我将 <code>/home</code> 挂载在 机械硬盘上（这里要注意切换磁盘）</p>
+<p>双系统还需要一个引导分区 <code>/boot/efi</code></p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 分区配置</span><br><span class="line">&#x2F;boot&#x2F;efi	100MB</span><br><span class="line">&#x2F;boot 		512MB 		</span><br><span class="line">&#x2F;swap 		8192MB 		</span><br><span class="line">&#x2F; 			固态剩余空间 	</span><br><span class="line">&#x2F;home 		300G 		</span><br></pre></td></tr></table></figure>
+<p>整体的分区如下</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>大小</th>
+<th>分区类型</th>
+<th>文件系统</th>
+<th><strong>挂载点</strong></th>
+<th><strong>标记</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100MB</td>
+<td>主分区</td>
+<td>fat32</td>
+<td>/boot/efi</td>
+<td>boot</td>
+</tr>
+<tr>
+<td>512MB</td>
+<td>主分区</td>
+<td>fat32</td>
+<td>/boot</td>
+<td>boot</td>
+</tr>
+<tr>
+<td>8192MB</td>
+<td>主分区</td>
+<td>linuxswap</td>
+<td>-</td>
+<td>swap</td>
+</tr>
+<tr>
+<td>40960MB</td>
+<td>主分区</td>
+<td>xfs</td>
+<td>/</td>
+<td>lvm</td>
+</tr>
+<tr>
+<td>300G</td>
+<td>主分区</td>
+<td>xfs</td>
+<td>/home</td>
+<td>lvm</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>linux</category>
+        <category>manjaro</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>String类及intern方法</title>
+    <url>/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型<code>String</code>。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。</p>
+<a id="more"></a>
+
+<h3 id="String类型使用（jdk1-8）"><a href="#String类型使用（jdk1-8）" class="headerlink" title="String类型使用（jdk1.8）"></a>String类型使用（jdk1.8）</h3><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 &quot;&quot; 创建  会直接存储在 常量池中</span></span><br><span class="line">        String a = <span class="string">&quot;a1&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 创建， 会将zahngsan存储到常量池中，然后在Heap中创建对象指向b</span></span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用 字符串连接符拼接 ，会直接存储 &#x27;wangwuzhaoliu&#x27; 字符串在常量池中</span></span><br><span class="line">        String c = <span class="string">&quot;wangwu&quot;</span> + <span class="string">&quot;zhaoliu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用字符串 &quot;引用&quot; 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将 --- 存入到常量池中</span></span><br><span class="line">        String d = a + <span class="string">&quot;---&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将wang 和 jiu 两个字符串存到常量池中</span></span><br><span class="line">        String f = <span class="keyword">new</span> String(<span class="string">&quot;wang&quot;</span>) + <span class="string">&quot;jiu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中， 但是会将 zhao 和 ba 两个字符串存入到常量池中</span></span><br><span class="line">        String g = <span class="keyword">new</span> String(<span class="string">&quot;zhao&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;ba&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>变量a：</strong> “a1” 是<strong>字符串常量</strong>，在<strong>编译期就被确定</strong>了，先检查<strong>字符串常量池中是否含有”a1”字符串</strong>,若没有则<strong>添加</strong>“a1”到字符串常量池中，并且直接指向它。所以a直接指向<strong>字符串常量池</strong>的”a1”,也就是变量a指向的地址是<strong>常量池中的 a1</strong>。</li>
+<li><strong>变量b：\</strong>用new String() 创建的字符串不是常量，**不能在编译期就确定**，所以new String() 创建的字符串不放入常量池中，它们有自己的地址空间**(Java Heap 中)<strong>，</strong>变量b的引用的地址在Java Heap中**。 但是”zhangsan”字符串常量在编译期也会被加入到字符串常量池（如果常量池不存在的话）。</li>
+<li><strong>变量c：</strong>“wangwu”和”zhaoliu”也都是<strong>字符串常量</strong>，当<strong>一个字符串</strong>由<strong>多个字符串常量</strong>连接而成时，它自己<strong>肯定也是字符串常量</strong>，在编译器会被编译器优化成”wangwuzhaoliu”，所以c也同样在编译期就被解析为一个字符串常量，并且c是常量池中”wangwuzhaoliu”的一个引用，<strong>所以变量c的引用地址在常量池中</strong>。</li>
+<li><strong>变量d：</strong> JVM对于字符串引用，由于在字符串的”+”连接中，有字符串引用存在，而引用的值在程序编译期是无法确定的，即`(a+”—“)</li>
+<li><strong>变量f：</strong> 变量f同样不能在编译期确定，<strong>但是”wang”和”jiu”这两个字符串常量会添加到字符串常量池中</strong>，并且在堆中创建String对象。（字符串常量池并不会存放”wangjiu”这个字符串,除非执行f.intern()方法）</li>
+<li><strong>变量g：</strong> 同理变量f。</li>
+</ul>
+<h4 id="Sring拼接"><a href="#Sring拼接" class="headerlink" title="Sring拼接"></a>Sring拼接</h4><ul>
+<li><p><strong>字符串拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span> + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>zhang和 san都是<strong>字符串</strong>，都是在编译器<strong>可知的</strong>，编译器会将这行代码优化，<strong>当一个字符串是由多个可知的字符串(非引用字符串)连接组成</strong>，将会优化为如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      String a = <span class="string">&quot;zhangsan&quot;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>引用拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">      	String b = a + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 上下含义相同</span></span><br><span class="line">      	String c = <span class="string">&quot;li&quot;</span>;</span><br><span class="line">      	String d = <span class="string">&quot;si&quot;</span>;</span><br><span class="line">      	String f = c + d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当Java编译器遇到<strong>字符串引用</strong> 或 <strong>字符串引用和可知字符串</strong>拼接的时候，会创建一个<code>StringBuilder</code>对象，后面的append()。</p>
+<p>因为有字符串引用存在，而引用的值在程序编译期是无法确定的。<strong>另外 “zhang”、”san” 都会编译器添加到字符串常量池中（如果没有的话）</strong>，因为它们都是编译期确定的字符串常量，<strong>但是最后的”lantao”并不会添加到字符串常量池, 除非执行b.intern() 方法</strong></p>
+</li>
+<li><p><strong>final拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">     		<span class="keyword">final</span> String b = <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	String c = a + b + <span class="string">&quot;1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>final拼接和以上两者的区别就是在前边增加了final修饰，<strong>用final修饰的字符串就是在编译期可知的</strong>，编译期就会将以上代码优化为</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">				String str = <span class="string">&quot;zhangsan1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这里 final 拼接的效果是和字符串拼接是一致的。</strong></p>
+</li>
+</ul>
+<h3 id="String-intern方法"><a href="#String-intern方法" class="headerlink" title="String#intern方法"></a>String#intern方法</h3><h4 id="intern方法详解"><a href="#intern方法详解" class="headerlink" title="intern方法详解"></a>intern方法详解</h4><p>String.intern()是一个Native(本地)方法，它的作用是如果<strong>字符串常量池已经包含一个等于此String对象的字符串，则返回字符串常量池中这个字符串的引用</strong>, <strong>否则将当前String对象的引用地址（堆中）添加到字符串常量池中并返回</strong>。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><strong>注意：基本数据类型之间的 == 是比较值，引用数据类型 == 比较的是地址值</strong></p>
+<ul>
+<li><h5 id="常量池中存在字符串"><a href="#常量池中存在字符串" class="headerlink" title="常量池中存在字符串"></a><strong>常量池中存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 基本数据类型之间的 ==  是比较值，引用数据类型 == 比较的是地址值</span></span><br><span class="line">      	<span class="comment">// 1：在Java Heap中创建对象 2：在字符串常量池中添加 zhangsan</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      	<span class="comment">// 调用 intern 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// a 的地址在Java Heap中 ， b的地址在 常量池中 ，所以结果是flase</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      	<span class="comment">// 因为常量池中已经包含zhangsan，所以直接返回</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">        <span class="comment">// b c 的地址一致，所以是true</span></span><br><span class="line">        System.out.println(b == c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：在<strong>Java Heap</strong>中<strong>创建对象</strong>然后在<strong>字符串常量</strong>池中<strong>添加</strong> zhangsan。</p>
+<p>2：调用 <strong>intern</strong> 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址。</p>
+<p>3：因 a 的地址在Heap中，b的地址在字符串常量池中。</p>
+<p>4：因为常量池中已经包含zhangsan，所以直接返回</p>
+<p>5： b c 的地址一致，所以是true</p>
+<p>地址可以使用System.identityHashCode(a)方法获取</p>
+</li>
+<li><h5 id="常量池中不存在字符串"><a href="#常量池中不存在字符串" class="headerlink" title="常量池中不存在字符串"></a><strong>常量池中不存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//1： 首先会在Heap中创建对象，然后在常量池中放入zhagnsan 和 wangwu ，但是并不会放入zhagnsanwangwu</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>) + <span class="string">&quot;wangwu&quot;</span>;</span><br><span class="line">      	<span class="comment">// 2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中String对象的引用地址添加到字符串常量池中。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// 3：因为 a 的地址和 b的地址一致，锁以是true</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//4：因常量池中已经存在 zhangsanwangwu 了，所以直接返回引用就是 a 类型 a ==b 锁 a==b==c</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsanwangwu&quot;</span>;</span><br><span class="line">        System.out.println(a == c); <span class="comment">// true</span></span><br><span class="line">      	System.out.println(b == c); <span class="comment">// true</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 5：首先会在Heap中创建对象，然后会在常量池中存储 zhang 和 san</span></span><br><span class="line">      	String d = <span class="keyword">new</span> String(<span class="string">&quot;zhang&quot;</span>) + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 6： 返回的是 常量池中的 地址，因在a变量时已经将 zhangsan 放入到了常量池中</span></span><br><span class="line">      	String f = d.intern();</span><br><span class="line">      	System.out.println(d = f); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：首先会在<strong>Heap中创建对象a，然后在</strong>常量池中放入zhagnsan 和 wangwu** ，但是<strong>并不会放入</strong>zhagnsanwangwu。</p>
+<p>2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中<strong>String对象的引用地址添加到字符串常量池中</strong>。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用。</p>
+<p>3：因为 a 的地址和 b的地址一致，所以是true。</p>
+<p>4：因常量池中<strong>已经存在 zhangsanwangwu</strong> 了，所以<strong>直接返回引用就是 a 类型</strong>， a ==b 所以 a==b==c。</p>
+<p>5：首先会在<strong>Heap中创建对象d</strong>，然后会在<strong>常量池中存储 zhang 和 san</strong>。</p>
+<p>6：因在创建对象a时，已经将 “zhangsan”放入到了常量池，所以<strong>返回的是常量池中的zhangsan地址</strong>，对象d的地址在Heap中，f的地址在常量池中，并不是一个，所以false；</p>
+</li>
+</ul>
+<h4 id="参考：-https-blog-csdn-net-qian520ao-article-details-78966179"><a href="#参考：-https-blog-csdn-net-qian520ao-article-details-78966179" class="headerlink" title="参考：     https://blog.csdn.net/qian520ao/article/details/78966179"></a>参考：     <a href="https://blog.csdn.net/qian520ao/article/details/78966179#%E5%B7%B2%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%8Dintern">https://blog.csdn.net/qian520ao/article/details/78966179</a></h4>]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker搭建本地私服</title>
+    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/</url>
+    <content><![CDATA[<p>​    <em>自己制作的镜像一般会上传到本地私服，首先得搭建一个docker私有仓库服务，docker的私服搭建也是非常简单</em></p>
+<a id="more"></a>
+
+<h1 id="一、搭建私服"><a href="#一、搭建私服" class="headerlink" title="一、搭建私服"></a>一、搭建私服</h1><ol>
+<li><h4 id="拉取私有仓库镜像"><a href="#拉取私有仓库镜像" class="headerlink" title="拉取私有仓库镜像"></a>拉取私有仓库镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="启动-registry仓库容器"><a href="#启动-registry仓库容器" class="headerlink" title="启动 registry仓库容器"></a>启动 <code>registry</code>仓库容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --restart&#x3D;always --privileged&#x3D;true \</span><br><span class="line">-p 5000:5000 \</span><br><span class="line">-v &#x2F;usr&#x2F;local&#x2F;docker&#x2F;data&#x2F;registry:&#x2F;var&#x2F;lib&#x2F;registry \</span><br><span class="line">--name registry registry:latest</span><br></pre></td></tr></table></figure>
+<p>参数说明，启动参数有一定顺序，可能会因为顺序不同而启动失败</p>
+<blockquote>
+<p>–restart=always 此模式容器会跟 docker daemon会随着docker服务的重启而自动恢复<br>-v /usr/local/docker/data/registry 把本地磁盘挂载到容器磁盘/var/lib/registry（默认情况下仓库存放镜像于容器内的/var/lib/registry目录下，宿主机目录需要提前创建）<br>–name registry定义容器名<br>-p 5000:5000 端口映射，本地端口5000映射到容器端口5000<br>–-privileged=true ：配置了-v /opt/data/registry:/var/lib/registry ，如果没有关闭安全模块selinux，容器将没有权限访问本地目录，设置此参数可以给容器加特权。如果没有关闭selinux以及没有加上此参数，上传传镜像时可能会报权限错误(OSError: [Errno 13] Permission denied: ‘/var/lib/registry/repositories/library’)或者（Received unexpected HTTP status: 500 Internal Server Error）错误</p>
+</blockquote>
+</li>
+<li><h4 id="启动成功后通过docker-ps查看"><a href="#启动成功后通过docker-ps查看" class="headerlink" title="启动成功后通过docker ps查看"></a>启动成功后通过<code>docker ps</code>查看</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_1.png" alt="验证"></p>
+</li>
+<li><h4 id="测试镜像仓库中所有的镜像"><a href="#测试镜像仓库中所有的镜像" class="headerlink" title="测试镜像仓库中所有的镜像"></a>测试镜像仓库中所有的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:5000/v2/_catalog</span><br><span class="line">&#123;<span class="string">&quot;repositories&quot;</span>:[]&#125;</span><br></pre></td></tr></table></figure>
+<p> 现在是空的，因为才刚运行，里面没有任何镜像内容。 </p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>启动docker容器时报错</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables failed: iptables --<span class="built_in">wait</span> -t nat -A DOCKER -p tcp -d 0/0 --dport 5000 -j DNAT --to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain/target/match by that name. (<span class="built_in">exit</span> status 1)</span><br></pre></td></tr></table></figure>
+<p>解决方案：<strong>重启docker</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h1 id="二、上传镜像至私服"><a href="#二、上传镜像至私服" class="headerlink" title="二、上传镜像至私服"></a>二、上传镜像至私服</h1></li>
+<li><h4 id="首先添加可信任仓库"><a href="#首先添加可信任仓库" class="headerlink" title="首先添加可信任仓库"></a>首先添加可信任仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑文件</span><br><span class="line">vim &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line"># 添加仓库配置 192.168.125.121:5000为宿主机地址加私服启动端口</span><br><span class="line">&quot;insecure-registries&quot;:[&quot;192.168.125.121:5000&quot;]</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry.png" alt="验证"></p>
+</li>
+<li><h4 id="更新配置"><a href="#更新配置" class="headerlink" title="更新配置"></a>更新配置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="重新启动docker"><a href="#重新启动docker" class="headerlink" title="重新启动docker"></a>重新启动<code>docker</code></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="给原有镜像打标签"><a href="#给原有镜像打标签" class="headerlink" title="给原有镜像打标签"></a>给原有镜像打标签</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker tag jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="上传到私有仓库"><a href="#上传到私有仓库" class="headerlink" title="上传到私有仓库"></a>上传到私有仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker push jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="可以通过浏览器访问查看仓库"><a href="#可以通过浏览器访问查看仓库" class="headerlink" title="可以通过浏览器访问查看仓库"></a>可以通过浏览器访问查看仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.125.121:5000&#x2F;v2&#x2F;_catalog</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_3.png" alt="验证"></p>
+<p>其中仓库中出现 jdk1.8这个镜像。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker与Maven插件</title>
+    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/</url>
+    <content><![CDATA[<p>通过maven插件构建Docker镜像上传私服</p>
+<p>​    <em>在持续集成过程中，项目工程 一般使用Maven编译打包，然后生成镜像，通过镜像上线， 能够大大提供上线效率，同时能够快速动态扩容，快速回滚，着实很方便。docker-maven-plugin 插件就是为了帮助我们在Maven工程中，通过简单的配置，自动生成镜像并推送到仓库中。</em></p>
+<a id="more"></a>
+
+<h3 id="宿主机配置"><a href="#宿主机配置" class="headerlink" title="宿主机配置"></a>宿主机配置</h3><h4 id="1-首先在Docker宿主机中配置可通过远程访问，基于centos7系统"><a href="#1-首先在Docker宿主机中配置可通过远程访问，基于centos7系统" class="headerlink" title="1. 首先在Docker宿主机中配置可通过远程访问，基于centos7系统"></a>1. 首先在Docker宿主机中配置可通过远程访问，基于centos7系统</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开编辑文件</span></span><br><span class="line">vim /usr/lib/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
+<p>在 ExecStart=/usr/bin/dockerd的后面加上<code>-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock</code> </p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_1.png" alt="验证"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:wq保存退出</span><br></pre></td></tr></table></figure>
+<h4 id="2-重启Docker守护进程，重启Docker"><a href="#2-重启Docker守护进程，重启Docker" class="headerlink" title="2. 重启Docker守护进程，重启Docker"></a>2. 重启<strong>Docker</strong>守护进程，重启Docker</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload  </span><br><span class="line">systemctl start docker  </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>在宿主机输入 <code>**netstat -anp|grep 2375**</code> 查看监听端口</p>
+</li>
+<li><p>在浏览器输入 <strong>192.168.125.121:2375/info</strong> 显示数据，表明端口一对外开放</p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_2.png" alt="图片"></p>
+</li>
+</ul>
+<h4 id="3-registry私服仓库启动"><a href="#3-registry私服仓库启动" class="headerlink" title="3. registry私服仓库启动"></a>3. registry私服仓库启动</h4><h3 id="主机配置（win10）"><a href="#主机配置（win10）" class="headerlink" title="主机配置（win10）"></a>主机配置（win10）</h3><ul>
+<li><p>一种是在电脑的环境变量种配置tcp</p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_3.png" alt="验证"></p>
+</li>
+<li><p>一种是通过<strong>DockerHost</strong>配置</p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_4.png" alt="验证"></p>
+</li>
+</ul>
+<p>这里采用第二种方式，具体pom文件如下</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--启动名称--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>app<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--docker的maven插件--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--&lt;version&gt;1.0.0&lt;/version&gt;--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--基础镜像的名称--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">baseImage</span>&gt;</span>jdk1.8<span class="tag">&lt;/<span class="name">baseImage</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--生成的镜像名称--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">imageName</span>&gt;</span>192.168.125.121:5000/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--相当于启动容器后自动执行java -jar命令--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">entryPoint</span>&gt;</span>[&quot;java&quot;, &quot;-jar&quot;, &quot;/$&#123;project.build.finalName&#125;.jar&quot;]<span class="tag">&lt;/<span class="name">entryPoint</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.jar<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.125.121:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="打包上传"><a href="#打包上传" class="headerlink" title="打包上传"></a>打包上传</h4><ul>
+<li><p>这里使用了一个简单的<strong>springboot</strong>工程，提供/hello接口</p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_5.png" alt="验证"></p>
+</li>
+<li><p>在<strong>idea</strong>中打开<strong>Terminal</strong>命令窗口，进入要打包的工程目录下</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">mvn install</span><br></pre></td></tr></table></figure></li>
+<li><p>打包完成之后，进行docker镜像制作和上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn docker:build -DpushImage</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">Step <span class="number">1</span>/<span class="number">3</span> : FROM jdk1.<span class="number">8</span></span><br><span class="line"></span><br><span class="line"> ---&gt; <span class="number">9962</span>dfc8b892</span><br><span class="line">Step <span class="number">2</span>/<span class="number">3</span> : ADD /app1.jar //</span><br><span class="line"></span><br><span class="line"> ---&gt; c3859ca47b38</span><br><span class="line">Step <span class="number">3</span>/<span class="number">3</span> : ENTRYPOINT [<span class="string">&quot;java&quot;</span>, <span class="string">&quot;-jar&quot;</span>, <span class="string">&quot;/app1.jar&quot;</span>]</span><br><span class="line"></span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> ed0ab6e3574f</span><br><span class="line">Removing intermediate container ed0ab6e3574f</span><br><span class="line"> ---&gt; <span class="number">00</span>e704f305bc</span><br><span class="line">ProgressMessage&#123;id=null, status=null, stream=null, error=null, progress=null, progressDetail=null&#125;</span><br><span class="line">Successfully built <span class="number">00</span>e704f305bc</span><br><span class="line">Successfully tagged <span class="number">192.168</span>.<span class="number">125.121</span>:<span class="number">5000</span>/ckssblog:<span class="number">1.0</span></span><br><span class="line">[<span class="type">INFO</span>] Built <span class="number">192.168</span>.<span class="number">125.121</span>:<span class="number">5000</span>/ckssblog:<span class="number">1.0</span></span><br><span class="line">[<span class="type">INFO</span>] Pushing <span class="number">192.168</span>.<span class="number">125.121</span>:<span class="number">5000</span>/ckssblog:<span class="number">1.0</span></span><br><span class="line">The push refers to repository [<span class="number">192.168</span><span class="type">.125.121</span>:<span class="number">5000</span>/<span class="type">ckssblog</span>]</span><br><span class="line"><span class="number">33</span>dca580002a: Pushed</span><br><span class="line"><span class="number">851</span>f2b8709b8: Layer already exists</span><br><span class="line"><span class="number">5</span>c2a28ad5134: Layer already exists</span><br><span class="line"><span class="number">0683</span>de282177: Layer already exists</span><br><span class="line"><span class="number">1.0</span>: digest: sha256:<span class="number">49783</span>be4a9117124457b53b08f076183fde33fe62571051e08effa688db18a2d size: <span class="number">1161</span></span><br><span class="line">null: null</span><br><span class="line">[<span class="type">INFO</span>] ------------------------------------------------------------------------</span><br><span class="line">[<span class="type">INFO</span>] BUILD SUCCESS</span><br><span class="line">[<span class="type">INFO</span>] ------------------------------------------------------------------------</span><br><span class="line">[<span class="type">INFO</span>] Total time:  <span class="number">13.995</span> s</span><br><span class="line">[<span class="type">INFO</span>] Finished at: <span class="number">2020</span><span class="literal">-03</span><span class="literal">-19T19</span>:<span class="number">34</span>:<span class="number">35</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">[<span class="type">INFO</span>] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><u>maven执行命令</u></p>
+<p><strong>mvn clean package docker:build</strong> 只执行 build 操作</p>
+<p><strong>mvn clean package docker:build -DpushImage</strong> 执行 build 完成后 push 镜像</p>
+<p><strong>mvn clean package docker:build -DpushImageTag</strong> 执行 build 并 push 指定 tag 的镜像</p>
+<p>注意：这里必须指定至少一个 imageTag，它可以配置到 POM 中，也可以在命令行指定。命令行指定如下：mvn clean package docker:build -DpushImageTags -DdockerImageTags=imageTag_1 -DdockerImageTags=imageTag_2，POM 文件中指定配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line"> ...</span><br><span class="line"> <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">     ...</span><br><span class="line">     <span class="tag">&lt;<span class="name">imageTags</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">imageTag</span>&gt;</span>imageTag_1<span class="tag">&lt;/<span class="name">imageTag</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">imageTag</span>&gt;</span>imageTag_2<span class="tag">&lt;/<span class="name">imageTag</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">imageTags</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"> ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+</li>
+</ul>
+<h4 id="验证查看"><a href="#验证查看" class="headerlink" title="验证查看"></a>验证查看</h4><ul>
+<li><p>切换到宿主机，查看docker镜像和镜像仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_6.png" alt="验证"></p>
+<pre><code>可以看到docker中已经有该镜像**192.168.125.121:5000/ckssblog**</code></pre>
+</li>
+<li><p>在地址栏输入 <strong><a href="http://192.168.125.121:5000/v2/_catalog">http://192.168.125.121:5000/v2/_catalog</a></strong> ，镜像仓库中也有新上传的镜像</p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_7.png" alt="验证"></p>
+</li>
+<li><p>通过镜像启动容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -di --name=base -p 8099:8080 192.168.125.121:5000/ckssblog:1.0</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_8.png" alt="验证"></p>
+</li>
+<li><p>打开浏览器地址，输入 <strong><a href="http://192.168.125.121:8099/hello">http://192.168.125.121:8099/hello</a></strong> </p>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-3Maven%E6%8F%92%E4%BB%B6%E6%8E%A8%E9%80%81/base_mvn_9.png" alt="验证"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jenkins安装</title>
+    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-4-Jenkins%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p><em>Jenkin安装启动方式有很多种，比如下载<code>war</code>包后放在<code>tomcat</code>中启动、使用<code>rpm</code>安装、或者使用<code>Docker</code>安装，这里先使用Docker进行安装。</em></p>
+<a id="more"></a>
+
+<h2 id="Docker安装Jenkin"><a href="#Docker安装Jenkin" class="headerlink" title="Docker安装Jenkin"></a>Docker安装Jenkin</h2><ol>
+<li><h3 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker search jenkins</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost opt]# docker search jenkins</span><br><span class="line">   NAME                                   DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">   jenkins                                Official Jenkins Docker image                   4698                [OK]                </span><br><span class="line">   jenkins&#x2F;jenkins                        The leading open source automation server       1954                                    </span><br><span class="line">   jenkinsci&#x2F;blueocean                    https:&#x2F;&#x2F;jenkins.io&#x2F;projects&#x2F;blueocean           </span><br><span class="line">   .......</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="默认下载latest版"><a href="#默认下载latest版" class="headerlink" title="默认下载latest版"></a>默认下载latest版</h3>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker pull jenkins/jenkins</span><br></pre></td></tr></table></figure>
+<p>查看镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">jenkins/jenkins     latest              768d450bf188        2 days ago          619MB</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="启动Jenkins容器"><a href="#启动Jenkins容器" class="headerlink" title="启动Jenkins容器"></a>启动Jenkins容器</h3><h5 id="输入jenkins"><a href="#输入jenkins" class="headerlink" title="输入jenkins"></a>输入jenkins</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker run -d -p 8088:8080 -p 50001:50000 -v /usr/<span class="built_in">local</span>/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime --name jenkins docker.io/jenkins/jenkins</span><br></pre></td></tr></table></figure>
+<p>启动参数说明：    </p>
+<blockquote>
+<p>-d 后台运行镜像<br>-p 8088:8080 将镜像的8080端口映射到服务器的8088端口<br>-p 50001:50000 将镜像的50000端口映射到服务器的50001端口<br>-v /usr/local/jenkins:/var/jenkins_home /var/jenkins_home目录为（容器）jenkins工作目录，我们将硬盘上的一个目录挂载到这个位置，方便后续更新镜像后继续使用原来的工作目录。<br>-v /etc/localtime:/etc/localtime 让容器使用和服务器同样的时间设置。<br>–name jenkins 给容器起一个别名</p>
+</blockquote>
+<h5 id="有可能会启动失败，这里需要对宿主机中的目录设置权限"><a href="#有可能会启动失败，这里需要对宿主机中的目录设置权限" class="headerlink" title="有可能会启动失败，这里需要对宿主机中的目录设置权限"></a>有可能会启动失败，这里需要对宿主机中的目录设置权限</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chown -R 1000:1000  /usr/<span class="built_in">local</span>/jenkins</span><br></pre></td></tr></table></figure>
+<h5 id="重新运行容器"><a href="#重新运行容器" class="headerlink" title="重新运行容器"></a>重新运行容器</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker run -d -p 8088:8080 -p 50001:50000 -v /usr/<span class="built_in">local</span>/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime --name jenkins docker.io/jenkins/jenkins</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h4> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                              NAMES</span><br><span class="line">869de06b4a9d        jenkins&#x2F;jenkins     &quot;&#x2F;sbin&#x2F;tini -- &#x2F;usr&#x2F;…&quot;   8 minutes ago       Up 8 minutes        0.0.0.0:8088-&gt;8080&#x2F;tcp, 0.0.0.0:50001-&gt;50000&#x2F;tcp   jenkins</span><br></pre></td></tr></table></figure>
+<p> 成功运行在了8080端口，可登录浏览器访问，前提是宿主机的8080端口需要开放</p>
+<p> <img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-4-Jenkins%E5%AE%89%E8%A3%85/jenkins_1.png" alt="验证"></p>
+</li>
+<li><h3 id="配置jenkins"><a href="#配置jenkins" class="headerlink" title="配置jenkins"></a>配置jenkins</h3><p>由于这里使用<code>Docker</code>启动的<strong>Jenkins</strong>，所以需要进入容器内部获取初始化密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> jenkins tail /var/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<p>获取密码后在页面输入密码，点击<strong>Continue</strong>，进入插件安装界面，可以选择建议安装，也可以自定义安装</p>
+<h4 id="初次启动卡住很慢"><a href="#初次启动卡住很慢" class="headerlink" title="初次启动卡住很慢"></a>初次启动卡住很慢</h4><p>解决方案</p>
+<p>​    进入Jenkins工作目录，修改./updates/default.json文件， 把 “connectionCheckUrl”:”<a href="http://www.google.com/&quot;">http://www.google.com/&quot;</a> 改为  “connectionCheckUrl”:”<a href="http://www.baidu.com/&quot;">http://www.baidu.com/&quot;</a> </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;jenkins&#x2F;updates</span><br><span class="line">vim default.json</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-4-Jenkins%E5%AE%89%E8%A3%85/jenkins_2.png" alt="验证"></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centos7上安装Docker</title>
+    <url>/2020/03/16/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-centos7%E4%B8%8A%E5%AE%89%E8%A3%85Docker/</url>
+    <content><![CDATA[<p>centos7上安装Docker</p>
+<a id="more"></a>
+
+<ol>
+<li><p>Docker 要求 CentOS 系统的内核版本高于 3.10，通过 <strong>uname -r</strong> 命令查看当前系统的内核版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># uname -r</span></span><br><span class="line">3.10.0-1062.9.1.el7.x86_64xxxxxxxxxx [root@localhost ~]<span class="comment"># uname -r3.10.0-1062.9.1.el7.x86_64uname -rbash</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将yum包更新到最新</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum update</span><br></pre></td></tr></table></figure></li>
+<li><p>安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure></li>
+<li><p>设置yum源，这里选择阿里仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure></li>
+<li><p>可以查看仓库中所有docker版本，并选择所需要的安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br></pre></td></tr></table></figure></li>
+<li><p>安装docker, 可根据 <code>sudo yum install &lt;FQPN&gt;</code>选择版本，例如：sudo yum install docker-ce-17.12.0.ce</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install docker-ce</span><br></pre></td></tr></table></figure></li>
+<li><p>启动docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></li>
+<li><p>查看docker是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker version</span></span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           19.03.8</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.12.17</span><br><span class="line"> Git commit:        afacb8b</span><br><span class="line"> Built:             Wed Mar 11 01:27:04 2020</span><br><span class="line"> OS/Arch:           linux/amd64</span><br><span class="line"> Experimental:      <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.8</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.12.17</span><br><span class="line">  Git commit:       afacb8b</span><br><span class="line">  Built:            Wed Mar 11 01:25:42 2020</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     <span class="literal">false</span></span><br><span class="line"> containerd:</span><br><span class="line">  Version:          1.2.13</span><br><span class="line">  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h1 id="树莓派上安装Dcoker"><a href="#树莓派上安装Dcoker" class="headerlink" title="树莓派上安装Dcoker"></a>树莓派上安装Dcoker</h1><ol>
+<li><p>树莓派也需要查看版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
+<p>  这里一般分 <code>buster</code>和<code>stretch </code>版，我的是<code>stretch </code>，版本，所以接下来很多操作都关系这个，一定要注意。</p>
+</li>
+<li><p>编辑sources.list文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</span><br></pre></td></tr></table></figure>
+<p>修改镜像源，改成国内的,这里需要根据版本选择，如果是上面说的<code>stretch </code>版本，那就使用上面配置，如果是<code>buster</code>，就是用下面这种</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</span><br></pre></td></tr></table></figure></li>
+<li><p>修改raspi.list文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim  /etc/apt/sources.list.d/raspi.list</span><br></pre></td></tr></table></figure>
+<p>将其它内容注释，添加如下，同样，<code>如果是buster </code>版本，需要将 <code>stretch</code>进行替换  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deb http:&#x2F;&#x2F;mirror.tuna.tsinghua.edu.cn&#x2F;raspberrypi&#x2F; stretch main ui</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirror.tuna.tsinghua.edu.cn&#x2F;raspberrypi&#x2F; stretch main ui</span><br></pre></td></tr></table></figure></li>
+<li><p>更新验证</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></li>
+<li><p>安装HTTPS所依赖的包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install \</span><br><span class="line">     apt-transport-https \</span><br><span class="line">     ca-certificates \</span><br><span class="line">     curl \</span><br><span class="line">     gnupg2 \</span><br><span class="line">     software-properties-common</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>添加 <code>Docker</code> 的<code>GPG key</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<p>验证<code>Key id</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-key fingerprint 0EBFCD88</span><br></pre></td></tr></table></figure></li>
+<li><p>根据系统版本设置<code>Docker</code>源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [arch=armhf] https://download.docker.com/linux/debian \</span></span><br><span class="line"><span class="string">     <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | \</span><br><span class="line">     sudo tee /etc/apt/sources.list.d/docker.list</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure></li>
+<li><p>添加<code>Docker</code>用户组</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo groupadd docker</span><br><span class="line">sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> dockersudo service docker restart</span><br></pre></td></tr></table></figure></li>
+<li><p>启动验证</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">    sudo systemctl start docker</span><br><span class="line">    sudo docker version</span><br><span class="line">    pi@raspberrypi:/root $ sudo docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line">     Version:           19.03.8</span><br><span class="line">     API version:       1.40</span><br><span class="line">     Go version:        go1.12.17</span><br><span class="line">     Git commit:        afacb8b</span><br><span class="line">     Built:             Wed Mar 11 01:37:36 2020</span><br><span class="line">     OS/Arch:           linux/arm</span><br><span class="line">     Experimental:      <span class="literal">false</span></span><br><span class="line">    </span><br><span class="line">    Server: Docker Engine - Community</span><br><span class="line">     Engine:</span><br><span class="line">      Version:          19.03.8</span><br><span class="line">      API version:      1.40 (minimum version 1.12)</span><br><span class="line">      Go version:       go1.12.17</span><br><span class="line">      Git commit:       afacb8b</span><br><span class="line">      Built:            Wed Mar 11 01:31:37 2020</span><br><span class="line">      OS/Arch:          linux/arm</span><br><span class="line">      Experimental:     <span class="literal">false</span></span><br><span class="line">     containerd:</span><br><span class="line">      Version:          1.2.13</span><br><span class="line">      GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line">     runc:</span><br><span class="line">      Version:          1.0.0-rc10</span><br><span class="line">      GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line">     docker-init:</span><br><span class="line">      Version:          0.18.0</span><br><span class="line">      GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h1 id="Docker安装完后的配置"><a href="#Docker安装完后的配置" class="headerlink" title="Docker安装完后的配置"></a>Docker安装完后的配置</h1><ol>
+<li><h5 id="镜像源问题"><a href="#镜像源问题" class="headerlink" title="镜像源问题"></a>镜像源问题</h5><ol>
+<li><p>Docker安装完之后，拉取源是非常缓慢的，因为默认源是在国外。。。可以通过配置国内的镜像源，这里使用的是网易镜像地址</p>
+</li>
+<li><p>编辑文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure></li>
+<li><p>添加参数（如果没有该文件，可以直接新建）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>重启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>重启后可以尝试拉去镜像，比如 <code>docker pull jenkins/jenkins</code></p>
+</li>
+</ol>
+</li>
+<li><h5 id="Docker远程通信"><a href="#Docker远程通信" class="headerlink" title="Docker远程通信"></a>Docker远程通信</h5><ol>
+<li><p>编辑文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /lib/systemd/system/docker.service</span><br></pre></td></tr></table></figure></li>
+<li><p>修改配置，在<code>ExecStart</code>之后添加配置<code>ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock</code></p>
+<p><img src="/2020/03/16/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-centos7%E4%B8%8A%E5%AE%89%E8%A3%85Docker/docker_1.png" alt="验证"></p>
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker基础镜像制作</title>
+    <url>/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
+    <content><![CDATA[<p>​    使用docker运行java项目需要一个基础镜像，制作java环境基础镜像方式有很多，比如基于<strong>Alpine</strong>、<strong>ubuntu</strong>、<strong>centos</strong>，这里使用centos（比较习惯）</p>
+<a id="more"></a>
+
+<h1 id="一、Docker基础镜像制作"><a href="#一、Docker基础镜像制作" class="headerlink" title="一、Docker基础镜像制作"></a>一、Docker基础镜像制作</h1><ol>
+<li><p>首先查找镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker search centos</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/baseImg_1.png" alt="验证"></p>
+</li>
+<li><p>拉取镜像<code>docker pull centos</code>，中间下载需要时间，下载完可以通过<code>docker images</code>查看</p>
+<p><img src="/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/baseImg_2.png" alt="验证"></p>
+</li>
+<li><p>创建Dockerfile文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建存放Dockerfile的文件夹</span></span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/docker</span><br><span class="line"><span class="comment"># 移动至目标目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/docker</span><br><span class="line"><span class="comment"># 创建jdk存放目录</span></span><br><span class="line">mkdir jdk1.8</span><br><span class="line"><span class="comment"># 将jdk的压缩文件解压至该文件夹，或者将原有的复制进来</span></span><br><span class="line">cp -r /usr/<span class="built_in">local</span>/java/jdk1.8.0_211/ ./jdk1.8/</span><br><span class="line"><span class="comment"># 创建Docker文件</span></span><br><span class="line">vim Dockerfile</span><br></pre></td></tr></table></figure>
+<p>Dockerfile文件如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#依赖镜像名称和ID</span><br><span class="line">FROM centos</span><br><span class="line">#指定镜像创建者信息</span><br><span class="line">MAINTAINER cksspk</span><br><span class="line">#执行命令，在容器中创建目录</span><br><span class="line">RUN mkdir  &#x2F;usr&#x2F;local&#x2F;java</span><br><span class="line">#ADD 是相对路径jar,把java添加到容器中</span><br><span class="line">ADD &#x2F;jdk1.8&#x2F;jdk1.8.0_211&#x2F;  &#x2F;usr&#x2F;local&#x2F;java&#x2F;</span><br><span class="line"></span><br><span class="line">#配置java环境变量</span><br><span class="line">ENV JAVA_HOME &#x2F;usr&#x2F;local&#x2F;java&#x2F;</span><br><span class="line">ENV JRE_HOME $JAVA_HOME&#x2F;jre</span><br><span class="line">ENV CLASSPATH $JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar:$JRE_HOME&#x2F;lib:$CLASSPATH</span><br><span class="line">ENV PATH $JAVA_HOME&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>其中ADD之后的路径一定要注意文件前后都有 //，否则docker找不到会报错</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ADD failed: <span class="built_in">stat</span> /var/lib/docker/tmp/docker-builder055888630/jdk1.8/jdk1.8.0_211/: no such file or directory</span><br></pre></td></tr></table></figure>
+<p>保存退出</p>
+</li>
+<li><p>使用Dockerfile制作镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker build -t=jdk1.8 .</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/baseImg_3.png" alt="验证"></p>
+<p>制作完成之后可以通过<code>docker images</code>查看</p>
+<p><img src="/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/baseImg_2.png" alt="验证"></p>
+<p>如果没有报错，会出现上面第一个镜像，报错的也会有镜像，但是没有名称，这个docker制作的写时复制有关，一层一层传递，可以通过<code>docker rmi &lt;ID&gt;</code> 删除镜像</p>
+</li>
+<li><p>运行检查</p>
+<p>后台运行镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -itd --name jdk8 jdk8</span><br><span class="line">da7084eaf0e79bc2336980e5ebeecb912dcac3f83b5fbce9fdcb449664d32d8a</span><br></pre></td></tr></table></figure>
+<p>查看容器状态</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/baseImg_4.png" alt="验证"></p>
+<p>进入容器，并且查看jdk版本信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost docker]<span class="comment"># docker attach 117a34208989</span></span><br><span class="line">[root@117a34208989 /]<span class="comment"># java -vresion</span></span><br><span class="line">Unrecognized option: -vresion</span><br><span class="line">Error: Could not create the Java Virtual Machine.</span><br><span class="line">Error: A fatal exception has occurred. Program will <span class="built_in">exit</span>.</span><br><span class="line">[root@117a34208989 /]<span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">&quot;1.8.0_211&quot;</span></span><br></pre></td></tr></table></figure>
+<p>退出容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<p>至此，基础镜像制作完成。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+</search>

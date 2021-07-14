@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="非常好看的linux桌面版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="manjaro安装及基本配置">
+<meta property="og:url" content="http://example.com/2020/08/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-08-09-manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Cksspk (｡•̀ᴗ-)✧。">
+<meta property="og:description" content="非常好看的linux桌面版">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-09T09:11:11.000Z">
+<meta property="article:modified_time" content="2021-07-14T00:52:14.198Z">
+<meta property="article:author" content="cksspk">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/08/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-08-09-manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>manjaro安装及基本配置 | Cksspk (｡•̀ᴗ-)✧。</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cksspk (｡•̀ᴗ-)✧。</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-08-09-manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/kenan.jpg">
+      <meta itemprop="name" content="cksspk">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cksspk (｡•̀ᴗ-)✧。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          manjaro安装及基本配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-09 17:11:11" itemprop="dateCreated datePublished" datetime="2020-08-09T17:11:11+08:00">2020-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-14 08:52:14" itemprop="dateModified" datetime="2021-07-14T08:52:14+08:00">2021-07-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/manjaro/" itemprop="url" rel="index"><span itemprop="name">manjaro</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>非常好看的linux桌面版</p>
+<a id="more"></a>
+
+<h2 id="磁盘分区方案"><a href="#磁盘分区方案" class="headerlink" title="磁盘分区方案"></a>磁盘分区方案</h2><p>磁盘大小一共给了80G，主要分了4个分区。</p>
+<table>
+<thead>
+<tr>
+<th>大小</th>
+<th>分区类型</th>
+<th>文件系统</th>
+<th>挂载点</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>512MB</td>
+<td>主分区</td>
+<td>fat32</td>
+<td>/boot</td>
+<td>boot</td>
+</tr>
+<tr>
+<td>8192MB</td>
+<td>主分区</td>
+<td>linuxswap</td>
+<td>-</td>
+<td>swap</td>
+</tr>
+<tr>
+<td>40960MB</td>
+<td>主分区</td>
+<td>xfs</td>
+<td>/</td>
+<td>lvm</td>
+</tr>
+<tr>
+<td>剩余</td>
+<td>主分区</td>
+<td>xfs</td>
+<td>/home</td>
+<td>lvm</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分区配置</span></span><br><span class="line">/boot 	512MB fat32</span><br><span class="line">/swap 4096MB Linux swap</span><br><span class="line">/ 30720MB lvm</span><br><span class="line">/home 剩余 lvm</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="manjaro安装后基本配置"><a href="#manjaro安装后基本配置" class="headerlink" title="manjaro安装后基本配置"></a>manjaro安装后基本配置</h2><h3 id="自动选择中国源"><a href="#自动选择中国源" class="headerlink" title="自动选择中国源"></a>自动选择中国源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank     //选择中国源并更新</span><br><span class="line"><span class="comment"># 使用清华源</span></span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/manjaro/stable/<span class="variable">$repo</span>/<span class="variable">$arch</span></span><br><span class="line"><span class="comment"># 中科大</span></span><br><span class="line">Server = https://mirrors.ustc.edu.cn/manjaro/stable/<span class="variable">$repo</span>/<span class="variable">$arch</span></span><br><span class="line"></span><br><span class="line">sudo pacman -Syyu                           //更新系统</span><br></pre></td></tr></table></figure>
+<h4 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S vim</span><br></pre></td></tr></table></figure>
+<h4 id="添加Archlinuxcn源"><a href="#添加Archlinuxcn源" class="headerlink" title="添加Archlinuxcn源"></a>添加Archlinuxcn源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf <span class="comment"># 打开文件</span></span><br><span class="line"><span class="comment"># 在文件末尾添加以下两行</span></span><br><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustedOnly</span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装archlinuxcn签名钥匙-导入-GPG-key，否则的话key验证失败会导致无法安装软件"><a href="#安装archlinuxcn签名钥匙-导入-GPG-key，否则的话key验证失败会导致无法安装软件" class="headerlink" title="安装archlinuxcn签名钥匙(导入 GPG key，否则的话key验证失败会导致无法安装软件)"></a>安装archlinuxcn签名钥匙(导入 GPG key，否则的话key验证失败会导致无法安装软件)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+<h4 id="解决终端间隙过大"><a href="#解决终端间隙过大" class="headerlink" title="解决终端间隙过大"></a>解决终端间隙过大</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S wqy-bitmapfont</span><br><span class="line">sudo pacman -S wqy-zenhei</span><br></pre></td></tr></table></figure>
+<h4 id="修改主目录为英文"><a href="#修改主目录为英文" class="headerlink" title="修改主目录为英文"></a>修改主目录为英文</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S xdg-user-dirs-gtk</span><br><span class="line"><span class="built_in">export</span> LANG=en_US</span><br><span class="line">xdg-user-dirs-gtk-update</span><br><span class="line"><span class="comment">#会有窗体提示语言更改，修改文件夹名称，按照提示使用英文即可</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装zsh-amp-oh-my-zsh-普通用户和root用户需要单独配置"><a href="#安装zsh-amp-oh-my-zsh-普通用户和root用户需要单独配置" class="headerlink" title="安装zsh &amp; oh-my-zsh(普通用户和root用户需要单独配置)"></a>安装zsh &amp; oh-my-zsh(普通用户和root用户需要单独配置)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 安装zsh</span><br><span class="line">sudo pacman -S zsh</span><br><span class="line">2. 使用zsh替换bash</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">3. 安装oh-my-zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="oh-my-zsh插件"><a href="#oh-my-zsh插件" class="headerlink" title="oh-my-zsh插件"></a>oh-my-zsh插件</h4><h5 id="语法高亮-zsh-syntax-highlighting"><a href="#语法高亮-zsh-syntax-highlighting" class="headerlink" title="语法高亮 zsh-syntax-highlighting"></a>语法高亮 zsh-syntax-highlighting</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行下面指令自动安装</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+<h5 id="自动补全插件-zsh-autosuggestions"><a href="#自动补全插件-zsh-autosuggestions" class="headerlink" title="自动补全插件 zsh-autosuggestions"></a>自动补全插件 zsh-autosuggestions</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行下面指令自动安装</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+<h5 id="自动跳转插件-autojump"><a href="#自动跳转插件-autojump" class="headerlink" title="自动跳转插件 autojump"></a>自动跳转插件 autojump</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clone 到本地</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/wting/autojump.git <span class="variable">$ZSH_CUSTOM</span>/plugins/autojump</span><br><span class="line"><span class="comment"># 进入clone目录，接着执行安装文件</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$ZSH_CUSTOM</span>/plugins/autojump</span><br><span class="line">./install.py</span><br><span class="line"><span class="comment"># 接着根据安装完成后的提示，在~/.zshrc最后添加下面语句：</span></span><br><span class="line">vim ~/.zshrc    </span><br><span class="line">[[ -s /home/xxxx/.autojump/etc/profile.d/autojump.sh ]] &amp;&amp; <span class="built_in">source</span> /home/xxxx/.autojump/etc/profile.d/autojump.sh</span><br><span class="line"><span class="built_in">autoload</span> -U compinit &amp;&amp; compinit -u</span><br></pre></td></tr></table></figure>
+<h5 id="安装完后启用插件"><a href="#安装完后启用插件" class="headerlink" title="安装完后启用插件"></a>安装完后启用插件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑~/.zshrc   </span></span><br><span class="line">vim ~/.zshrc    </span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;ys&quot;</span></span><br><span class="line"><span class="comment"># 在plugins后括号里添加安装的插件名字</span></span><br><span class="line">plugins=(   git </span><br><span class="line">            autojump </span><br><span class="line">            zsh-autosuggestions </span><br><span class="line">            zsh-syntax-highlighting</span><br><span class="line">            )</span><br><span class="line"><span class="comment"># 最后刷新</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+<h4 id="安装oh-m-zsh导致小键盘失效问题"><a href="#安装oh-m-zsh导致小键盘失效问题" class="headerlink" title="安装oh-m-zsh导致小键盘失效问题"></a>安装oh-m-zsh导致小键盘失效问题</h4><p>​    在 ~/.zshrc 中将 HOME/END 等键值重新 MAP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># key bindings</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[1~&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[4~&quot;</span> end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[5~&quot;</span> beginning-of-history</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[6~&quot;</span> end-of-history</span><br><span class="line"></span><br><span class="line"><span class="comment"># for rxvt</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[8~&quot;</span> end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[7~&quot;</span> beginning-of-line</span><br><span class="line"><span class="comment"># for non RH/Debian xterm, can&#x27;t hurt for RH/DEbian xterm</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\eOH&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\eOF&quot;</span> end-of-line</span><br><span class="line"><span class="comment"># for freebsd console</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[H&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[F&quot;</span> end-of-line</span><br><span class="line"><span class="comment"># completion in the middle of a line</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&#x27;^i&#x27;</span> expand-or-complete-prefix</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fix numeric keypad  </span></span><br><span class="line"><span class="comment"># 0 . Enter  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Op&quot;</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[On&quot;</span> <span class="string">&quot;.&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[OM&quot;</span> <span class="string">&quot;^M&quot;</span></span><br><span class="line"><span class="comment"># 1 2 3  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oq&quot;</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Or&quot;</span> <span class="string">&quot;2&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Os&quot;</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"><span class="comment"># 4 5 6  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ot&quot;</span> <span class="string">&quot;4&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ou&quot;</span> <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ov&quot;</span> <span class="string">&quot;6&quot;</span></span><br><span class="line"><span class="comment"># 7 8 9  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ow&quot;</span> <span class="string">&quot;7&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ox&quot;</span> <span class="string">&quot;8&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oy&quot;</span> <span class="string">&quot;9&quot;</span></span><br><span class="line"><span class="comment"># + - * /  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ol&quot;</span> <span class="string">&quot;+&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Om&quot;</span> <span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oj&quot;</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oo&quot;</span> <span class="string">&quot;/&quot;</span></span><br></pre></td></tr></table></figure>
+<p>​    保存退出</p>
+<p>​    刷新 <code>source ~/.zshrc</code></p>
+<h4 id="设置桌面快捷键"><a href="#设置桌面快捷键" class="headerlink" title="设置桌面快捷键"></a>设置桌面快捷键</h4><p>​    使用super + D 快捷键显示桌面，类似在windows快捷键</p>
+<p>​    设置 -&gt; 窗口管理器 -&gt; 键盘 </p>
+<p>​    找到 <strong>显示桌面项</strong>, 编辑修改即可</p>
+<h4 id="设置终端快捷键"><a href="#设置终端快捷键" class="headerlink" title="设置终端快捷键"></a>设置终端快捷键</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置-&gt;键盘-&gt;应用程序快捷键-&gt;添加</span></span><br><span class="line"><span class="comment"># 命令：</span></span><br><span class="line">xfce4-terminal</span><br><span class="line"></span><br><span class="line"><span class="comment">#随着版本的升级，可能需要启动的命令也不一样，列出终端命令</span></span><br><span class="line"><span class="built_in">cd</span> /usr/bin</span><br><span class="line">ls | grep terminal</span><br></pre></td></tr></table></figure>
+<h4 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h4><p>本来想装搜狗输入法，但是一直报错 <code>错误：未找到目标：fcitx-sogoupinyin</code>，换成谷歌，能用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin</span><br><span class="line"><span class="comment"># 在用户根目录创建文件</span></span><br><span class="line">vim ~/.xprofile</span><br><span class="line"><span class="comment"># 内容</span></span><br><span class="line"><span class="built_in">export</span> LC_ALL=zh_CN.UTF-8</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=“@im=fcitx”</span><br><span class="line"><span class="comment"># 注销重新登录即可,按 crtl + space 切换</span></span><br></pre></td></tr></table></figure>
+<h4 id="时间同步"><a href="#时间同步" class="headerlink" title="时间同步"></a>时间同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 配置chrony服务，实现服务器时间自动同步</span></span><br><span class="line">sudo pacman -S chrony</span><br><span class="line"><span class="comment">#2 修改配置，同步阿里云时间</span></span><br><span class="line">sudo vim /etc/chrony.conf</span><br><span class="line"><span class="comment">#3 将 四个源 注释掉， 添加如下 保存退出</span></span><br><span class="line">server ntp.aliyun.com iburst</span><br><span class="line"></span><br><span class="line"><span class="comment">#同步</span></span><br><span class="line">sudo chronyc -a makestep</span><br><span class="line">sudo systemctl start chronyd.service</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> chronyd.service	</span><br></pre></td></tr></table></figure>
+<h4 id="开启ssh"><a href="#开启ssh" class="headerlink" title="开启ssh"></a>开启ssh</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start sshd</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sshd</span><br></pre></td></tr></table></figure>
+<h4 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S ttf-hack</span><br></pre></td></tr></table></figure>
+<h3 id="软件篇"><a href="#软件篇" class="headerlink" title="软件篇"></a>软件篇</h3><h4 id="安装maven环境"><a href="#安装maven环境" class="headerlink" title="安装maven环境"></a>安装maven环境</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 将下载好的maven上传到服务器</span></span><br><span class="line">scp apache-maven-3.6.3-bin.tar.gz your_name@192.168.xx.xxx:/opt/xxx/</span><br><span class="line"><span class="comment">#2 创建目录</span></span><br><span class="line">sudo mkdir /usr/<span class="built_in">local</span>/maven</span><br><span class="line"><span class="comment">#3 移动maven到指定目录</span></span><br><span class="line">sudo mv apache-maven-3.6.3-bin.tar.gz ./maven</span><br><span class="line"><span class="comment">#4 解压</span></span><br><span class="line">sudo tar -zxvf apache-maven-3.6.3-bin.tar.gz</span><br><span class="line"><span class="comment">#5 配置环境变量</span></span><br><span class="line">sudo vim /etc/profile</span><br><span class="line"><span class="comment">#6 在文件末尾添加</span></span><br><span class="line"><span class="built_in">export</span> MAVEN_HOME=/usr/<span class="built_in">local</span>/maven/apache-maven-3.6.3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:<span class="variable">$&#123;MAVEN_HOME&#125;</span>/bin</span><br><span class="line"><span class="comment">#7 让配置文件生效</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="comment">#8 验证</span></span><br><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 nodejs安装</span></span><br><span class="line">sudo pacman -S nodejs</span><br><span class="line"><span class="comment">#2 npm安装</span></span><br><span class="line">sudo pacman -S npm</span><br><span class="line"><span class="comment">#3 设置npm源</span></span><br><span class="line">sudo npm config <span class="built_in">set</span> -g registry https://registry.npm.taobao.org</span><br><span class="line"><span class="comment">#查看源是否修改成功</span></span><br><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+<h4 id="安装谷歌浏览器"><a href="#安装谷歌浏览器" class="headerlink" title="安装谷歌浏览器"></a>安装谷歌浏览器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S google-chrome</span><br></pre></td></tr></table></figure>
+<h4 id="安装vscode"><a href="#安装vscode" class="headerlink" title="安装vscode"></a>安装vscode</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S visual-studio-code-bin</span><br></pre></td></tr></table></figure>
+<h4 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h4><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1bhcqnnxqgEtqtZMWphGqqA">mysql文件</a> 提取码: xb7f</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 将下载好的MySQL上传到服务器 </span></span><br><span class="line">scp mysql-5.7.31-linux-glibc2.12-x86_64.tar xxx@192.168.xx.xxx:/tmp</span><br><span class="line"><span class="comment">#2 移动到指定目录解压</span></span><br><span class="line">sudo tar -zxvf mysql-5.7.31-linux-glibc2.12-x86_64.tar.gz</span><br><span class="line"><span class="comment">##3.1 创建用户组</span></span><br><span class="line">sudo groupadd mysql </span><br><span class="line"><span class="comment">##3.2 创建用户</span></span><br><span class="line">sudo useradd -r -g mysql mysql</span><br><span class="line"><span class="comment">##3.3 修改文件权限</span></span><br><span class="line">sudo chown -R mysql:mysql mysql-5.7.31-linux-glibc2.12-x86_64</span><br><span class="line"><span class="comment">#4.1 创建MySQL数据存放目录,在MySQL安装目录下</span></span><br><span class="line">sudo mkdir data</span><br><span class="line"><span class="comment">#4.2 创建日志文件 并修改所有者</span></span><br><span class="line">sudo vim /var/<span class="built_in">log</span>/mysqld.log</span><br><span class="line">sudo chown -R mysql:mysql /var/<span class="built_in">log</span>/mysqld.log </span><br><span class="line"><span class="comment">#4.3 创建pid文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql/mysql-5.7.31-linux-glibc2.12-x86_64/data</span><br><span class="line">sudo touch mysqld.pid</span><br><span class="line"><span class="comment">#4.4 创建配置文件</span></span><br><span class="line">sudo  /etc/my.cnf</span><br><span class="line"><span class="comment">#5 初始化数据库,在bin目录下</span></span><br><span class="line">sudo ./mysqld --initialize --user=mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">#5.1 报错./mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory</span></span><br><span class="line"><span class="comment"># 执行解决</span></span><br><span class="line">sudo pacman -S numactl</span><br><span class="line"></span><br><span class="line"><span class="comment">#6 启动MySQL</span></span><br><span class="line">$ sudo ./mysql.server start                </span><br><span class="line">Starting MySQL. SUCCESS!</span><br><span class="line"></span><br><span class="line"><span class="comment">#7 连接MySQL报错 mysql: error while loading shared libraries: libncurses.so.5: cannot open shared object file: No such file or directory，</span></span><br><span class="line">sudo pacman  -S ncurses5-compat-libs</span><br><span class="line"></span><br><span class="line"><span class="comment">#8 重新启动MySQL 登录</span></span><br><span class="line">sudo ./mysql.server restart</span><br><span class="line">$ mysql -uroot -p</span><br><span class="line">Enter password: </span><br><span class="line">ERROR 1045 (28000): Access denied <span class="keyword">for</span> user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> (using password: NO)</span><br><span class="line"><span class="comment">#8.1 初始密码不对，停止MySQL</span></span><br><span class="line">sudo ./mysql.server stop</span><br><span class="line"><span class="comment">#8.2 修改my.cnf文件，将skip-grant-tables注释放开</span></span><br><span class="line">sudo vim /etc/my.cnf</span><br><span class="line"></span><br><span class="line"><span class="comment">#9 启动MySQL，这个时候不需要密码进行登录</span></span><br><span class="line">use mysql;	//切换数据库</span><br><span class="line">update user <span class="built_in">set</span> authentication_string=password(<span class="string">&#x27;123456&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span>;	//修改密码</span><br><span class="line">flush privileges;	//刷新权限</span><br><span class="line"><span class="comment">#9.1 修改my.cnf文件，将skip-grant-tables注释 重新启动mysql即可</span></span><br></pre></td></tr></table></figure>
+
+
+<h5 id="etc-my-cnf配置文件"><a href="#etc-my-cnf配置文件" class="headerlink" title="/etc/my.cnf配置文件"></a>/etc/my.cnf配置文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line">port &#x3D; 3306</span><br><span class="line">socket &#x3D; &#x2F;tmp&#x2F;mysql.sock</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line">port &#x3D; 3306</span><br><span class="line">socket &#x3D; &#x2F;tmp&#x2F;mysql.sock</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">character_set_server&#x3D;utf8</span><br><span class="line">init_connect&#x3D;&#39;SET NAMES utf8&#39;</span><br><span class="line">basedir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;mysql-5.7.31-linux-glibc2.12-x86_64</span><br><span class="line">datadir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;mysql-5.7.31-linux-glibc2.12-x86_64&#x2F;data</span><br><span class="line">socket&#x3D;&#x2F;tmp&#x2F;mysql.sock</span><br><span class="line">log-error&#x3D;&#x2F;var&#x2F;log&#x2F;mysqld.log</span><br><span class="line">pid-file&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;mysql-5.7.31-linux-glibc2.12-x86_64&#x2F;data&#x2F;mysqld.pid</span><br><span class="line">#不区分大小写</span><br><span class="line">lower_case_table_names &#x3D; 1</span><br><span class="line">sql_mode&#x3D;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br><span class="line">max_connections&#x3D;5000</span><br><span class="line">default-time_zone &#x3D; &#39;+8:00&#39;</span><br><span class="line"></span><br><span class="line"># skip-grant-tables</span><br></pre></td></tr></table></figure>
+<h5 id="自动启动"><a href="#自动启动" class="headerlink" title="自动启动"></a>自动启动</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 创建systemctl管理文件</span></span><br><span class="line">sudo vim /usr/lib/systemd/system/mysqld.service</span><br><span class="line"><span class="comment">#2 内容如下</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">After=network.target</span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">TimeoutSec=0</span><br><span class="line">PermissionsStartOnly=<span class="literal">true</span></span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/mysql/mysql-5.7.31-linux-glibc2.12-x86_64/support-files/mysql.server start</span><br><span class="line">LimitNOFILE = 65535</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=3</span><br><span class="line">RestartPreventExitStatus=1</span><br><span class="line">PrivateTmp=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装Idea"><a href="#安装Idea" class="headerlink" title="安装Idea"></a>安装Idea</h4><ul>
+<li><p>指定版本破解。先将<code>ideaIU-2020.2.tar.gz</code>与<code>jetbrains-agent-latest.zip</code>文件上传到服务器。<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MTUe6i7Y5KQhveUGxYxqQw">链接地址</a> 提取码：e9uw</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 解压</span></span><br><span class="line">tar -zxvf ideaIU-2020.2.tar.gz</span><br><span class="line"><span class="comment">#2 安装 移动到bin目录下</span></span><br><span class="line">./idea.sh</span><br><span class="line"><span class="comment">#3 安装完成后先进去试用30天</span></span><br><span class="line"><span class="comment">#4 新建一个类</span></span><br><span class="line"><span class="comment">#5 将 jetbrains-agent-latest.zip 文件拖进类中</span></span><br><span class="line"><span class="comment">#6 重启idea，查看Help-&gt;About 2089过期</span></span><br></pre></td></tr></table></figure></li>
+<li><p>最新地址</p>
+<p><a target="_blank" rel="noopener" href="https://tech.souyunku.com/?p=30970">https://tech.souyunku.com/?p=30970</a></p>
+</li>
+</ul>
+<h4 id="安装Dock"><a href="#安装Dock" class="headerlink" title="安装Dock"></a>安装Dock</h4><p>​    在开始菜单中，输入“面板”并点击，将弹出选项中的“锁定面板”的勾选去掉，然后将任务栏拖到顶部，再勾选上“锁定面板”<br>​    进入shell输入，安装plank：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S plank</span><br></pre></td></tr></table></figure>
+<h5 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h5><p>  在开始菜单中，输入“回话和启动”，点击“应用程序自启动”选显卡，点击“添加”，弹出的框里，“名称”填“plank”,命令填“/usr/bin/plank”，触发器选“on login”，设置dock开机启动。</p>
+<h3 id="网络篇"><a href="#网络篇" class="headerlink" title="网络篇"></a>网络篇</h3><h4 id="安装Shadowsocks-qt5，实现科学上网"><a href="#安装Shadowsocks-qt5，实现科学上网" class="headerlink" title="安装Shadowsocks-qt5，实现科学上网"></a>安装Shadowsocks-qt5，实现科学上网</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S shadowsocks-qt5</span><br></pre></td></tr></table></figure>
+<h4 id="利用代理执行命令-proxychains"><a href="#利用代理执行命令-proxychains" class="headerlink" title="利用代理执行命令-proxychains"></a>利用代理执行命令-proxychains</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 安装proxychains</span></span><br><span class="line">sudo pacman -S proxychains-ng</span><br><span class="line"><span class="comment">#2 修改配置文件</span></span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line"><span class="comment">#3 将socks4 127.0.0.1 9050 删除，添加一行，如下</span></span><br><span class="line">socks5 127.0.0.1 1080</span><br><span class="line"><span class="comment">#4 在zshrc中添加别名,打开文件</span></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="comment">#5 在文件末尾添加一行</span></span><br><span class="line"><span class="built_in">alias</span> pc4=<span class="string">&#x27;proxychains4&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装chrome插件SwitchyOmega"><a href="#安装chrome插件SwitchyOmega" class="headerlink" title="安装chrome插件SwitchyOmega"></a>安装chrome插件SwitchyOmega</h4><ul>
+<li><p>在github上下载.crx文件 地址<a target="_blank" rel="noopener" href="https://github.com/FelisCatus/SwitchyOmega/releases">https://github.com/FelisCatus/SwitchyOmega/releases</a></p>
+</li>
+<li><p>将文件后缀改成zip,解压到文件夹</p>
+</li>
+<li><p>将文件夹传到服务器目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r SwitchyOmega_Chromium you_name@192.168.xx.xxx:/home/ckss/workspace/application/</span><br></pre></td></tr></table></figure></li>
+<li><p>在chrome浏览器打开扩展程序 -&gt; 加载已解压的扩展程序 -&gt; 选择SwitchyOmega_Chromium</p>
+</li>
+<li><p>在SwitchyOmega界面点击导入/导出</p>
+</li>
+<li><p>选择从备份文件恢复 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1FNvvTQ9IzmlcPc3p-JbX5A">文件地址</a> 提取码: nsbh</p>
+</li>
+<li><p>开启的时候记得要先开Shadowsocks-qt5，然后选择自动切换模式，即可实现chrome访问google</p>
+</li>
+</ul>
+<p>在使用git clone xxx 使用 pc4 git clone xxx 即可提速（前提是开启本地1080代理）</p>
+<h3 id="操作篇"><a href="#操作篇" class="headerlink" title="操作篇"></a>操作篇</h3><h4 id="使用scp与linux文件上传下载"><a href="#使用scp与linux文件上传下载" class="headerlink" title="使用scp与linux文件上传下载"></a>使用scp与linux文件上传下载</h4><ul>
+<li>scp /home/work/source.txt <a href="mailto:&#119;&#111;&#114;&#107;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#x2e;&#x30;&#x2e;&#49;&#x30;">&#119;&#111;&#114;&#107;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#x2e;&#x30;&#x2e;&#49;&#x30;</a>:/home/work/ #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下</li>
+<li>scp <a href="mailto:&#119;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#x30;">&#119;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#x30;</a>:/home/work/source.txt /home/work/ #把192.168.0.10机器上的source.txt文件拷贝到本地的/home/work目录下</li>
+<li>scp <a href="mailto:&#x77;&#111;&#x72;&#107;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#49;&#48;">&#x77;&#111;&#x72;&#107;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#49;&#48;</a>:/home/work/source.txt <a href="mailto:&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;">&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;</a>:/home/work/ #把192.168.0.10机器上的source.txt文件拷贝到192.168.0.11机器的/home/work目录下</li>
+<li>scp -r /home/work/sourcedir <a href="mailto:&#x77;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#48;&#46;&#49;&#48;">&#x77;&#111;&#114;&#x6b;&#x40;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#x2e;&#48;&#46;&#49;&#48;</a>:/home/work/ #拷贝文件夹，加-r参数</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/" rel="prev" title="String类及intern方法">
+      <i class="fa fa-chevron-left"></i> String类及intern方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/10/linux-manjaro/" rel="next" title="Linux-manjaro双系统安装">
+      Linux-manjaro双系统安装 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">磁盘分区方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">manjaro安装后基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%E4%B8%AD%E5%9B%BD%E6%BA%90"><span class="nav-number">2.1.</span> <span class="nav-text">自动选择中国源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85vim"><span class="nav-number">2.1.1.</span> <span class="nav-text">安装vim</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0Archlinuxcn%E6%BA%90"><span class="nav-number">2.1.2.</span> <span class="nav-text">添加Archlinuxcn源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85archlinuxcn%E7%AD%BE%E5%90%8D%E9%92%A5%E5%8C%99-%E5%AF%BC%E5%85%A5-GPG-key%EF%BC%8C%E5%90%A6%E5%88%99%E7%9A%84%E8%AF%9Dkey%E9%AA%8C%E8%AF%81%E5%A4%B1%E8%B4%A5%E4%BC%9A%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.1.3.</span> <span class="nav-text">安装archlinuxcn签名钥匙(导入 GPG key，否则的话key验证失败会导致无法安装软件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%BB%88%E7%AB%AF%E9%97%B4%E9%9A%99%E8%BF%87%E5%A4%A7"><span class="nav-number">2.1.4.</span> <span class="nav-text">解决终端间隙过大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E7%9B%AE%E5%BD%95%E4%B8%BA%E8%8B%B1%E6%96%87"><span class="nav-number">2.1.5.</span> <span class="nav-text">修改主目录为英文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85zsh-amp-oh-my-zsh-%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E5%92%8Croot%E7%94%A8%E6%88%B7%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.6.</span> <span class="nav-text">安装zsh &amp; oh-my-zsh(普通用户和root用户需要单独配置)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oh-my-zsh%E6%8F%92%E4%BB%B6"><span class="nav-number">2.1.7.</span> <span class="nav-text">oh-my-zsh插件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE-zsh-syntax-highlighting"><span class="nav-number">2.1.7.1.</span> <span class="nav-text">语法高亮 zsh-syntax-highlighting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%8F%92%E4%BB%B6-zsh-autosuggestions"><span class="nav-number">2.1.7.2.</span> <span class="nav-text">自动补全插件 zsh-autosuggestions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC%E6%8F%92%E4%BB%B6-autojump"><span class="nav-number">2.1.7.3.</span> <span class="nav-text">自动跳转插件 autojump</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E5%90%8E%E5%90%AF%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">2.1.7.4.</span> <span class="nav-text">安装完后启用插件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85oh-m-zsh%E5%AF%BC%E8%87%B4%E5%B0%8F%E9%94%AE%E7%9B%98%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.8.</span> <span class="nav-text">安装oh-m-zsh导致小键盘失效问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.1.9.</span> <span class="nav-text">设置桌面快捷键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%88%E7%AB%AF%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.1.10.</span> <span class="nav-text">设置终端快捷键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95"><span class="nav-number">2.1.11.</span> <span class="nav-text">安装中文输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5"><span class="nav-number">2.1.12.</span> <span class="nav-text">时间同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AFssh"><span class="nav-number">2.1.13.</span> <span class="nav-text">开启ssh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AD%97%E4%BD%93"><span class="nav-number">2.1.14.</span> <span class="nav-text">安装字体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%AF%87"><span class="nav-number">2.2.</span> <span class="nav-text">软件篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85maven%E7%8E%AF%E5%A2%83"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装maven环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85nodejs"><span class="nav-number">2.2.2.</span> <span class="nav-text">安装nodejs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">安装谷歌浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85vscode"><span class="nav-number">2.2.4.</span> <span class="nav-text">安装vscode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL"><span class="nav-number">2.2.5.</span> <span class="nav-text">安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#etc-my-cnf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">&#x2F;etc&#x2F;my.cnf配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">自动启动</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Idea"><span class="nav-number">2.2.6.</span> <span class="nav-text">安装Idea</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Dock"><span class="nav-number">2.2.7.</span> <span class="nav-text">安装Dock</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="nav-number">2.2.7.1.</span> <span class="nav-text">开机自启</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%AF%87"><span class="nav-number">2.3.</span> <span class="nav-text">网络篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Shadowsocks-qt5%EF%BC%8C%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">2.3.1.</span> <span class="nav-text">安装Shadowsocks-qt5，实现科学上网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E4%BB%A3%E7%90%86%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4-proxychains"><span class="nav-number">2.3.2.</span> <span class="nav-text">利用代理执行命令-proxychains</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6SwitchyOmega"><span class="nav-number">2.3.3.</span> <span class="nav-text">安装chrome插件SwitchyOmega</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%AF%87"><span class="nav-number">2.4.</span> <span class="nav-text">操作篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8scp%E4%B8%8Elinux%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.4.1.</span> <span class="nav-text">使用scp与linux文件上传下载</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cksspk"
+      src="/uploads/kenan.jpg">
+  <p class="site-author-name" itemprop="name">cksspk</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cksspk</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

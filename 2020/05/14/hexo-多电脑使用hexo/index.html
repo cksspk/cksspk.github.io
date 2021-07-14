@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="&amp;ensp;&amp;ensp;一般使用hexo都是在一台电脑进行写作，但是有时候在公司，在家或者其他地方想要提交博客，原始方式就不方便，我们一般将hexo通过git部署，因此可以git特性实现同一仓库管理源文件和博客页面。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多台电脑使用Hexo">
+<meta property="og:url" content="http://example.com/2020/05/14/hexo-%E5%A4%9A%E7%94%B5%E8%84%91%E4%BD%BF%E7%94%A8hexo/index.html">
+<meta property="og:site_name" content="Cksspk (｡•̀ᴗ-)✧。">
+<meta property="og:description" content="&amp;ensp;&amp;ensp;一般使用hexo都是在一台电脑进行写作，但是有时候在公司，在家或者其他地方想要提交博客，原始方式就不方便，我们一般将hexo通过git部署，因此可以git特性实现同一仓库管理源文件和博客页面。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-14T01:12:09.000Z">
+<meta property="article:modified_time" content="2021-07-14T00:52:14.190Z">
+<meta property="article:author" content="cksspk">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/05/14/hexo-%E5%A4%9A%E7%94%B5%E8%84%91%E4%BD%BF%E7%94%A8hexo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>多台电脑使用Hexo | Cksspk (｡•̀ᴗ-)✧。</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cksspk (｡•̀ᴗ-)✧。</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/14/hexo-%E5%A4%9A%E7%94%B5%E8%84%91%E4%BD%BF%E7%94%A8hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/kenan.jpg">
+      <meta itemprop="name" content="cksspk">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cksspk (｡•̀ᴗ-)✧。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多台电脑使用Hexo
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-14 09:12:09" itemprop="dateCreated datePublished" datetime="2020-05-14T09:12:09+08:00">2020-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-14 08:52:14" itemprop="dateModified" datetime="2021-07-14T08:52:14+08:00">2021-07-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> &ensp;&ensp;一般使用hexo都是在一台电脑进行写作，但是有时候在公司，在家或者其他地方想要提交博客，原始方式就不方便，我们一般将hexo通过git部署，因此可以git特性实现同一仓库管理源文件和博客页面。</p>
+<a id="more"></a>
+
+<h2 id="简单原理"><a href="#简单原理" class="headerlink" title="简单原理"></a>简单原理</h2><p>先简单说说Hexo生产的静态博客的特点，首先它是一个静态博客生成工具，可以根据你的配置和md文件生成一系列的html、css、js等文件，组成一个站点，部署到github pages，这样网站就可以访问了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>hexo的部署命令，其实就是：</p>
+<ol>
+<li>生成站点有关文件到 <code>.deploy_git</code> </li>
+<li>把它初始化为git目录，并根据你的配置指定remote和branch(一般是master)</li>
+<li>进行<code>git commit</code>，并把修改push到指定的remote branch</li>
+<li>命令执行完成后，到你的github仓库，你会发现master分支上的内容和’.deploy_git’中一样</li>
+</ol>
+<h2 id="步骤如下"><a href="#步骤如下" class="headerlink" title="步骤如下"></a>步骤如下</h2><ol>
+<li><p>创建仓库 cksspk/cksspk.github.io</p>
+</li>
+<li><p>根据提示将仓库拉取到本地，并且添加新的分支<code>hexo</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 拉取分支提交</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# hello &quot;</span> &gt;&gt; READ.md</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init&quot;</span></span><br><span class="line">git remote add origin  https://github.com/cksspk/cksspk.github.io.git</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 创建新的分支</span></span><br><span class="line">git checkout -b hexo</span><br><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure></li>
+<li><p>设置默认分支</p>
+<p> 在该仓库<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>中将默认分支 </p>
+</li>
+<li><p>克隆<code>source</code>分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 将新建的source分支克隆到本地</span></span><br><span class="line"><span class="comment"># 使用ssh免密 git clone git@github.com:cksspk/cksspk.github.io.git</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cksspk/cksspk.github.io.git</span><br><span class="line"><span class="comment">#2. 进入该目录</span></span><br><span class="line"><span class="built_in">cd</span> cksspk.github.io</span><br><span class="line"><span class="comment">#3. 在Git Bash中查看分支,分支应该为 branch</span></span><br><span class="line">git branch</span><br></pre></td></tr></table></figure></li>
+<li><p>上传部署文件</p>
+<ul>
+<li><p>把除了.git 文件夹外的所有文件都删掉</p>
+</li>
+<li><p>将本地博客中除了  <code>.deploy_git </code>文件全部复制到 <code>cksspk.github.io</code>目录</p>
+</li>
+<li><p>可以修改 <code>.gitignore</code> 用来忽略一些不需要的文件 ，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br></pre></td></tr></table></figure>
+<p> 注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传 </p>
+</li>
+<li><p>上传到远程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m <span class="string">&quot;add hexo&quot;</span></span><br><span class="line">git push </span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="同步到其他电脑"><a href="#同步到其他电脑" class="headerlink" title="同步到其他电脑"></a>同步到其他电脑</h2><ul>
+<li>在新电脑上克隆<code>username.github.io</code>仓库的<code>hexo</code>分支到本地，此时本地<code>git</code>仓库处于<code>hexo</code>分支</li>
+<li>切换到<code>username.github.io</code>目录，执行<code>npm install</code>(由于仓库有一个.gitignore文件，里面默认是忽略掉 <code>node_modules</code>文件夹的，也就是说仓库的<code>hexo</code>分支并没有存储该目录，所以需要<code>install</code>下)如果<code>node_modules</code>文件没有丢失, 可不执行该操作</li>
+<li>需要注意的是每次更新博客之后, 都要把相关修改上传到<code>hexo</code>分支</li>
+<li>每次换电脑更新博客的时候, 在修改之前最好也要<code>git pull</code>拉取一下最新的更新</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-4-Jenkins%E5%AE%89%E8%A3%85/" rel="prev" title="Jenkins安装">
+      <i class="fa fa-chevron-left"></i> Jenkins安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/" rel="next" title="将Hexo部署在个人服务器">
+      将Hexo部署在个人服务器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">简单原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B"><span class="nav-number">2.</span> <span class="nav-text">步骤如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%88%B0%E5%85%B6%E4%BB%96%E7%94%B5%E8%84%91"><span class="nav-number">3.</span> <span class="nav-text">同步到其他电脑</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cksspk"
+      src="/uploads/kenan.jpg">
+  <p class="site-author-name" itemprop="name">cksspk</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cksspk</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
