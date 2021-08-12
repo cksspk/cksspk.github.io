@@ -1510,8 +1510,8 @@
 ]]></content>
   </entry>
   <entry>
-    <title>jenkins</title>
-    <url>/2021/07/21/jenkins/</url>
+    <title>Jenkins</title>
+    <url>/2021/07/21/2021-07-jenkins/</url>
     <content><![CDATA[<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>​    在centos7服务器安装Jenkins及基础配置</p>
 <a id="more"></a>
 
@@ -1562,5 +1562,51 @@
 </li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Springboot+Jenkins+Docker自动部署</title>
+    <url>/2021/07/25/Jenkins%E4%B8%8EDocker/</url>
+    <content><![CDATA[<p>使用Jenkins快速打包Springboot项目，制作Docker镜像，并且推送到阿里云镜像仓库。    </p>
+<a id="more"></a>
+
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>Jenkins</li>
+<li>Docker</li>
+<li>Maven</li>
+<li>Gitee/GitLab</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>创建一个简单的Springboot项目，并上传到Git远程仓库。地址：<a href="https://gitee.com/cksspk/jenkins-t1.git">https://gitee.com/cksspk/jenkins-t1.git</a></p>
+<img src="/2021/07/25/Jenkins%E4%B8%8EDocker/1.png" alt="基础图片" style="zoom:75%;">
+
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>pom中主要配置</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--镜像仓库配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docker.repository</span>&gt;</span>registry.cn-hangzhou.aliyuncs.com<span class="tag">&lt;/<span class="name">docker.repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docker.registry.name</span>&gt;</span>cksspk<span class="tag">&lt;/<span class="name">docker.registry.name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;project.artifactId&#125;-$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--docker镜像相关的配置信息--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--镜像名--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">imageName</span>&gt;</span></span><br><span class="line">                        $&#123;docker.repository&#125;/$&#123;docker.registry.name&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--Dockerfile文件所在目录--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dockerDirectory</span>&gt;</span></span><br><span class="line">                        $&#123;project.basedir&#125;</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">dockerDirectory</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--构建镜像的配置信息--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">include</span>&gt;</span></span><br><span class="line">                                $&#123;project.artifactId&#125;-$&#123;project.version&#125;.jar</span><br><span class="line">                            <span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--Dcoker服务器所在地址，配置文件开启0.0.0.0:2375通信--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.1.114:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--推送阿里云--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">serverId</span>&gt;</span>docker-aliyun<span class="tag">&lt;/<span class="name">serverId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">registryUrl</span>&gt;</span>$&#123;docker.repository&#125;<span class="tag">&lt;/<span class="name">registryUrl</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">pushImage</span>&gt;</span>true<span class="tag">&lt;/<span class="name">pushImage</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><p>docker镜像制作好后自动推送到阿里云镜像仓库，需要在maven中添加配置。</p>
+<p>修改settings.conf文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--maven的pom中可以根据这个id找到这个server节点的配置--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>docker-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--这里是在阿里云注册的账号--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">username</span>&gt;</span>cksspk<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--这里是在阿里云注册的密码--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">password</span>&gt;</span>*****<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--这是在阿里云注册时填写的邮箱--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">email</span>&gt;</span>****@163.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><ol>
+<li><p>在Jenkins控制面板中【新建任务】，选择【构建一个自由风格的软件项目】</p>
+</li>
+<li><p>源码管理 配置项目的Git地址，填写账户认证</p>
+</li>
+<li><p>构建，调用Maven目标</p>
+<p><img src="/2021/07/25/Jenkins%E4%B8%8EDocker/c.png" alt="c"></p>
+<p>保存</p>
+</li>
+<li><p>点击 立即构建，在构建信息中可以通过【控制台输出】查看编译信息</p>
+</li>
+</ol>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
+<li><p>在服务器中执行命令，查看镜像是否制作成功</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></li>
+<li><p>登录阿里云镜像服务查看是否推送成功</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
   </entry>
 </search>
