@@ -1610,9 +1610,10 @@
       </tags>
   </entry>
   <entry>
-    <title>jd_cookie</title>
+    <title>jd_cookie获取</title>
     <url>/2021/08/17/jd-cookie/</url>
-    <content><![CDATA[<h1 id="JD获取COOKIE教程"><a href="#JD获取COOKIE教程" class="headerlink" title="JD获取COOKIE教程"></a>JD获取COOKIE教程</h1><a id="more"></a>
+    <content><![CDATA[<p>JD获取COOKIE教程</p>
+<a id="more"></a>
 
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
 <li>浏览器 ：Chrome或者Edge</li>
@@ -1643,6 +1644,67 @@
 <p><img src="/2021/08/17/jd-cookie/5.png" alt="3"></p>
 <p>将pt_key和pt_pin组成如下格式：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">pt_key=xxxx;pt_pin=xxxx;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>jd</category>
+      </categories>
+      <tags>
+        <tag>jd</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jd-script 青龙面板搭建</title>
+    <url>/2021/08/17/jd-script/</url>
+    <content><![CDATA[<p>青龙面板搭建教程</p>
+<a id="more"></a>
+
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li>linux服务器一台：推荐使用Centos7</li>
+</ul>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
+<li>Docker</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>Demo使用一台全新的Centos7服务器，安装Docker</p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum check-update</span><br><span class="line">curl -fsSL https://get.docker.com/ | sh</span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl status docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+<h2 id="安装青龙面板"><a href="#安装青龙面板" class="headerlink" title="安装青龙面板"></a>安装青龙面板</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -dit \</span><br><span class="line">  --name QL \</span><br><span class="line">  --hostname QL \</span><br><span class="line">  --restart always \</span><br><span class="line">  -p 5700:5700 \</span><br><span class="line">  -v <span class="variable">$PWD</span>/QL/config:/ql/config \</span><br><span class="line">  -v <span class="variable">$PWD</span>/QL/<span class="built_in">log</span>:/ql/<span class="built_in">log</span> \</span><br><span class="line">  -v <span class="variable">$PWD</span>/QL/db:/ql/db \</span><br><span class="line">  -v <span class="variable">$PWD</span>/QL/scripts:/ql/scripts \</span><br><span class="line">  -v <span class="variable">$PWD</span>/QL/jbot:/ql/jbot \</span><br><span class="line">  whyour/qinglong:latest</span><br></pre></td></tr></table></figure>
+<p>查看是否启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/17/jd-script/1.png" alt="1"></p>
+<h2 id="面板配置"><a href="#面板配置" class="headerlink" title="面板配置"></a>面板配置</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><ol>
+<li><p>在浏览器地址栏输入 服务器ip:5700</p>
+<p><img src="/2021/08/17/jd-script/3.png" alt="image-20210817163127835"></p>
+<p>如果访问不到，可能是端口没开启。阿里云服务器需要单独开启端口访问。其他服务器同理。</p>
+<p>Demo使用谷歌云通过网络标记已开启所有端口访问，推荐使用谷歌云。</p>
+</li>
+<li><p>在服务器上查看用户名和密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat <span class="variable">$PWD</span>/QL/config/auth.json</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/17/jd-script/2.png" alt="image-20210817162926222"></p>
+</li>
+<li><p>在界面输入用户名和密码，初始密码会重置。重复上面步骤查看最新密码。</p>
+</li>
+<li><p>登录成功后如下所示。</p>
+<p><img src="/2021/08/17/jd-script/4.png" alt="image-20210817163849124"></p>
+</li>
+</ol>
+<p>青龙面板初始化完成。</p>
+<h3 id="导入配置"><a href="#导入配置" class="headerlink" title="导入配置"></a>导入配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it QL bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/allin1code/a1/raw/master/1customCDN.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>一直回车即可</p>
+<p>在浏览器界面刷新</p>
+<p><img src="/2021/08/17/jd-script/5.png" alt="image-20210817165525675"></p>
+<h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>【环境变量】-【添加变量】</p>
+<p>名称输入 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">JD_COOKIE</span><br></pre></td></tr></table></figure>
+<p>值输入 ,上一篇中有教程。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pt_key&#x3D;xxxx;pt_pin&#x3D;xxxx;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/17/jd-script/6.png" alt="image-20210817170201207"></p>
+<p>验证</p>
+<p>【定时任务】-【搜索】输入“通知”， 点击【搜索】</p>
+<p>执行 <code>京东资产变动通知</code>任务</p>
+<p><img src="/2021/08/17/jd-script/7.png" alt="image-20210817170408590"></p>
+<p>点击【操作】下日志查看，出现一下表示配置成功</p>
+<p><img src="/2021/08/17/jd-script/8.png" alt="image-20210817170701336"></p>
+<p>京东用户配置完成。</p>
+<h2 id="其他配置地址"><a href="#其他配置地址" class="headerlink" title="其他配置地址"></a>其他配置地址</h2><p>参考：<a href="https://www.notion.so/1c598629675145988b43a37998a1604a">https://www.notion.so/1c598629675145988b43a37998a1604a</a></p>
 ]]></content>
       <categories>
         <category>jd</category>
