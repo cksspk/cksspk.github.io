@@ -1612,9 +1612,9 @@
   <entry>
     <title>jd_cookie</title>
     <url>/2021/08/17/jd-cookie/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<h1 id="JD获取COOKIE教程"><a href="#JD获取COOKIE教程" class="headerlink" title="JD获取COOKIE教程"></a>JD获取COOKIE教程</h1><a id="more"></a>
 
-<h1 id="JD获取COOKIE教程"><a href="#JD获取COOKIE教程" class="headerlink" title="JD获取COOKIE教程"></a>JD获取COOKIE教程</h1><h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
 <li>浏览器 ：Chrome或者Edge</li>
 <li>EditThisCookie插件</li>
 </ul>
@@ -1623,24 +1623,24 @@
 <li><p>打开Chrome浏览器，找到【扩展程序】-【打开Chrome网上应用店】</p>
 </li>
 <li><p>搜索 EditThisCookie 插件，安装</p>
-<p><img src="/2021/08/17/jd-cookie/jd-cookie%5C1.png" alt="aaa"></p>
+<p><img src="/2021/08/17/jd-cookie/1.png" alt="aaa"></p>
 </li>
 </ol>
 <h3 id="账号登录"><a href="#账号登录" class="headerlink" title="账号登录"></a>账号登录</h3><ol>
 <li><p>在Chrome浏览器地址栏输入京东地址：   <a href="https://m.jd.com/">https://m.jd.com/</a></p>
 </li>
 <li><p>按F12打开调试模式，切换到手机模式</p>
-<p><img src="/2021/08/17/jd-cookie/jd-cookie%5C2.png" alt="aaa"></p>
+<p><img src="/2021/08/17/jd-cookie/2.png" alt="aaa"></p>
 </li>
 <li><p>点击【登录】。输入手机号码，收到短信登陆。</p>
-<p><img src="/2021/08/17/jd-cookie/jd-cookie%5C3.png" alt="3"></p>
+<p><img src="/2021/08/17/jd-cookie/3.png" alt="3"></p>
 </li>
 <li><p>登录成功后如下</p>
-<p><img src="/2021/08/17/jd-cookie/jd-cookie%5C4.png" alt="3"></p>
+<p><img src="/2021/08/17/jd-cookie/4.png" alt="3"></p>
 </li>
 </ol>
 <h3 id="Cookie获取"><a href="#Cookie获取" class="headerlink" title="Cookie获取"></a>Cookie获取</h3><p>打开 EditThisCookie 插件，点击搜索图标， 输入 pt</p>
-<p><img src="/2021/08/17/jd-cookie/jd-cookie%5C5.png" alt="3"></p>
+<p><img src="/2021/08/17/jd-cookie/5.png" alt="3"></p>
 <p>将pt_key和pt_pin组成如下格式：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">pt_key=xxxx;pt_pin=xxxx;</span><br></pre></td></tr></table></figure>
 ]]></content>
