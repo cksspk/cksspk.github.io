@@ -1610,49 +1610,6 @@
       </tags>
   </entry>
   <entry>
-    <title>jd_cookie获取</title>
-    <url>/2021/08/17/jd-cookie/</url>
-    <content><![CDATA[<p>JD获取COOKIE教程</p>
-<a id="more"></a>
-
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li>浏览器 ：Chrome或者Edge</li>
-<li>EditThisCookie插件</li>
-</ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h3><p>以Chrome浏览器为例</p>
-<ol>
-<li><p>打开Chrome浏览器，找到【扩展程序】-【打开Chrome网上应用店】</p>
-</li>
-<li><p>搜索 EditThisCookie 插件，安装</p>
-<p><img src="/2021/08/17/jd-cookie/1.png" alt="aaa"></p>
-</li>
-</ol>
-<h3 id="账号登录"><a href="#账号登录" class="headerlink" title="账号登录"></a>账号登录</h3><ol>
-<li><p>在Chrome浏览器地址栏输入京东地址：   <a href="https://m.jd.com/">https://m.jd.com/</a></p>
-</li>
-<li><p>按F12打开调试模式，切换到手机模式</p>
-<p><img src="/2021/08/17/jd-cookie/2.png" alt="aaa"></p>
-</li>
-<li><p>点击【登录】。输入手机号码，收到短信登陆。</p>
-<p><img src="/2021/08/17/jd-cookie/3.png" alt="3"></p>
-</li>
-<li><p>登录成功后如下</p>
-<p><img src="/2021/08/17/jd-cookie/4.png" alt="3"></p>
-</li>
-</ol>
-<h3 id="Cookie获取"><a href="#Cookie获取" class="headerlink" title="Cookie获取"></a>Cookie获取</h3><p>打开 EditThisCookie 插件，点击搜索图标， 输入 pt</p>
-<p><img src="/2021/08/17/jd-cookie/5.png" alt="3"></p>
-<p>将pt_key和pt_pin组成如下格式：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">pt_key=xxxx;pt_pin=xxxx;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>jd</category>
-      </categories>
-      <tags>
-        <tag>jd</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>jd-script 青龙面板搭建</title>
     <url>/2021/08/17/jd-script/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
@@ -1667,11 +1624,5 @@
   </div>
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>jd</category>
-      </categories>
-      <tags>
-        <tag>jd</tag>
-      </tags>
   </entry>
 </search>
