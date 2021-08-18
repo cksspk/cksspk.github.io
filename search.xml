@@ -258,6 +258,99 @@
 ]]></content>
   </entry>
   <entry>
+    <title>树莓派基本设置</title>
+    <url>/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<p>树莓派硬件为3b+，系统版本debian9.9</p>
+<a id="more"></a>
+
+<p>查看树莓派系统参数命令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">getconf LONG_BIT        <span class="comment"># 查看系统位数</span></span><br><span class="line">uname -a            <span class="comment"># kernel 版本</span></span><br><span class="line">/opt/vc/bin/vcgencmd  version   <span class="comment"># firmware版本</span></span><br><span class="line">strings /boot/start.elf  |  grep VC_BUILD_ID    <span class="comment"># firmware版本</span></span><br><span class="line">cat /proc/version       <span class="comment"># kernel</span></span><br><span class="line">cat /etc/os-release     <span class="comment"># OS版本资讯</span></span><br><span class="line">cat /etc/issue          <span class="comment"># Linux distro 版本</span></span><br><span class="line">cat /etc/debian_version     <span class="comment"># Debian版本编号</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置wifi连接"><a href="#配置wifi连接" class="headerlink" title="配置wifi连接"></a>配置wifi连接</h2><ol>
+<li><p>打开文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>增加配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">&quot;wifi名称&quot;</span></span><br><span class="line">    psk=<span class="string">&quot;wifi密码&quot;</span></span><br><span class="line">    priority=4 连接优先级，数字越大优先级越高（不可以是负数）</span><br><span class="line">    <span class="comment">#scan_ssid:连接隐藏WiFi时需要指定该值为1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>拔网线，重启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h2></li>
+</ol>
+<p>路由器的WiFi一般为自动分配，如果经常开关机都要去路由器上查看IP地址，很麻烦，因此这种情况配置静态IP就很方便</p>
+<ol>
+<li><p>打开文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/dhcpcd.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>增加配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 指定接口 eth0</span></span><br><span class="line">interface eth0</span><br><span class="line"><span class="comment"># 指定静态IP，/24表示子网掩码为 255.255.255.0</span></span><br><span class="line">static ip_address=192.168.1.20/24</span><br><span class="line"><span class="comment"># 路由器/网关IP地址</span></span><br><span class="line">static routers=192.168.1.1</span><br><span class="line"><span class="comment"># 手动自定义DNS服务器</span></span><br><span class="line">static domain_name_servers=114.114.114.114</span><br></pre></td></tr></table></figure></li>
+<li><p>重启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="JAVA环境（jdk1-8）"><a href="#JAVA环境（jdk1-8）" class="headerlink" title="JAVA环境（jdk1.8）"></a>JAVA环境（jdk1.8）</h2></li>
+</ol>
+<h3 id="下载jdk"><a href="#下载jdk" class="headerlink" title="下载jdk"></a>下载jdk</h3><ol>
+<li>进入java<a href="https://www.oracle.com/java/technologies/javase-jdk8-downloads.html">官网</a></li>
+<li>选择 <code>Linux ARM 32 Hard Float ABI</code> 版本下载</li>
+<li>通过<code>xshell</code>软件上传至树莓派</li>
+</ol>
+<h3 id="解压配置环境"><a href="#解压配置环境" class="headerlink" title="解压配置环境"></a>解压配置环境</h3><ol>
+<li><p>在软件目录解压</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf jdk-8u241-linux-arm32-vfp-hflt.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>编辑配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li><p>在后面写入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;opt&#x2F;java&#x2F;jdk1.8.0_241</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre></td></tr></table></figure>
+<h3 id="保存验证"><a href="#保存验证" class="headerlink" title="保存验证"></a>保存验证</h3></li>
+<li><p>修改文件后立即生效</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li><p>验证，输入 <code>java -version</code>，查看打印输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/yanzheng.jpg" alt="验证"></p>
+</li>
+</ol>
+<h2 id="安装SVN服务器"><a href="#安装SVN服务器" class="headerlink" title="安装SVN服务器"></a>安装SVN服务器</h2><h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><ol>
+<li><p>安装svn服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install subversion -y</span><br></pre></td></tr></table></figure></li>
+<li><p>创建仓库, 使用/home/pi/svn/svn_ckss作为仓库根路径</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">svnadmin create /home/pi/svn/svn_ckss</span><br></pre></td></tr></table></figure></li>
+<li><p>修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/svnserve.conf </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_1.png" alt="验证"></p>
+<p>​    <strong>去掉注释，一定要删除空格！！！ 让配置顶格写！！！</strong></p>
+</li>
+<li><p>配置用户信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/passwd </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_2.jpg" alt="验证"></p>
+</li>
+<li><p>修改权限配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/authz </span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_3.png" alt="验证"></p>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">svnserve -d -r /home/pi/svn/svn_ckss</span><br></pre></td></tr></table></figure></li>
+<li><p>查看启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep svnserve</span><br></pre></td></tr></table></figure>
+<p>启动成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root     19497     1  0 12:54 ?        00:00:00 svnserve -d -r /home/pi/svn/svn_taoge/</span><br><span class="line">root     19530 19172  0 13:13 pts/0    00:00:00 grep svnserve</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="8">
+<li><p>停止服务</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">killall svnserve</span><br></pre></td></tr></table></figure>
+<p>如果使用防火墙需要将3690端口开放</p>
+</li>
+</ol>
+<h3 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h3><p>客户端通过**<em>tortoiseSVN**</em>进行连接，下载地址 <a href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a></p>
+<p>另外，中文语言包需要通版本保持一致</p>
+<p>输入SVN服务器地址 :svn://192.168.0.108进行检出</p>
+<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_4.png" alt="验证"></p>
+]]></content>
+      <categories>
+        <category>raspberryPi</category>
+      </categories>
+      <tags>
+        <tag>树莓派</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>将Hexo部署在个人服务器</title>
     <url>/2020/05/16/hexo-%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A/</url>
     <content><![CDATA[<p> &ensp;&ensp;之前是对<code>hexo</code>进行了<code>git</code>配置，可以实现多台电脑对<code>hexo</code>博客进行维护。但是在使用过程中发现访问速度非常慢（部署在<code>Github</code>上），这里通过<code>git</code>裸仓库+<code>nginx</code>作为网页服务器，实现将<code>Hexo</code>博客部署在自己的服务器上。</p>
@@ -444,34 +537,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Nginx反向代理frps</title>
-    <url>/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/</url>
-    <content><![CDATA[<p>​        申请的域名终于下来了，再加上之前买的云服务器，终于可以搞一搞了。由于服务器只有一个<code>IP</code>和域名，80端口用来访问很方便，但是有些接口回调只支持80端口，比如微信公众号。因此，需要将80端口配置的更加通用一些。</p>
-<a id="more"></a>
-
-<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
-<li>frp</li>
-<li>nginx</li>
-</ul>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p><img src="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%88%B0frps.png" alt="流程"></p>
-<p>​    整体流程如图所示，<code>nginx</code>根据一级域名和二级域名进行方向代理，这样的话主域名代理到<code>Hexo</code>博客，二级域名通过<code>frp</code>还可以穿透到其他机器，扩展起来也很方便，添加一个<code>frp</code>客户端就可以了。：</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
-<li><h4 id="添加域名解析"><a href="#添加域名解析" class="headerlink" title="添加域名解析"></a>添加域名解析</h4><p>域名解析一般在购买的服务商那里都会有配置，这里我买的是腾讯云，所以展示腾讯云配置</p>
-<p><img src="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/1.jpg" alt="流程1"></p>
-</li>
-<li><h4 id="nginx配置代理规则"><a href="#nginx配置代理规则" class="headerlink" title="nginx配置代理规则"></a>nginx配置代理规则</h4><p>nginx代理规则很简单，根据一级域名和二级域名的不同进行代理就好了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#二级域名配置 转发到本机frps</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen          80;</span><br><span class="line">    server_name     *.yourdomain.com;</span><br><span class="line">    location /&#123;</span><br><span class="line">            <span class="comment">#服务器的ip和端口   http://[ip]:[port]   vhost_http_port</span></span><br><span class="line">            proxy_pass http://127.0.0.1:81;</span><br><span class="line">            proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">            proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">            proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">            proxy_hide_header X-Powered-By;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#主域名配置</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  yourdomain.com;</span><br><span class="line">    <span class="comment">#配置hexo博客地址</span></span><br><span class="line">    location / &#123;</span><br><span class="line">         root   /home/git/projects/blog;</span><br><span class="line">         index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="frp配置"><a href="#frp配置" class="headerlink" title="frp配置"></a>frp配置</h4><p>frps.ini这里没有什么需要特别改动的，使用的方式还是通过二级域名管理客户端 <a href="%5Bhttps://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%5D(https://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D)">frp官方说明</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line">subdomain_host = yourdomain.com</span><br><span class="line"><span class="comment"># 注意启动端口与 nginx 代理二级域名后的端口一致</span></span><br><span class="line">vhost_http_port = 81</span><br><span class="line">vhost_https_port = 443</span><br></pre></td></tr></table></figure>
-<p>服务器配置到这里就ok了，接下来只要在<code>frpc</code>客户端对二级域名配置即可。通过test.yourdomain.com就可以访问内网的web服务，接口回调也很方便~</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
     <title>manjaro安装及基本配置</title>
     <url>/2020/08/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-08-09-manjaro%E5%AE%89%E8%A3%85%E5%90%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>非常好看的linux桌面版</p>
@@ -586,15 +651,43 @@
 </ul>
 <p>在使用git clone xxx 使用 pc4 git clone xxx 即可提速（前提是开启本地1080代理）</p>
 <h3 id="操作篇"><a href="#操作篇" class="headerlink" title="操作篇"></a>操作篇</h3><h4 id="使用scp与linux文件上传下载"><a href="#使用scp与linux文件上传下载" class="headerlink" title="使用scp与linux文件上传下载"></a>使用scp与linux文件上传下载</h4><ul>
-<li>scp /home/work/source.txt <a href="mailto:&#119;&#111;&#114;&#107;&#64;&#49;&#57;&#50;&#46;&#x31;&#54;&#56;&#46;&#48;&#46;&#x31;&#48;">&#119;&#111;&#114;&#107;&#64;&#49;&#57;&#50;&#46;&#x31;&#54;&#56;&#46;&#48;&#46;&#x31;&#48;</a>:/home/work/ #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下</li>
-<li>scp <a href="mailto:&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#48;&#46;&#49;&#x30;">&#119;&#x6f;&#114;&#107;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#48;&#46;&#49;&#x30;</a>:/home/work/source.txt /home/work/ #把192.168.0.10机器上的source.txt文件拷贝到本地的/home/work目录下</li>
-<li>scp <a href="mailto:&#x77;&#111;&#x72;&#x6b;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#56;&#46;&#x30;&#46;&#49;&#x30;">&#x77;&#111;&#x72;&#x6b;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#56;&#46;&#x30;&#46;&#49;&#x30;</a>:/home/work/source.txt <a href="mailto:&#119;&#111;&#x72;&#x6b;&#64;&#49;&#57;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#48;&#46;&#x31;&#x31;">&#119;&#111;&#x72;&#x6b;&#64;&#49;&#57;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#48;&#46;&#x31;&#x31;</a>:/home/work/ #把192.168.0.10机器上的source.txt文件拷贝到192.168.0.11机器的/home/work目录下</li>
-<li>scp -r /home/work/sourcedir <a href="mailto:&#x77;&#x6f;&#114;&#x6b;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#48;&#x2e;&#x31;&#x30;">&#x77;&#x6f;&#114;&#x6b;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#48;&#x2e;&#x31;&#x30;</a>:/home/work/ #拷贝文件夹，加-r参数</li>
+<li>scp /home/work/source.txt <a href="mailto:&#x77;&#111;&#x72;&#107;&#64;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#x31;&#x30;">&#x77;&#111;&#x72;&#107;&#64;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#x31;&#x30;</a>:/home/work/ #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下</li>
+<li>scp <a href="mailto:&#x77;&#111;&#114;&#107;&#64;&#x31;&#57;&#50;&#46;&#x31;&#x36;&#x38;&#x2e;&#x30;&#x2e;&#49;&#48;">&#x77;&#111;&#114;&#107;&#64;&#x31;&#57;&#50;&#46;&#x31;&#x36;&#x38;&#x2e;&#x30;&#x2e;&#49;&#48;</a>:/home/work/source.txt /home/work/ #把192.168.0.10机器上的source.txt文件拷贝到本地的/home/work目录下</li>
+<li>scp <a href="mailto:&#x77;&#111;&#x72;&#x6b;&#x40;&#49;&#57;&#50;&#46;&#49;&#x36;&#56;&#46;&#48;&#x2e;&#49;&#48;">&#x77;&#111;&#x72;&#x6b;&#x40;&#49;&#57;&#50;&#46;&#49;&#x36;&#56;&#46;&#48;&#x2e;&#49;&#48;</a>:/home/work/source.txt <a href="mailto:&#119;&#x6f;&#114;&#x6b;&#64;&#x31;&#57;&#x32;&#46;&#49;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#49;">&#119;&#x6f;&#114;&#x6b;&#64;&#x31;&#57;&#x32;&#46;&#49;&#x36;&#56;&#x2e;&#x30;&#46;&#x31;&#49;</a>:/home/work/ #把192.168.0.10机器上的source.txt文件拷贝到192.168.0.11机器的/home/work目录下</li>
+<li>scp -r /home/work/sourcedir <a href="mailto:&#119;&#x6f;&#114;&#x6b;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#48;&#x2e;&#49;&#x30;">&#119;&#x6f;&#114;&#x6b;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#48;&#x2e;&#49;&#x30;</a>:/home/work/ #拷贝文件夹，加-r参数</li>
 </ul>
 ]]></content>
       <categories>
         <category>linux</category>
         <category>manjaro</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Nginx反向代理frps</title>
+    <url>/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/</url>
+    <content><![CDATA[<p>​        申请的域名终于下来了，再加上之前买的云服务器，终于可以搞一搞了。由于服务器只有一个<code>IP</code>和域名，80端口用来访问很方便，但是有些接口回调只支持80端口，比如微信公众号。因此，需要将80端口配置的更加通用一些。</p>
+<a id="more"></a>
+
+<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
+<li>frp</li>
+<li>nginx</li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p><img src="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%88%B0frps.png" alt="流程"></p>
+<p>​    整体流程如图所示，<code>nginx</code>根据一级域名和二级域名进行方向代理，这样的话主域名代理到<code>Hexo</code>博客，二级域名通过<code>frp</code>还可以穿透到其他机器，扩展起来也很方便，添加一个<code>frp</code>客户端就可以了。：</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
+<li><h4 id="添加域名解析"><a href="#添加域名解析" class="headerlink" title="添加域名解析"></a>添加域名解析</h4><p>域名解析一般在购买的服务商那里都会有配置，这里我买的是腾讯云，所以展示腾讯云配置</p>
+<p><img src="/2020/07/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-2020-07-08-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86frps/1.jpg" alt="流程1"></p>
+</li>
+<li><h4 id="nginx配置代理规则"><a href="#nginx配置代理规则" class="headerlink" title="nginx配置代理规则"></a>nginx配置代理规则</h4><p>nginx代理规则很简单，根据一级域名和二级域名的不同进行代理就好了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#二级域名配置 转发到本机frps</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen          80;</span><br><span class="line">    server_name     *.yourdomain.com;</span><br><span class="line">    location /&#123;</span><br><span class="line">            <span class="comment">#服务器的ip和端口   http://[ip]:[port]   vhost_http_port</span></span><br><span class="line">            proxy_pass http://127.0.0.1:81;</span><br><span class="line">            proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">            proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">            proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">            proxy_hide_header X-Powered-By;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#主域名配置</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  yourdomain.com;</span><br><span class="line">    <span class="comment">#配置hexo博客地址</span></span><br><span class="line">    location / &#123;</span><br><span class="line">         root   /home/git/projects/blog;</span><br><span class="line">         index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="frp配置"><a href="#frp配置" class="headerlink" title="frp配置"></a>frp配置</h4><p>frps.ini这里没有什么需要特别改动的，使用的方式还是通过二级域名管理客户端 <a href="%5Bhttps://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%5D(https://github.com/fatedier/frp/blob/master/README_zh.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D)">frp官方说明</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line">subdomain_host = yourdomain.com</span><br><span class="line"><span class="comment"># 注意启动端口与 nginx 代理二级域名后的端口一致</span></span><br><span class="line">vhost_http_port = 81</span><br><span class="line">vhost_https_port = 443</span><br></pre></td></tr></table></figure>
+<p>服务器配置到这里就ok了，接下来只要在<code>frpc</code>客户端对二级域名配置即可。通过test.yourdomain.com就可以访问内网的web服务，接口回调也很方便~</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
       </categories>
   </entry>
   <entry>
@@ -689,6 +782,81 @@
       </tags>
   </entry>
   <entry>
+    <title>谷歌云与树莓派内网穿透frp</title>
+    <url>/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/</url>
+    <content><![CDATA[<p>之前很无聊买了个树莓派，一直吃灰，然后刚好谷歌云免费一年使用，于是打算拿来做服务器，并且可以随时通过外网访问，这就要使用到内网穿透服务了，这里通过frp穿透进行代理。</p>
+<a id="more"></a>
+
+<h2 id="配置工具"><a href="#配置工具" class="headerlink" title="配置工具"></a>配置工具</h2><ol>
+<li>谷歌云服务器 <code>centos7</code></li>
+<li>树莓派<code>Debian</code></li>
+<li>连接工具<code>xshell</code></li>
+</ol>
+<h2 id="云服务器配置"><a href="#云服务器配置" class="headerlink" title="云服务器配置"></a>云服务器配置</h2><p>在一台刚创建的服务器上下载<code>frp</code>，使用<code>xshell</code>登录云服务器，在<a href="https://github.com/fatedier/frp/releases">github</a>中找到系统所对应版本, 这里使用 <code>frp_0.27.1_linux_amd64.tar.gz</code></p>
+<ol>
+<li><p>下载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.27.1&#x2F;frp_0.27.1_linux_amd64.tar.gz</span><br><span class="line">#提示 -bash: wget: command not found</span><br><span class="line">yum install wget -y</span><br></pre></td></tr></table></figure></li>
+<li><p>解压</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf frp_0.27.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>修改名称</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv frp_0.27.1_linux_amd64 frp</span><br></pre></td></tr></table></figure></li>
+<li><p>进入文件夹，删除不需要文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd frp</span><br><span class="line">rm -f frpc*</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>frps.ini</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim frps.ini</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 10001</span><br><span class="line">protocol = tcp</span><br><span class="line">token = 123</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line"><span class="comment">#subdomain_host = cksspk.xyz</span></span><br><span class="line"></span><br><span class="line">vhost_http_port = 81</span><br><span class="line">vhost_https_port = 445</span><br><span class="line"></span><br><span class="line">log_file = /opt/frp/frps/<span class="built_in">log</span>/frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 10002</span><br><span class="line">dashboard_user = c123456</span><br><span class="line">dashboard_pwd = c123456</span><br><span class="line"></span><br><span class="line">tcp_mux = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li><p>​    启动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;frps -c .&#x2F;frps.ini</span><br></pre></td></tr></table></figure></li>
+<li><p>启动成功，可登录服务器地址:<code>10002</code>，访问控制面板</p>
+<p>   <img src="/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/frps_dashboard.png" alt="frps_dashboard.png"></p>
+</li>
+</ol>
+<h2 id="树莓派配置"><a href="#树莓派配置" class="headerlink" title="树莓派配置"></a>树莓派配置</h2><p>由于树莓派是<code>arm架构</code>,(如何查看<code>linux</code>架构，可通过<code>uname -a</code>命令查看)，所以需要使用<code>frp_0.27.1_linux_arm64.tar.gz</code>版本</p>
+<ol>
+<li><p>下载(或者通过<code>ftp</code>工具传输)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.27.1&#x2F;frp_0.27.1_linux_arm.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>解压、修改名称、删除不需要文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf frp_0.27.1_linux_arm.tar.gz</span><br><span class="line">mv frp_0.27.1_linux_arm frp</span><br><span class="line">cd frp</span><br><span class="line">rm -f frps*</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>frpc.ini</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim frpc.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line"><span class="comment">#服务器地址</span></span><br><span class="line">server_addr = ********</span><br><span class="line">server_port = 10001</span><br><span class="line">token=a123</span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志记录路径</span></span><br><span class="line">log_file = ./frpc.log</span><br><span class="line"><span class="comment"># 日志记录级别(trace, debug, info, warn, error)</span></span><br><span class="line">log_level = info</span><br><span class="line"><span class="comment"># 日志记录滚动天数</span></span><br><span class="line">log_max_days = 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># frpc客户端管理界面</span></span><br><span class="line">admin_addr = 127.0.0.1</span><br><span class="line">admin_port = 7400</span><br><span class="line">admin_user = admin</span><br><span class="line">admin_passwd = passwd</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 22315</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#http或者https模式主要针对于虚拟主机，访问的取决于frps.ini文件中的vhost_http_port设置</span></span><br><span class="line">[web01]</span><br><span class="line"><span class="built_in">type</span> = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 80</span><br><span class="line"><span class="comment">#域名</span></span><br><span class="line">custom_domains = cksspk.com</span><br><span class="line">http_user = admin</span><br><span class="line">http_pwd = passwd</span><br></pre></td></tr></table></figure></li>
+<li><p>启动 34.94.17.49</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure></li>
+<li><p>验证</p>
+<p>可通过<code>xshell</code>新建会话，输入 <code>谷歌云IP</code>地址，加上 <code>frpc.ini</code>文件中 <code>remote_port = 22315</code>端口，连接即可</p>
+</li>
+</ol>
+<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><p>通过上面的方式启动会占用当前shell, 一般会通过使用<code>systemctl</code>来控制启动</p>
+<h3 id="谷歌云配置"><a href="#谷歌云配置" class="headerlink" title="谷歌云配置"></a>谷歌云配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;frps.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Server Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> -s QUIT <span class="variable">$MAINPID</span></span><br><span class="line"><span class="comment"># &quot;ExecStart=&quot;之后的路径要填写你的frps安装路径</span></span><br><span class="line">ExecStart=/opt/frp/frps -c /opt/frp/frps.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="树莓派配置-1"><a href="#树莓派配置-1" class="headerlink" title="树莓派配置"></a>树莓派配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /lib/systemd/system/frpc.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Client Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"><span class="comment"># &quot;ExecStart=&quot;之后的路径要填写你的frps安装路径</span></span><br><span class="line">ExecStart=/opt/frp/frpc -c /opt/frp/frpc.ini</span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> <span class="variable">$MAINPID</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<h3 id="systemctl相关命令"><a href="#systemctl相关命令" class="headerlink" title="systemctl相关命令"></a><code>systemctl</code>相关命令</h3><ol>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>查看状态</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>停止</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> frps.service</span><br></pre></td></tr></table></figure></li>
+<li><p>停止开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> frps.service</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>树莓派</tag>
+        <tag>云服务器</tag>
+        <tag>谷歌云</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谷歌云搭建</title>
     <url>/2019/11/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<p>谷歌云白嫖</p>
@@ -761,176 +929,55 @@
       </tags>
   </entry>
   <entry>
-    <title>谷歌云与树莓派内网穿透frp</title>
-    <url>/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/</url>
-    <content><![CDATA[<p>之前很无聊买了个树莓派，一直吃灰，然后刚好谷歌云免费一年使用，于是打算拿来做服务器，并且可以随时通过外网访问，这就要使用到内网穿透服务了，这里通过frp穿透进行代理。</p>
+    <title>NodeJs离线环境下安装配置</title>
+    <url>/2019/06/26/%E5%89%8D%E7%AB%AF-nodejs-outline/</url>
+    <content><![CDATA[<p>这段时间由于工作原因要使用到openlayers，然后去网上找资料，发现一个神奇的东西， <a href="https://www.gitbook.com/">gitbook</a>（有可能链接点不开，qiang你懂得）。<em>GitBook 是一个基于 Node.js 的命令行工具，可使用 Github/Git 和 Markdown 来制作精美的电子书，GitBook 并非关于 Git的教程   ————百度百科 。</em> 然后我就心痒痒，想在公司（内网）使用，于是开始了离线环境下搭建之旅。</p>
 <a id="more"></a>
 
-<h2 id="配置工具"><a href="#配置工具" class="headerlink" title="配置工具"></a>配置工具</h2><ol>
-<li>谷歌云服务器 <code>centos7</code></li>
-<li>树莓派<code>Debian</code></li>
-<li>连接工具<code>xshell</code></li>
+<h1 id="一、安装配置"><a href="#一、安装配置" class="headerlink" title="一、安装配置"></a>一、安装配置</h1><ol>
+<li><p>首先下载安装NodeJs <a href="https://nodejs.org/en/">官网</a>、<a href="https://pan.baidu.com/s/1XRyaezEQJ9DcYfmO2nLE7A">百度云【提取码：emrm】</a></p>
+</li>
+<li><p>配置模块全局安装路径，方便找到位置，而且模块文件非常之多，放在c盘肯定不好</p>
+<p>先查看路径</p>
+</li>
 </ol>
-<h2 id="云服务器配置"><a href="#云服务器配置" class="headerlink" title="云服务器配置"></a>云服务器配置</h2><p>在一台刚创建的服务器上下载<code>frp</code>，使用<code>xshell</code>登录云服务器，在<a href="https://github.com/fatedier/frp/releases">github</a>中找到系统所对应版本, 这里使用 <code>frp_0.27.1_linux_amd64.tar.gz</code></p>
-<ol>
-<li><p>下载</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.27.1&#x2F;frp_0.27.1_linux_amd64.tar.gz</span><br><span class="line">#提示 -bash: wget: command not found</span><br><span class="line">yum install wget -y</span><br></pre></td></tr></table></figure></li>
-<li><p>解压</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf frp_0.27.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></li>
-<li><p>修改名称</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv frp_0.27.1_linux_amd64 frp</span><br></pre></td></tr></table></figure></li>
-<li><p>进入文件夹，删除不需要文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd frp</span><br><span class="line">rm -f frpc*</span><br></pre></td></tr></table></figure></li>
-<li><p>配置<code>frps.ini</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim frps.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
+<p>设置全局模块路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set prefix&quot;D:\Program Files\nodejs\node_global&quot; </span><br></pre></td></tr></table></figure>
+<p> 设置缓存路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set cache&quot;D:\Program Files\nodejs\node_cache&quot;</span><br></pre></td></tr></table></figure>
 
+<p>设置完之后可以同通过命令查看，配置信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 10001</span><br><span class="line">protocol = tcp</span><br><span class="line">token = 123</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置路由，开启二级域名配置</span></span><br><span class="line"><span class="comment">#subdomain_host = cksspk.xyz</span></span><br><span class="line"></span><br><span class="line">vhost_http_port = 81</span><br><span class="line">vhost_https_port = 445</span><br><span class="line"></span><br><span class="line">log_file = /opt/frp/frps/<span class="built_in">log</span>/frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 10002</span><br><span class="line">dashboard_user = c123456</span><br><span class="line">dashboard_pwd = c123456</span><br><span class="line"></span><br><span class="line">tcp_mux = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li><p>​    启动</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;frps -c .&#x2F;frps.ini</span><br></pre></td></tr></table></figure></li>
-<li><p>启动成功，可登录服务器地址:<code>10002</code>，访问控制面板</p>
-<p>   <img src="/2019/11/09/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E8%B0%B7%E6%AD%8C%E4%BA%91%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/frps_dashboard.png" alt="frps_dashboard.png"></p>
-</li>
-</ol>
-<h2 id="树莓派配置"><a href="#树莓派配置" class="headerlink" title="树莓派配置"></a>树莓派配置</h2><p>由于树莓派是<code>arm架构</code>,(如何查看<code>linux</code>架构，可通过<code>uname -a</code>命令查看)，所以需要使用<code>frp_0.27.1_linux_arm64.tar.gz</code>版本</p>
-<ol>
-<li><p>下载(或者通过<code>ftp</code>工具传输)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.27.1&#x2F;frp_0.27.1_linux_arm.tar.gz</span><br></pre></td></tr></table></figure></li>
-<li><p>解压、修改名称、删除不需要文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf frp_0.27.1_linux_arm.tar.gz</span><br><span class="line">mv frp_0.27.1_linux_arm frp</span><br><span class="line">cd frp</span><br><span class="line">rm -f frps*</span><br></pre></td></tr></table></figure></li>
-<li><p>配置<code>frpc.ini</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim frpc.ini</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line"><span class="comment">#服务器地址</span></span><br><span class="line">server_addr = ********</span><br><span class="line">server_port = 10001</span><br><span class="line">token=a123</span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志记录路径</span></span><br><span class="line">log_file = ./frpc.log</span><br><span class="line"><span class="comment"># 日志记录级别(trace, debug, info, warn, error)</span></span><br><span class="line">log_level = info</span><br><span class="line"><span class="comment"># 日志记录滚动天数</span></span><br><span class="line">log_max_days = 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># frpc客户端管理界面</span></span><br><span class="line">admin_addr = 127.0.0.1</span><br><span class="line">admin_port = 7400</span><br><span class="line">admin_user = admin</span><br><span class="line">admin_passwd = passwd</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 22315</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#http或者https模式主要针对于虚拟主机，访问的取决于frps.ini文件中的vhost_http_port设置</span></span><br><span class="line">[web01]</span><br><span class="line"><span class="built_in">type</span> = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 80</span><br><span class="line"><span class="comment">#域名</span></span><br><span class="line">custom_domains = cksspk.com</span><br><span class="line">http_user = admin</span><br><span class="line">http_pwd = passwd</span><br></pre></td></tr></table></figure></li>
-<li><p>启动 34.94.17.49</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure></li>
-<li><p>验证</p>
-<p>可通过<code>xshell</code>新建会话，输入 <code>谷歌云IP</code>地址，加上 <code>frpc.ini</code>文件中 <code>remote_port = 22315</code>端口，连接即可</p>
-</li>
-</ol>
-<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><p>通过上面的方式启动会占用当前shell, 一般会通过使用<code>systemctl</code>来控制启动</p>
-<h3 id="谷歌云配置"><a href="#谷歌云配置" class="headerlink" title="谷歌云配置"></a>谷歌云配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;frps.service</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Server Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> -s QUIT <span class="variable">$MAINPID</span></span><br><span class="line"><span class="comment"># &quot;ExecStart=&quot;之后的路径要填写你的frps安装路径</span></span><br><span class="line">ExecStart=/opt/frp/frps -c /opt/frp/frps.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="树莓派配置-1"><a href="#树莓派配置-1" class="headerlink" title="树莓派配置"></a>树莓派配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /lib/systemd/system/frpc.service</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Client Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"><span class="comment"># &quot;ExecStart=&quot;之后的路径要填写你的frps安装路径</span></span><br><span class="line">ExecStart=/opt/frp/frpc -c /opt/frp/frpc.ini</span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> <span class="variable">$MAINPID</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<h3 id="systemctl相关命令"><a href="#systemctl相关命令" class="headerlink" title="systemctl相关命令"></a><code>systemctl</code>相关命令</h3><ol>
-<li><p>启动</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start frps.service</span><br></pre></td></tr></table></figure></li>
-<li><p>查看状态</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status frps.service</span><br></pre></td></tr></table></figure></li>
-<li><p>停止</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop frps.service</span><br></pre></td></tr></table></figure></li>
-<li><p>开机自启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> frps.service</span><br></pre></td></tr></table></figure></li>
-<li><p>停止开机自启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> frps.service</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>云服务器</tag>
-        <tag>谷歌云</tag>
-        <tag>树莓派</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>树莓派基本设置</title>
-    <url>/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<p>树莓派硬件为3b+，系统版本debian9.9</p>
-<a id="more"></a>
+<p>然后就可以愉快的通过命令下载模块，比如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
 
-<p>查看树莓派系统参数命令如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">getconf LONG_BIT        <span class="comment"># 查看系统位数</span></span><br><span class="line">uname -a            <span class="comment"># kernel 版本</span></span><br><span class="line">/opt/vc/bin/vcgencmd  version   <span class="comment"># firmware版本</span></span><br><span class="line">strings /boot/start.elf  |  grep VC_BUILD_ID    <span class="comment"># firmware版本</span></span><br><span class="line">cat /proc/version       <span class="comment"># kernel</span></span><br><span class="line">cat /etc/os-release     <span class="comment"># OS版本资讯</span></span><br><span class="line">cat /etc/issue          <span class="comment"># Linux distro 版本</span></span><br><span class="line">cat /etc/debian_version     <span class="comment"># Debian版本编号</span></span><br></pre></td></tr></table></figure>
-<h2 id="配置wifi连接"><a href="#配置wifi连接" class="headerlink" title="配置wifi连接"></a>配置wifi连接</h2><ol>
-<li><p>打开文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure></li>
-<li><p>增加配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">&quot;wifi名称&quot;</span></span><br><span class="line">    psk=<span class="string">&quot;wifi密码&quot;</span></span><br><span class="line">    priority=4 连接优先级，数字越大优先级越高（不可以是负数）</span><br><span class="line">    <span class="comment">#scan_ssid:连接隐藏WiFi时需要指定该值为1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>拔网线，重启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<h2 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h2></li>
-</ol>
-<p>路由器的WiFi一般为自动分配，如果经常开关机都要去路由器上查看IP地址，很麻烦，因此这种情况配置静态IP就很方便</p>
-<ol>
-<li><p>打开文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/dhcpcd.conf</span><br></pre></td></tr></table></figure></li>
-<li><p>增加配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 指定接口 eth0</span></span><br><span class="line">interface eth0</span><br><span class="line"><span class="comment"># 指定静态IP，/24表示子网掩码为 255.255.255.0</span></span><br><span class="line">static ip_address=192.168.1.20/24</span><br><span class="line"><span class="comment"># 路由器/网关IP地址</span></span><br><span class="line">static routers=192.168.1.1</span><br><span class="line"><span class="comment"># 手动自定义DNS服务器</span></span><br><span class="line">static domain_name_servers=114.114.114.114</span><br></pre></td></tr></table></figure></li>
-<li><p>重启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<h2 id="JAVA环境（jdk1-8）"><a href="#JAVA环境（jdk1-8）" class="headerlink" title="JAVA环境（jdk1.8）"></a>JAVA环境（jdk1.8）</h2></li>
-</ol>
-<h3 id="下载jdk"><a href="#下载jdk" class="headerlink" title="下载jdk"></a>下载jdk</h3><ol>
-<li>进入java<a href="https://www.oracle.com/java/technologies/javase-jdk8-downloads.html">官网</a></li>
-<li>选择 <code>Linux ARM 32 Hard Float ABI</code> 版本下载</li>
-<li>通过<code>xshell</code>软件上传至树莓派</li>
-</ol>
-<h3 id="解压配置环境"><a href="#解压配置环境" class="headerlink" title="解压配置环境"></a>解压配置环境</h3><ol>
-<li><p>在软件目录解压</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf jdk-8u241-linux-arm32-vfp-hflt.tar.gz</span><br></pre></td></tr></table></figure></li>
-<li><p>编辑配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></li>
-<li><p>在后面写入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;opt&#x2F;java&#x2F;jdk1.8.0_241</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre></td></tr></table></figure>
-<h3 id="保存验证"><a href="#保存验证" class="headerlink" title="保存验证"></a>保存验证</h3></li>
-<li><p>修改文件后立即生效</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></li>
-<li><p>验证，输入 <code>java -version</code>，查看打印输出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/yanzheng.jpg" alt="验证"></p>
-</li>
-</ol>
-<h2 id="安装SVN服务器"><a href="#安装SVN服务器" class="headerlink" title="安装SVN服务器"></a>安装SVN服务器</h2><h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><ol>
-<li><p>安装svn服务器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install subversion -y</span><br></pre></td></tr></table></figure></li>
-<li><p>创建仓库, 使用/home/pi/svn/svn_ckss作为仓库根路径</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">svnadmin create /home/pi/svn/svn_ckss</span><br></pre></td></tr></table></figure></li>
-<li><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/svnserve.conf </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_1.png" alt="验证"></p>
-<p>​    <strong>去掉注释，一定要删除空格！！！ 让配置顶格写！！！</strong></p>
-</li>
-<li><p>配置用户信息</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/passwd </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_2.jpg" alt="验证"></p>
-</li>
-<li><p>修改权限配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /home/pi/svn/svn_ckss/conf/authz </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_3.png" alt="验证"></p>
-</li>
-<li><p>启动服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">svnserve -d -r /home/pi/svn/svn_ckss</span><br></pre></td></tr></table></figure></li>
-<li><p>查看启动</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep svnserve</span><br></pre></td></tr></table></figure>
-<p>启动成功</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root     19497     1  0 12:54 ?        00:00:00 svnserve -d -r /home/pi/svn/svn_taoge/</span><br><span class="line">root     19530 19172  0 13:13 pts/0    00:00:00 grep svnserve</span><br></pre></td></tr></table></figure>
+<h2 id="问题一："><a href="#问题一：" class="headerlink" title="问题一："></a><strong>问题一：</strong></h2><p>下载完之后通过gitbook -V命令提示：</p>
+<p><strong>‘gitbook’不是内部或外部命令，也不是可运行的程序或批量文件</strong></p>
+<p>此时需要配置环境变量，将新的全局模块路径添加到环境变量！！在path中追加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">D:\Program Files\nodejs\node_global;</span><br></pre></td></tr></table></figure>
+<h2 id="问题二："><a href="#问题二：" class="headerlink" title="问题二："></a>问题二：</h2><p>在内网条件下安装nodeJs，并且将联网机中 node_global 及node_cache文件夹拷贝到开发机，通过上述命令设置好全局路径，通过gitbook -V命令显示 CLI version 2.3.2 ，然后卡住，报错，没有gitbook版本信息</p>
+<p>解决方法：手动拷贝将<strong>联网机c盘用户文件</strong>下的**.gitbook<strong>文件拷贝到</strong>开发机c盘用户目录**。</p>
+<h1 id="gitbook命令"><a href="#gitbook命令" class="headerlink" title="gitbook命令"></a>gitbook命令</h1><p>安装完后可通过命令初始化一本书</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure>
 
+<p>发布书籍</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<ol start="8">
-<li><p>停止服务</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">killall svnserve</span><br></pre></td></tr></table></figure>
-<p>如果使用防火墙需要将3690端口开放</p>
-</li>
-</ol>
-<h3 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h3><p>客户端通过**<em>tortoiseSVN**</em>进行连接，下载地址 <a href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a></p>
-<p>另外，中文语言包需要通版本保持一致</p>
-<p>输入SVN服务器地址 :svn://192.168.0.108进行检出</p>
-<p><img src="/2020/01/22/raspberryPi-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/svn_4.png" alt="验证"></p>
+<p> 具体还有很多有操作可以参考这<a href="http://gitbook.zhangjikai.com/#%E5%89%8D%E8%A8%80">这篇文章</a>，里面很多gitbook相关信息及资源</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>通过此次发现nodeJs还是挺有有意思的，有非常多的模块，比如快速发布本地服务的http-server模块。而且它的文件形式比较容易理解。最后，在复制 node_global 文件夹的时候，windows或提示文件夹名称过长，这个时候需要用解压缩软件对文件夹压缩操作。。。这也算一个有点了坑的地方！！！！！</p>
 ]]></content>
       <categories>
-        <category>raspberryPi</category>
+        <category>nodeJs</category>
       </categories>
       <tags>
-        <tag>树莓派</tag>
+        <tag>nodejs</tag>
       </tags>
   </entry>
   <entry>
     <title>Linux-manjaro双系统安装</title>
-    <url>/2021/05/10/linux-manjaro/</url>
+    <url>/2021/05/10/2021-05-linux-manjaro/</url>
     <content><![CDATA[<p>​    之前在虚拟机上装过 Manjar-xfce版本，感觉还不错。这次直接在笔记本上安装双系统，版本使用 <code>Manjaro-Kde</code></p>
 <a id="more"></a>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><ul>
@@ -945,7 +992,7 @@
 <li><p>打开 <code>Rufus</code>软件</p>
 </li>
 <li><p>点击 【选择】找到下载好的 ios</p>
-<p><img src="/2021/05/10/linux-manjaro/1.png"></p>
+<p><img src="/2021/05/10/2021-05-linux-manjaro/1.png"></p>
 </li>
 <li><p>点击【开始】</p>
 </li>
@@ -956,7 +1003,7 @@
 </li>
 <li><p>找一块比较大的磁盘，【右键】-【压缩卷】</p>
 <p>压缩完后不用格式化，由于我的笔记本上还装了一块固态，所有我压缩了两个分区出来(200G固态，300G机械)，后面系统手动分区使用。</p>
-<p><img src="/2021/05/10/linux-manjaro/2.png"></p>
+<p><img src="/2021/05/10/2021-05-linux-manjaro/2.png"></p>
 </li>
 </ol>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h4 id="设置从U盘启动"><a href="#设置从U盘启动" class="headerlink" title="设置从U盘启动"></a>设置从U盘启动</h4><p>各种品牌的笔记本启动方式可能不一样，我的是惠普光影精灵，开机后按【esc】键，然后【F9】进入启动方式。</p>
@@ -968,7 +1015,7 @@
 <li><p>回车键启动</p>
 </li>
 </ul>
-<img src="/2021/05/10/linux-manjaro/3.png" style="zoom:75%;">
+<img src="/2021/05/10/2021-05-linux-manjaro/3.png" style="zoom:75%;">
 
 
 
@@ -1035,55 +1082,82 @@
       </categories>
   </entry>
   <entry>
-    <title>NodeJs离线环境下安装配置</title>
-    <url>/2019/06/26/%E5%89%8D%E7%AB%AF-nodejs-outline/</url>
-    <content><![CDATA[<p>这段时间由于工作原因要使用到openlayers，然后去网上找资料，发现一个神奇的东西， <a href="https://www.gitbook.com/">gitbook</a>（有可能链接点不开，qiang你懂得）。<em>GitBook 是一个基于 Node.js 的命令行工具，可使用 Github/Git 和 Markdown 来制作精美的电子书，GitBook 并非关于 Git的教程   ————百度百科 。</em> 然后我就心痒痒，想在公司（内网）使用，于是开始了离线环境下搭建之旅。</p>
+    <title>acme.sh签发证书</title>
+    <url>/2021/07/14/2021-07-acme-sh%E7%AD%BE%E5%8F%91%E8%AF%81%E4%B9%A6/</url>
+    <content><![CDATA[<p>​        使用<code>acme.sh</code>申请数字证书，实现HTTPS。并到期自动续订。</p>
 <a id="more"></a>
 
-<h1 id="一、安装配置"><a href="#一、安装配置" class="headerlink" title="一、安装配置"></a>一、安装配置</h1><ol>
-<li><p>首先下载安装NodeJs <a href="https://nodejs.org/en/">官网</a>、<a href="https://pan.baidu.com/s/1XRyaezEQJ9DcYfmO2nLE7A">百度云【提取码：emrm】</a></p>
-</li>
-<li><p>配置模块全局安装路径，方便找到位置，而且模块文件非常之多，放在c盘肯定不好</p>
-<p>先查看路径</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
-<p>设置全局模块路径</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set prefix&quot;D:\Program Files\nodejs\node_global&quot; </span><br></pre></td></tr></table></figure>
-<p> 设置缓存路径</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set cache&quot;D:\Program Files\nodejs\node_cache&quot;</span><br></pre></td></tr></table></figure>
-
-<p>设置完之后可以同通过命令查看，配置信息</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以愉快的通过命令下载模块，比如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题一："><a href="#问题一：" class="headerlink" title="问题一："></a><strong>问题一：</strong></h2><p>下载完之后通过gitbook -V命令提示：</p>
-<p><strong>‘gitbook’不是内部或外部命令，也不是可运行的程序或批量文件</strong></p>
-<p>此时需要配置环境变量，将新的全局模块路径添加到环境变量！！在path中追加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">D:\Program Files\nodejs\node_global;</span><br></pre></td></tr></table></figure>
-<h2 id="问题二："><a href="#问题二：" class="headerlink" title="问题二："></a>问题二：</h2><p>在内网条件下安装nodeJs，并且将联网机中 node_global 及node_cache文件夹拷贝到开发机，通过上述命令设置好全局路径，通过gitbook -V命令显示 CLI version 2.3.2 ，然后卡住，报错，没有gitbook版本信息</p>
-<p>解决方法：手动拷贝将<strong>联网机c盘用户文件</strong>下的**.gitbook<strong>文件拷贝到</strong>开发机c盘用户目录**。</p>
-<h1 id="gitbook命令"><a href="#gitbook命令" class="headerlink" title="gitbook命令"></a>gitbook命令</h1><p>安装完后可通过命令初始化一本书</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure>
-
-<p>发布书籍</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
-
-<p> 具体还有很多有操作可以参考这<a href="http://gitbook.zhangjikai.com/#%E5%89%8D%E8%A8%80">这篇文章</a>，里面很多gitbook相关信息及资源</p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>通过此次发现nodeJs还是挺有有意思的，有非常多的模块，比如快速发布本地服务的http-server模块。而且它的文件形式比较容易理解。最后，在复制 node_global 文件夹的时候，windows或提示文件夹名称过长，这个时候需要用解压缩软件对文件夹压缩操作。。。这也算一个有点了坑的地方！！！！！</p>
+<p> 安装acme.sh</p>
+<p>在服务器上操作</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<p>遇到无法下载问题，可通过其他方式下载传到服务器</p>
+<p>仓库地址: <a href="https://github.com/acmesh-official/acme.sh">https://github.com/acmesh-official/acme.sh</a></p>
+<h2 id="准备DNS环境"><a href="#准备DNS环境" class="headerlink" title="准备DNS环境"></a>准备DNS环境</h2><p>默认使用阿里云 地址：<a href="https://ak-console.aliyun.com/#/accesskey">https://ak-console.aliyun.com/#/accesskey</a></p>
+<p>获取阿里云控制台获取的<code>Ali_Key</code>，<code>Ali_Secret</code>，在服务器中执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">&quot;xxxxxxxx&quot;</span> </span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">&quot;xxxxxxxx&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果是新用户，要给用户赋予DNS操作权限</p>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --issue -d <span class="string">&quot;*.cksspk.top&quot;</span> --dns dns_ali</span><br></pre></td></tr></table></figure>
+<p>新版本CA证书，需要申请新账号</p>
+<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --install-cert -d *.cksspk.top \</span><br><span class="line">--key-file       /path/to/keyfile/<span class="keyword">in</span>/nginx/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/nginx/cert.pem \</span><br><span class="line">--reloadcmd     <span class="string">&quot;service nginx force-reload&quot;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
-      <categories>
-        <category>nodeJs</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
-      </tags>
+  </entry>
+  <entry>
+    <title>Jenkins</title>
+    <url>/2021/07/21/2021-07-jenkins/</url>
+    <content><![CDATA[<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>​    在centos7服务器安装Jenkins及基础配置</p>
+<a id="more"></a>
+
+<h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>服务器：centos7</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>在镜像网站下载rpm文件 地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat/">https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat/</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -c https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat-stable/jenkins-2.289.2-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -ivh jenkins-2.302-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>Java环境</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/init.d/jenkins</span><br></pre></td></tr></table></figure>
+<p>添加Java路径。注意：是安装目录的/bin下。如    </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_211&#x2F;bin&#x2F;java</span><br></pre></td></tr></table></figure>
+<p>启动</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start jenkins</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>查看密码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /var/lib/jenkins/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure></li>
+<li><p>默认端口修改</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/sysconfig/jenkins</span><br></pre></td></tr></table></figure></li>
+<li><p>插件配置替换为清华源地址</p>
+<p>地址</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</span></span><br></pre></td></tr></table></figure></li>
+<li><p>插件无法安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /var/lib/jenkins/updates</span><br></pre></td></tr></table></figure>
+<p>使用sed命令修改default.json文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s#https://updates.jenkins.io/download#https://mirrors.tuna.tsinghua.edu.cn/jenkins#g&#x27; default.json &amp;&amp; sed -i &#x27;s#http://www.google.com#https://www.baidu.com#g&#x27; default.json</span><br></pre></td></tr></table></figure>
+<p>修改后重启Jenkins</p>
+</li>
+</ul>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>停止运行</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl stop jenkins</span><br></pre></td></tr></table></figure>
+<p>卸载</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">rpm -e jenkins</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">rm -rf /etc/sysconfig/jenkins.rpmsave</span><br><span class="line">rm -rf /var/cache/jenkins/</span><br><span class="line">rm -rf /var/lib/jenkins/</span><br><span class="line">rm -rf /var/<span class="built_in">log</span>/jenkins</span><br><span class="line">rm -rf /usr/lib/jenkins</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="解决-jenkins汉化后部分中文"><a href="#解决-jenkins汉化后部分中文" class="headerlink" title="解决 jenkins汉化后部分中文"></a>解决 jenkins汉化后部分中文</h2><p>安装好插件“Locale plugin”和“Localization: Chinese (Simplified)后，先设置为zh_US重新启动，再设置回来</p>
+<p>其他插件重启Jenkins后，又出现了部分中文简体不翻译的情况。</p>
+<p>方法如下，可以完美修复。</p>
+<ul>
+<li><p> 将语言设定为zh_US，Jenkins切换为英文。</p>
+</li>
+<li><p>调用restart重启Jenkins：http://域名/restart。</p>
+</li>
+<li><p>再次语言设定为zh_CN，刷新即可。</p>
+</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>t1</title>
-    <url>/2021/07/14/t1/</url>
+    <url>/2021/07/14/2021-07-t1/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
   <script id="hbeData" type="hbeData" data-hmacdigest="c5b98f699b8cf1d182d37d999402c4173783c8bae609f8d33b3abe975a79fb8c">10d79030e8222445804370796b90fca1af3488aaccb319d5e208d2c4734b307cf152d06795f7c3f16ed95ecfcafb3c27</script>
   <div class="hbe hbe-content">
@@ -1099,7 +1173,7 @@
   </entry>
   <entry>
     <title>t2</title>
-    <url>/2021/07/14/t2/</url>
+    <url>/2021/07/14/2021-07-t2/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
   <script id="hbeData" type="hbeData" data-hmacdigest="9e2ad2f141dc3eac153ff593b8271a98fef76abc1e2e9a9ea5ca919d6147ff4b">165d50f05814027fb7fe5e4ae8a088d8c68cde6be4647fbe6c3b52fcec7e4f234098a8b43512bba24b66c0eb6a3a9c22</script>
   <div class="hbe hbe-content">
@@ -1112,6 +1186,120 @@
   </div>
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
+    <title>阻塞队列</title>
+    <url>/2021/07/15/2021-07-%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<h1 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h1><a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cks.queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.ObjectUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Condition;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 阻塞队列 Demo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> cks</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoBlockingQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//队列容器</span></span><br><span class="line">    <span class="keyword">private</span> Object items[];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//容量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//入队下标</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> putIndex;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//出队下标</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> takeIndex;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//锁</span></span><br><span class="line">    <span class="keyword">private</span> ReentrantLock reentrantLock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读条件</span></span><br><span class="line">    <span class="keyword">private</span> Condition notEmpty;</span><br><span class="line">    <span class="comment">//写条件</span></span><br><span class="line">    <span class="keyword">private</span> Condition notFull;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DemoBlockingQueue</span><span class="params">(<span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (size &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        items = <span class="keyword">new</span> Object[size];</span><br><span class="line"></span><br><span class="line">        notEmpty = reentrantLock.newCondition();</span><br><span class="line">        notFull = reentrantLock.newCondition();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Object item)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ObjectUtils.isEmpty(item))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取锁</span></span><br><span class="line">            reentrantLock.lock();</span><br><span class="line">            <span class="comment">//队列已满</span></span><br><span class="line">            <span class="keyword">while</span> (size == items.length)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot; 队列已满 &quot;</span> + size);</span><br><span class="line">                <span class="comment">//堵塞</span></span><br><span class="line">                notFull.await();</span><br><span class="line">            &#125;</span><br><span class="line">            items[putIndex] = item;</span><br><span class="line">            <span class="comment">//入队下标移动，同时判断队列是否满了</span></span><br><span class="line">            <span class="keyword">if</span> (++putIndex == items.length)&#123;</span><br><span class="line">                putIndex = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            size++;</span><br><span class="line">            <span class="comment">//唤醒线程</span></span><br><span class="line">            notEmpty.signal();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            notEmpty.signal();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//释放lock</span></span><br><span class="line">            reentrantLock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">take</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            reentrantLock.lock();</span><br><span class="line">            <span class="keyword">while</span> (size == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot; 队列为空 &quot;</span>);</span><br><span class="line">                notEmpty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            Object item = items[takeIndex];</span><br><span class="line">            <span class="comment">//如果到了最后一个元素， 则从头开始</span></span><br><span class="line">            <span class="keyword">if</span> (++takeIndex == items.length)&#123;</span><br><span class="line">                takeIndex = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            size--;</span><br><span class="line">            notFull.signal();</span><br><span class="line">            <span class="keyword">return</span> item;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            notFull.signal();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            reentrantLock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        DemoBlockingQueue demoBlockingQueue = <span class="keyword">new</span> DemoBlockingQueue(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">300</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                demoBlockingQueue.offer(i);</span><br><span class="line">                System.out.println(<span class="string">&quot;线程名&quot;</span> + Thread.currentThread().getName()+<span class="string">&quot;  生产者生产了：&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                Object take = demoBlockingQueue.take();</span><br><span class="line">                System.out.println(<span class="string">&quot;线程名&quot;</span> + Thread.currentThread().getName()+<span class="string">&quot;  ======消费者消费了：&quot;</span>+take);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>Docker搭建本地私服</title>
+    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/</url>
+    <content><![CDATA[<p>​    <em>自己制作的镜像一般会上传到本地私服，首先得搭建一个docker私有仓库服务，docker的私服搭建也是非常简单</em></p>
+<a id="more"></a>
+
+<h1 id="一、搭建私服"><a href="#一、搭建私服" class="headerlink" title="一、搭建私服"></a>一、搭建私服</h1><ol>
+<li><h4 id="拉取私有仓库镜像"><a href="#拉取私有仓库镜像" class="headerlink" title="拉取私有仓库镜像"></a>拉取私有仓库镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="启动-registry仓库容器"><a href="#启动-registry仓库容器" class="headerlink" title="启动 registry仓库容器"></a>启动 <code>registry</code>仓库容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --restart&#x3D;always --privileged&#x3D;true \</span><br><span class="line">-p 5000:5000 \</span><br><span class="line">-v &#x2F;usr&#x2F;local&#x2F;docker&#x2F;data&#x2F;registry:&#x2F;var&#x2F;lib&#x2F;registry \</span><br><span class="line">--name registry registry:latest</span><br></pre></td></tr></table></figure>
+<p>参数说明，启动参数有一定顺序，可能会因为顺序不同而启动失败</p>
+<blockquote>
+<p>–restart=always 此模式容器会跟 docker daemon会随着docker服务的重启而自动恢复<br>-v /usr/local/docker/data/registry 把本地磁盘挂载到容器磁盘/var/lib/registry（默认情况下仓库存放镜像于容器内的/var/lib/registry目录下，宿主机目录需要提前创建）<br>–name registry定义容器名<br>-p 5000:5000 端口映射，本地端口5000映射到容器端口5000<br>–-privileged=true ：配置了-v /opt/data/registry:/var/lib/registry ，如果没有关闭安全模块selinux，容器将没有权限访问本地目录，设置此参数可以给容器加特权。如果没有关闭selinux以及没有加上此参数，上传传镜像时可能会报权限错误(OSError: [Errno 13] Permission denied: ‘/var/lib/registry/repositories/library’)或者（Received unexpected HTTP status: 500 Internal Server Error）错误</p>
+</blockquote>
+</li>
+<li><h4 id="启动成功后通过docker-ps查看"><a href="#启动成功后通过docker-ps查看" class="headerlink" title="启动成功后通过docker ps查看"></a>启动成功后通过<code>docker ps</code>查看</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_1.png" alt="验证"></p>
+</li>
+<li><h4 id="测试镜像仓库中所有的镜像"><a href="#测试镜像仓库中所有的镜像" class="headerlink" title="测试镜像仓库中所有的镜像"></a>测试镜像仓库中所有的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:5000/v2/_catalog</span><br><span class="line">&#123;<span class="string">&quot;repositories&quot;</span>:[]&#125;</span><br></pre></td></tr></table></figure>
+<p> 现在是空的，因为才刚运行，里面没有任何镜像内容。 </p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>启动docker容器时报错</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables failed: iptables --<span class="built_in">wait</span> -t nat -A DOCKER -p tcp -d 0/0 --dport 5000 -j DNAT --to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain/target/match by that name. (<span class="built_in">exit</span> status 1)</span><br></pre></td></tr></table></figure>
+<p>解决方案：<strong>重启docker</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h1 id="二、上传镜像至私服"><a href="#二、上传镜像至私服" class="headerlink" title="二、上传镜像至私服"></a>二、上传镜像至私服</h1></li>
+<li><h4 id="首先添加可信任仓库"><a href="#首先添加可信任仓库" class="headerlink" title="首先添加可信任仓库"></a>首先添加可信任仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑文件</span><br><span class="line">vim &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line"># 添加仓库配置 192.168.125.121:5000为宿主机地址加私服启动端口</span><br><span class="line">&quot;insecure-registries&quot;:[&quot;192.168.125.121:5000&quot;]</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry.png" alt="验证"></p>
+</li>
+<li><h4 id="更新配置"><a href="#更新配置" class="headerlink" title="更新配置"></a>更新配置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="重新启动docker"><a href="#重新启动docker" class="headerlink" title="重新启动docker"></a>重新启动<code>docker</code></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="给原有镜像打标签"><a href="#给原有镜像打标签" class="headerlink" title="给原有镜像打标签"></a>给原有镜像打标签</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker tag jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="上传到私有仓库"><a href="#上传到私有仓库" class="headerlink" title="上传到私有仓库"></a>上传到私有仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker push jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="可以通过浏览器访问查看仓库"><a href="#可以通过浏览器访问查看仓库" class="headerlink" title="可以通过浏览器访问查看仓库"></a>可以通过浏览器访问查看仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.125.121:5000&#x2F;v2&#x2F;_catalog</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_3.png" alt="验证"></p>
+<p>其中仓库中出现 jdk1.8这个镜像。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String类及intern方法</title>
+    <url>/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型<code>String</code>。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。</p>
+<a id="more"></a>
+
+<h3 id="String类型使用（jdk1-8）"><a href="#String类型使用（jdk1-8）" class="headerlink" title="String类型使用（jdk1.8）"></a>String类型使用（jdk1.8）</h3><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 &quot;&quot; 创建  会直接存储在 常量池中</span></span><br><span class="line">        String a = <span class="string">&quot;a1&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 创建， 会将zahngsan存储到常量池中，然后在Heap中创建对象指向b</span></span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用 字符串连接符拼接 ，会直接存储 &#x27;wangwuzhaoliu&#x27; 字符串在常量池中</span></span><br><span class="line">        String c = <span class="string">&quot;wangwu&quot;</span> + <span class="string">&quot;zhaoliu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用字符串 &quot;引用&quot; 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将 --- 存入到常量池中</span></span><br><span class="line">        String d = a + <span class="string">&quot;---&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将wang 和 jiu 两个字符串存到常量池中</span></span><br><span class="line">        String f = <span class="keyword">new</span> String(<span class="string">&quot;wang&quot;</span>) + <span class="string">&quot;jiu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中， 但是会将 zhao 和 ba 两个字符串存入到常量池中</span></span><br><span class="line">        String g = <span class="keyword">new</span> String(<span class="string">&quot;zhao&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;ba&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>变量a：</strong> “a1” 是<strong>字符串常量</strong>，在<strong>编译期就被确定</strong>了，先检查<strong>字符串常量池中是否含有”a1”字符串</strong>,若没有则<strong>添加</strong>“a1”到字符串常量池中，并且直接指向它。所以a直接指向<strong>字符串常量池</strong>的”a1”,也就是变量a指向的地址是<strong>常量池中的 a1</strong>。</li>
+<li><strong>变量b：\</strong>用new String() 创建的字符串不是常量，**不能在编译期就确定**，所以new String() 创建的字符串不放入常量池中，它们有自己的地址空间**(Java Heap 中)<strong>，</strong>变量b的引用的地址在Java Heap中**。 但是”zhangsan”字符串常量在编译期也会被加入到字符串常量池（如果常量池不存在的话）。</li>
+<li><strong>变量c：</strong>“wangwu”和”zhaoliu”也都是<strong>字符串常量</strong>，当<strong>一个字符串</strong>由<strong>多个字符串常量</strong>连接而成时，它自己<strong>肯定也是字符串常量</strong>，在编译器会被编译器优化成”wangwuzhaoliu”，所以c也同样在编译期就被解析为一个字符串常量，并且c是常量池中”wangwuzhaoliu”的一个引用，<strong>所以变量c的引用地址在常量池中</strong>。</li>
+<li><strong>变量d：</strong> JVM对于字符串引用，由于在字符串的”+”连接中，有字符串引用存在，而引用的值在程序编译期是无法确定的，即`(a+”—“)</li>
+<li><strong>变量f：</strong> 变量f同样不能在编译期确定，<strong>但是”wang”和”jiu”这两个字符串常量会添加到字符串常量池中</strong>，并且在堆中创建String对象。（字符串常量池并不会存放”wangjiu”这个字符串,除非执行f.intern()方法）</li>
+<li><strong>变量g：</strong> 同理变量f。</li>
+</ul>
+<h4 id="Sring拼接"><a href="#Sring拼接" class="headerlink" title="Sring拼接"></a>Sring拼接</h4><ul>
+<li><p><strong>字符串拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span> + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>zhang和 san都是<strong>字符串</strong>，都是在编译器<strong>可知的</strong>，编译器会将这行代码优化，<strong>当一个字符串是由多个可知的字符串(非引用字符串)连接组成</strong>，将会优化为如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      String a = <span class="string">&quot;zhangsan&quot;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>引用拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">      	String b = a + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 上下含义相同</span></span><br><span class="line">      	String c = <span class="string">&quot;li&quot;</span>;</span><br><span class="line">      	String d = <span class="string">&quot;si&quot;</span>;</span><br><span class="line">      	String f = c + d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当Java编译器遇到<strong>字符串引用</strong> 或 <strong>字符串引用和可知字符串</strong>拼接的时候，会创建一个<code>StringBuilder</code>对象，后面的append()。</p>
+<p>因为有字符串引用存在，而引用的值在程序编译期是无法确定的。<strong>另外 “zhang”、”san” 都会编译器添加到字符串常量池中（如果没有的话）</strong>，因为它们都是编译期确定的字符串常量，<strong>但是最后的”lantao”并不会添加到字符串常量池, 除非执行b.intern() 方法</strong></p>
+</li>
+<li><p><strong>final拼接</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">     		<span class="keyword">final</span> String b = <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	String c = a + b + <span class="string">&quot;1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>final拼接和以上两者的区别就是在前边增加了final修饰，<strong>用final修饰的字符串就是在编译期可知的</strong>，编译期就会将以上代码优化为</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">				String str = <span class="string">&quot;zhangsan1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这里 final 拼接的效果是和字符串拼接是一致的。</strong></p>
+</li>
+</ul>
+<h3 id="String-intern方法"><a href="#String-intern方法" class="headerlink" title="String#intern方法"></a>String#intern方法</h3><h4 id="intern方法详解"><a href="#intern方法详解" class="headerlink" title="intern方法详解"></a>intern方法详解</h4><p>String.intern()是一个Native(本地)方法，它的作用是如果<strong>字符串常量池已经包含一个等于此String对象的字符串，则返回字符串常量池中这个字符串的引用</strong>, <strong>否则将当前String对象的引用地址（堆中）添加到字符串常量池中并返回</strong>。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><strong>注意：基本数据类型之间的 == 是比较值，引用数据类型 == 比较的是地址值</strong></p>
+<ul>
+<li><h5 id="常量池中存在字符串"><a href="#常量池中存在字符串" class="headerlink" title="常量池中存在字符串"></a><strong>常量池中存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 基本数据类型之间的 ==  是比较值，引用数据类型 == 比较的是地址值</span></span><br><span class="line">      	<span class="comment">// 1：在Java Heap中创建对象 2：在字符串常量池中添加 zhangsan</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      	<span class="comment">// 调用 intern 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// a 的地址在Java Heap中 ， b的地址在 常量池中 ，所以结果是flase</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      	<span class="comment">// 因为常量池中已经包含zhangsan，所以直接返回</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">        <span class="comment">// b c 的地址一致，所以是true</span></span><br><span class="line">        System.out.println(b == c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：在<strong>Java Heap</strong>中<strong>创建对象</strong>然后在<strong>字符串常量</strong>池中<strong>添加</strong> zhangsan。</p>
+<p>2：调用 <strong>intern</strong> 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址。</p>
+<p>3：因 a 的地址在Heap中，b的地址在字符串常量池中。</p>
+<p>4：因为常量池中已经包含zhangsan，所以直接返回</p>
+<p>5： b c 的地址一致，所以是true</p>
+<p>地址可以使用System.identityHashCode(a)方法获取</p>
+</li>
+<li><h5 id="常量池中不存在字符串"><a href="#常量池中不存在字符串" class="headerlink" title="常量池中不存在字符串"></a><strong>常量池中不存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//1： 首先会在Heap中创建对象，然后在常量池中放入zhagnsan 和 wangwu ，但是并不会放入zhagnsanwangwu</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>) + <span class="string">&quot;wangwu&quot;</span>;</span><br><span class="line">      	<span class="comment">// 2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中String对象的引用地址添加到字符串常量池中。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// 3：因为 a 的地址和 b的地址一致，锁以是true</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//4：因常量池中已经存在 zhangsanwangwu 了，所以直接返回引用就是 a 类型 a ==b 锁 a==b==c</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsanwangwu&quot;</span>;</span><br><span class="line">        System.out.println(a == c); <span class="comment">// true</span></span><br><span class="line">      	System.out.println(b == c); <span class="comment">// true</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 5：首先会在Heap中创建对象，然后会在常量池中存储 zhang 和 san</span></span><br><span class="line">      	String d = <span class="keyword">new</span> String(<span class="string">&quot;zhang&quot;</span>) + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 6： 返回的是 常量池中的 地址，因在a变量时已经将 zhangsan 放入到了常量池中</span></span><br><span class="line">      	String f = d.intern();</span><br><span class="line">      	System.out.println(d = f); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>1：首先会在<strong>Heap中创建对象a，然后在</strong>常量池中放入zhagnsan 和 wangwu** ，但是<strong>并不会放入</strong>zhagnsanwangwu。</p>
+<p>2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中<strong>String对象的引用地址添加到字符串常量池中</strong>。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用。</p>
+<p>3：因为 a 的地址和 b的地址一致，所以是true。</p>
+<p>4：因常量池中<strong>已经存在 zhangsanwangwu</strong> 了，所以<strong>直接返回引用就是 a 类型</strong>， a ==b 所以 a==b==c。</p>
+<p>5：首先会在<strong>Heap中创建对象d</strong>，然后会在<strong>常量池中存储 zhang 和 san</strong>。</p>
+<p>6：因在创建对象a时，已经将 “zhangsan”放入到了常量池，所以<strong>返回的是常量池中的zhangsan地址</strong>，对象d的地址在Heap中，f的地址在常量池中，并不是一个，所以false；</p>
+</li>
+</ul>
+<h4 id="参考：-https-blog-csdn-net-qian520ao-article-details-78966179"><a href="#参考：-https-blog-csdn-net-qian520ao-article-details-78966179" class="headerlink" title="参考：     https://blog.csdn.net/qian520ao/article/details/78966179"></a>参考：     <a href="https://blog.csdn.net/qian520ao/article/details/78966179#%E5%B7%B2%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%8Dintern">https://blog.csdn.net/qian520ao/article/details/78966179</a></h4>]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
   </entry>
   <entry>
     <title>Docker与Maven插件</title>
@@ -1191,50 +1379,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker搭建本地私服</title>
-    <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/</url>
-    <content><![CDATA[<p>​    <em>自己制作的镜像一般会上传到本地私服，首先得搭建一个docker私有仓库服务，docker的私服搭建也是非常简单</em></p>
-<a id="more"></a>
-
-<h1 id="一、搭建私服"><a href="#一、搭建私服" class="headerlink" title="一、搭建私服"></a>一、搭建私服</h1><ol>
-<li><h4 id="拉取私有仓库镜像"><a href="#拉取私有仓库镜像" class="headerlink" title="拉取私有仓库镜像"></a>拉取私有仓库镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="启动-registry仓库容器"><a href="#启动-registry仓库容器" class="headerlink" title="启动 registry仓库容器"></a>启动 <code>registry</code>仓库容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --restart&#x3D;always --privileged&#x3D;true \</span><br><span class="line">-p 5000:5000 \</span><br><span class="line">-v &#x2F;usr&#x2F;local&#x2F;docker&#x2F;data&#x2F;registry:&#x2F;var&#x2F;lib&#x2F;registry \</span><br><span class="line">--name registry registry:latest</span><br></pre></td></tr></table></figure>
-<p>参数说明，启动参数有一定顺序，可能会因为顺序不同而启动失败</p>
-<blockquote>
-<p>–restart=always 此模式容器会跟 docker daemon会随着docker服务的重启而自动恢复<br>-v /usr/local/docker/data/registry 把本地磁盘挂载到容器磁盘/var/lib/registry（默认情况下仓库存放镜像于容器内的/var/lib/registry目录下，宿主机目录需要提前创建）<br>–name registry定义容器名<br>-p 5000:5000 端口映射，本地端口5000映射到容器端口5000<br>–-privileged=true ：配置了-v /opt/data/registry:/var/lib/registry ，如果没有关闭安全模块selinux，容器将没有权限访问本地目录，设置此参数可以给容器加特权。如果没有关闭selinux以及没有加上此参数，上传传镜像时可能会报权限错误(OSError: [Errno 13] Permission denied: ‘/var/lib/registry/repositories/library’)或者（Received unexpected HTTP status: 500 Internal Server Error）错误</p>
-</blockquote>
-</li>
-<li><h4 id="启动成功后通过docker-ps查看"><a href="#启动成功后通过docker-ps查看" class="headerlink" title="启动成功后通过docker ps查看"></a>启动成功后通过<code>docker ps</code>查看</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_1.png" alt="验证"></p>
-</li>
-<li><h4 id="测试镜像仓库中所有的镜像"><a href="#测试镜像仓库中所有的镜像" class="headerlink" title="测试镜像仓库中所有的镜像"></a>测试镜像仓库中所有的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:5000/v2/_catalog</span><br><span class="line">&#123;<span class="string">&quot;repositories&quot;</span>:[]&#125;</span><br></pre></td></tr></table></figure>
-<p> 现在是空的，因为才刚运行，里面没有任何镜像内容。 </p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>启动docker容器时报错</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables failed: iptables --<span class="built_in">wait</span> -t nat -A DOCKER -p tcp -d 0/0 --dport 5000 -j DNAT --to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain/target/match by that name. (<span class="built_in">exit</span> status 1)</span><br></pre></td></tr></table></figure>
-<p>解决方案：<strong>重启docker</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
-<h1 id="二、上传镜像至私服"><a href="#二、上传镜像至私服" class="headerlink" title="二、上传镜像至私服"></a>二、上传镜像至私服</h1></li>
-<li><h4 id="首先添加可信任仓库"><a href="#首先添加可信任仓库" class="headerlink" title="首先添加可信任仓库"></a>首先添加可信任仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑文件</span><br><span class="line">vim &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line"># 添加仓库配置 192.168.125.121:5000为宿主机地址加私服启动端口</span><br><span class="line">&quot;insecure-registries&quot;:[&quot;192.168.125.121:5000&quot;]</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry.png" alt="验证"></p>
-</li>
-<li><h4 id="更新配置"><a href="#更新配置" class="headerlink" title="更新配置"></a>更新配置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="重新启动docker"><a href="#重新启动docker" class="headerlink" title="重新启动docker"></a>重新启动<code>docker</code></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="给原有镜像打标签"><a href="#给原有镜像打标签" class="headerlink" title="给原有镜像打标签"></a>给原有镜像打标签</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker tag jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="上传到私有仓库"><a href="#上传到私有仓库" class="headerlink" title="上传到私有仓库"></a>上传到私有仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker push jdk1.8 192.168.125.121:5000&#x2F;jdk1.8</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="可以通过浏览器访问查看仓库"><a href="#可以通过浏览器访问查看仓库" class="headerlink" title="可以通过浏览器访问查看仓库"></a>可以通过浏览器访问查看仓库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.125.121:5000&#x2F;v2&#x2F;_catalog</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-2%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D/base_registry_3.png" alt="验证"></p>
-<p>其中仓库中出现 jdk1.8这个镜像。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>持续集成</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jenkins安装</title>
     <url>/2020/03/20/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-4-Jenkins%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<p><em>Jenkin安装启动方式有很多种，比如下载<code>war</code>包后放在<code>tomcat</code>中启动、使用<code>rpm</code>安装、或者使用<code>Docker</code>安装，这里先使用Docker进行安装。</em></p>
@@ -1275,6 +1419,52 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Springboot+Jenkins+Docker自动部署</title>
+    <url>/2021/07/25/Jenkins%E4%B8%8EDocker/</url>
+    <content><![CDATA[<p>使用Jenkins快速打包Springboot项目，制作Docker镜像，并且推送到阿里云镜像仓库。    </p>
+<a id="more"></a>
+
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>Jenkins</li>
+<li>Docker</li>
+<li>Maven</li>
+<li>Gitee/GitLab</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>创建一个简单的Springboot项目，并上传到Git远程仓库。地址：<a href="https://gitee.com/cksspk/jenkins-t1.git">https://gitee.com/cksspk/jenkins-t1.git</a></p>
+<img src="/2021/07/25/Jenkins%E4%B8%8EDocker/1.png" alt="基础图片" style="zoom:75%;">
+
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>pom中主要配置</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--镜像仓库配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docker.repository</span>&gt;</span>registry.cn-hangzhou.aliyuncs.com<span class="tag">&lt;/<span class="name">docker.repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docker.registry.name</span>&gt;</span>cksspk<span class="tag">&lt;/<span class="name">docker.registry.name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;project.artifactId&#125;-$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--docker镜像相关的配置信息--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--镜像名--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">imageName</span>&gt;</span></span><br><span class="line">                        $&#123;docker.repository&#125;/$&#123;docker.registry.name&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--Dockerfile文件所在目录--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dockerDirectory</span>&gt;</span></span><br><span class="line">                        $&#123;project.basedir&#125;</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">dockerDirectory</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--构建镜像的配置信息--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">include</span>&gt;</span></span><br><span class="line">                                $&#123;project.artifactId&#125;-$&#123;project.version&#125;.jar</span><br><span class="line">                            <span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--Dcoker服务器所在地址，配置文件开启0.0.0.0:2375通信--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.1.114:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--推送阿里云--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">serverId</span>&gt;</span>docker-aliyun<span class="tag">&lt;/<span class="name">serverId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">registryUrl</span>&gt;</span>$&#123;docker.repository&#125;<span class="tag">&lt;/<span class="name">registryUrl</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">pushImage</span>&gt;</span>true<span class="tag">&lt;/<span class="name">pushImage</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><p>docker镜像制作好后自动推送到阿里云镜像仓库，需要在maven中添加配置。</p>
+<p>修改settings.conf文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--maven的pom中可以根据这个id找到这个server节点的配置--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>docker-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--这里是在阿里云注册的账号--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">username</span>&gt;</span>cksspk<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--这里是在阿里云注册的密码--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">password</span>&gt;</span>*****<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--这是在阿里云注册时填写的邮箱--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">email</span>&gt;</span>****@163.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><ol>
+<li><p>在Jenkins控制面板中【新建任务】，选择【构建一个自由风格的软件项目】</p>
+</li>
+<li><p>源码管理 配置项目的Git地址，填写账户认证</p>
+</li>
+<li><p>构建，调用Maven目标</p>
+<p><img src="/2021/07/25/Jenkins%E4%B8%8EDocker/c.png" alt="c"></p>
+<p>保存</p>
+</li>
+<li><p>点击 立即构建，在构建信息中可以通过【控制台输出】查看编译信息</p>
+</li>
+</ol>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
+<li><p>在服务器中执行命令，查看镜像是否制作成功</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></li>
+<li><p>登录阿里云镜像服务查看是否推送成功</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -1370,68 +1560,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String类及intern方法</title>
-    <url>/2020/07/26/%E5%90%8E%E7%AB%AF-java-2020-07-26-String%E7%B1%BB%E5%8F%8Aintern%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>​    在JAVA语言中有8中基本数据类型和一种比较特殊的类型<code>String</code>。为了使这些类型在运行过程中速度更快，更节省内存，大部分包装类提供了一种常量池的概念（除了Float,Double）。常量池就类似一个JAVA系统级别提供的缓存。</p>
-<a id="more"></a>
-
-<h3 id="String类型使用（jdk1-8）"><a href="#String类型使用（jdk1-8）" class="headerlink" title="String类型使用（jdk1.8）"></a>String类型使用（jdk1.8）</h3><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 &quot;&quot; 创建  会直接存储在 常量池中</span></span><br><span class="line">        String a = <span class="string">&quot;a1&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 创建， 会将zahngsan存储到常量池中，然后在Heap中创建对象指向b</span></span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用 字符串连接符拼接 ，会直接存储 &#x27;wangwuzhaoliu&#x27; 字符串在常量池中</span></span><br><span class="line">        String c = <span class="string">&quot;wangwu&quot;</span> + <span class="string">&quot;zhaoliu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用字符串 &quot;引用&quot; 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将 --- 存入到常量池中</span></span><br><span class="line">        String d = a + <span class="string">&quot;---&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中，但是会将wang 和 jiu 两个字符串存到常量池中</span></span><br><span class="line">        String f = <span class="keyword">new</span> String(<span class="string">&quot;wang&quot;</span>) + <span class="string">&quot;jiu&quot;</span>;</span><br><span class="line">        <span class="comment">// 使用 new String 拼接 ，不执行 intern 方法，不会存放到常量池中， 但是会将 zhao 和 ba 两个字符串存入到常量池中</span></span><br><span class="line">        String g = <span class="keyword">new</span> String(<span class="string">&quot;zhao&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;ba&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>变量a：</strong> “a1” 是<strong>字符串常量</strong>，在<strong>编译期就被确定</strong>了，先检查<strong>字符串常量池中是否含有”a1”字符串</strong>,若没有则<strong>添加</strong>“a1”到字符串常量池中，并且直接指向它。所以a直接指向<strong>字符串常量池</strong>的”a1”,也就是变量a指向的地址是<strong>常量池中的 a1</strong>。</li>
-<li><strong>变量b：\</strong>用new String() 创建的字符串不是常量，**不能在编译期就确定**，所以new String() 创建的字符串不放入常量池中，它们有自己的地址空间**(Java Heap 中)<strong>，</strong>变量b的引用的地址在Java Heap中**。 但是”zhangsan”字符串常量在编译期也会被加入到字符串常量池（如果常量池不存在的话）。</li>
-<li><strong>变量c：</strong>“wangwu”和”zhaoliu”也都是<strong>字符串常量</strong>，当<strong>一个字符串</strong>由<strong>多个字符串常量</strong>连接而成时，它自己<strong>肯定也是字符串常量</strong>，在编译器会被编译器优化成”wangwuzhaoliu”，所以c也同样在编译期就被解析为一个字符串常量，并且c是常量池中”wangwuzhaoliu”的一个引用，<strong>所以变量c的引用地址在常量池中</strong>。</li>
-<li><strong>变量d：</strong> JVM对于字符串引用，由于在字符串的”+”连接中，有字符串引用存在，而引用的值在程序编译期是无法确定的，即`(a+”—“)</li>
-<li><strong>变量f：</strong> 变量f同样不能在编译期确定，<strong>但是”wang”和”jiu”这两个字符串常量会添加到字符串常量池中</strong>，并且在堆中创建String对象。（字符串常量池并不会存放”wangjiu”这个字符串,除非执行f.intern()方法）</li>
-<li><strong>变量g：</strong> 同理变量f。</li>
-</ul>
-<h4 id="Sring拼接"><a href="#Sring拼接" class="headerlink" title="Sring拼接"></a>Sring拼接</h4><ul>
-<li><p><strong>字符串拼接</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span> + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>zhang和 san都是<strong>字符串</strong>，都是在编译器<strong>可知的</strong>，编译器会将这行代码优化，<strong>当一个字符串是由多个可知的字符串(非引用字符串)连接组成</strong>，将会优化为如下</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      String a = <span class="string">&quot;zhangsan&quot;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>引用拼接</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">      	String b = a + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 上下含义相同</span></span><br><span class="line">      	String c = <span class="string">&quot;li&quot;</span>;</span><br><span class="line">      	String d = <span class="string">&quot;si&quot;</span>;</span><br><span class="line">      	String f = c + d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当Java编译器遇到<strong>字符串引用</strong> 或 <strong>字符串引用和可知字符串</strong>拼接的时候，会创建一个<code>StringBuilder</code>对象，后面的append()。</p>
-<p>因为有字符串引用存在，而引用的值在程序编译期是无法确定的。<strong>另外 “zhang”、”san” 都会编译器添加到字符串常量池中（如果没有的话）</strong>，因为它们都是编译期确定的字符串常量，<strong>但是最后的”lantao”并不会添加到字符串常量池, 除非执行b.intern() 方法</strong></p>
-</li>
-<li><p><strong>final拼接</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String a = <span class="string">&quot;zhang&quot;</span>;</span><br><span class="line">     		<span class="keyword">final</span> String b = <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	String c = a + b + <span class="string">&quot;1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>final拼接和以上两者的区别就是在前边增加了final修饰，<strong>用final修饰的字符串就是在编译期可知的</strong>，编译期就会将以上代码优化为</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">				String str = <span class="string">&quot;zhangsan1111&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>这里 final 拼接的效果是和字符串拼接是一致的。</strong></p>
-</li>
-</ul>
-<h3 id="String-intern方法"><a href="#String-intern方法" class="headerlink" title="String#intern方法"></a>String#intern方法</h3><h4 id="intern方法详解"><a href="#intern方法详解" class="headerlink" title="intern方法详解"></a>intern方法详解</h4><p>String.intern()是一个Native(本地)方法，它的作用是如果<strong>字符串常量池已经包含一个等于此String对象的字符串，则返回字符串常量池中这个字符串的引用</strong>, <strong>否则将当前String对象的引用地址（堆中）添加到字符串常量池中并返回</strong>。</p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><strong>注意：基本数据类型之间的 == 是比较值，引用数据类型 == 比较的是地址值</strong></p>
-<ul>
-<li><h5 id="常量池中存在字符串"><a href="#常量池中存在字符串" class="headerlink" title="常量池中存在字符串"></a><strong>常量池中存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 基本数据类型之间的 ==  是比较值，引用数据类型 == 比较的是地址值</span></span><br><span class="line">      	<span class="comment">// 1：在Java Heap中创建对象 2：在字符串常量池中添加 zhangsan</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      	<span class="comment">// 调用 intern 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// a 的地址在Java Heap中 ， b的地址在 常量池中 ，所以结果是flase</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      	<span class="comment">// 因为常量池中已经包含zhangsan，所以直接返回</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">        <span class="comment">// b c 的地址一致，所以是true</span></span><br><span class="line">        System.out.println(b == c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<p>1：在<strong>Java Heap</strong>中<strong>创建对象</strong>然后在<strong>字符串常量</strong>池中<strong>添加</strong> zhangsan。</p>
-<p>2：调用 <strong>intern</strong> 方法，因上一步中已经将zhangsan存入常量池中，这里直接返回常量池 zhangsan 的引用地址。</p>
-<p>3：因 a 的地址在Heap中，b的地址在字符串常量池中。</p>
-<p>4：因为常量池中已经包含zhangsan，所以直接返回</p>
-<p>5： b c 的地址一致，所以是true</p>
-<p>地址可以使用System.identityHashCode(a)方法获取</p>
-</li>
-<li><h5 id="常量池中不存在字符串"><a href="#常量池中不存在字符串" class="headerlink" title="常量池中不存在字符串"></a><strong>常量池中不存在字符串</strong></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//1： 首先会在Heap中创建对象，然后在常量池中放入zhagnsan 和 wangwu ，但是并不会放入zhagnsanwangwu</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;zhangsan&quot;</span>) + <span class="string">&quot;wangwu&quot;</span>;</span><br><span class="line">      	<span class="comment">// 2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中String对象的引用地址添加到字符串常量池中。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用</span></span><br><span class="line">        String b = a.intern();</span><br><span class="line">      	<span class="comment">// 3：因为 a 的地址和 b的地址一致，锁以是true</span></span><br><span class="line">        System.out.println(a == b);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//4：因常量池中已经存在 zhangsanwangwu 了，所以直接返回引用就是 a 类型 a ==b 锁 a==b==c</span></span><br><span class="line">        String c = <span class="string">&quot;zhangsanwangwu&quot;</span>;</span><br><span class="line">        System.out.println(a == c); <span class="comment">// true</span></span><br><span class="line">      	System.out.println(b == c); <span class="comment">// true</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 5：首先会在Heap中创建对象，然后会在常量池中存储 zhang 和 san</span></span><br><span class="line">      	String d = <span class="keyword">new</span> String(<span class="string">&quot;zhang&quot;</span>) + <span class="string">&quot;san&quot;</span>;</span><br><span class="line">      	<span class="comment">// 6： 返回的是 常量池中的 地址，因在a变量时已经将 zhangsan 放入到了常量池中</span></span><br><span class="line">      	String f = d.intern();</span><br><span class="line">      	System.out.println(d = f); <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<p>1：首先会在<strong>Heap中创建对象a，然后在</strong>常量池中放入zhagnsan 和 wangwu** ，但是<strong>并不会放入</strong>zhagnsanwangwu。</p>
-<p>2：调用 intern ，因为字符串常量池中没有”zhangsanwangwu”这种拼接后的字符串，所以将堆中<strong>String对象的引用地址添加到字符串常量池中</strong>。jdk1.7后常量池引入到了Heap中，所以可以直接存储引用。</p>
-<p>3：因为 a 的地址和 b的地址一致，所以是true。</p>
-<p>4：因常量池中<strong>已经存在 zhangsanwangwu</strong> 了，所以<strong>直接返回引用就是 a 类型</strong>， a ==b 所以 a==b==c。</p>
-<p>5：首先会在<strong>Heap中创建对象d</strong>，然后会在<strong>常量池中存储 zhang 和 san</strong>。</p>
-<p>6：因在创建对象a时，已经将 “zhangsan”放入到了常量池，所以<strong>返回的是常量池中的zhangsan地址</strong>，对象d的地址在Heap中，f的地址在常量池中，并不是一个，所以false；</p>
-</li>
-</ul>
-<h4 id="参考：-https-blog-csdn-net-qian520ao-article-details-78966179"><a href="#参考：-https-blog-csdn-net-qian520ao-article-details-78966179" class="headerlink" title="参考：     https://blog.csdn.net/qian520ao/article/details/78966179"></a>参考：     <a href="https://blog.csdn.net/qian520ao/article/details/78966179#%E5%B7%B2%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%8Dintern">https://blog.csdn.net/qian520ao/article/details/78966179</a></h4>]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker基础镜像制作</title>
     <url>/2020/03/18/%E5%90%8E%E7%AB%AF-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
     <content><![CDATA[<p>​    使用docker运行java项目需要一个基础镜像，制作java环境基础镜像方式有很多，比如基于<strong>Alpine</strong>、<strong>ubuntu</strong>、<strong>centos</strong>，这里使用centos（比较习惯）</p>
@@ -1480,149 +1608,5 @@
       <tags>
         <tag>docker</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>acme.sh签发证书</title>
-    <url>/2021/07/14/acme-sh%E7%AD%BE%E5%8F%91%E8%AF%81%E4%B9%A6/</url>
-    <content><![CDATA[<p>​        使用<code>acme.sh</code>申请数字证书，实现HTTPS。并到期自动续订。</p>
-<a id="more"></a>
-
-<p> 安装acme.sh</p>
-<p>在服务器上操作</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
-<p>遇到无法下载问题，可通过其他方式下载传到服务器</p>
-<p>仓库地址: <a href="https://github.com/acmesh-official/acme.sh">https://github.com/acmesh-official/acme.sh</a></p>
-<h2 id="准备DNS环境"><a href="#准备DNS环境" class="headerlink" title="准备DNS环境"></a>准备DNS环境</h2><p>默认使用阿里云 地址：<a href="https://ak-console.aliyun.com/#/accesskey">https://ak-console.aliyun.com/#/accesskey</a></p>
-<p>获取阿里云控制台获取的<code>Ali_Key</code>，<code>Ali_Secret</code>，在服务器中执行命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">&quot;xxxxxxxx&quot;</span> </span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">&quot;xxxxxxxx&quot;</span></span><br></pre></td></tr></table></figure>
-<p>如果是新用户，要给用户赋予DNS操作权限</p>
-<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --issue -d <span class="string">&quot;*.cksspk.top&quot;</span> --dns dns_ali</span><br></pre></td></tr></table></figure>
-<p>新版本CA证书，需要申请新账号</p>
-<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --install-cert -d *.cksspk.top \</span><br><span class="line">--key-file       /path/to/keyfile/<span class="keyword">in</span>/nginx/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/nginx/cert.pem \</span><br><span class="line">--reloadcmd     <span class="string">&quot;service nginx force-reload&quot;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>阻塞队列</title>
-    <url>/2021/07/15/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/</url>
-    <content><![CDATA[<h1 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h1><a id="more"></a>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cks.queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.ObjectUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Condition;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 阻塞队列 Demo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> cks</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoBlockingQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//队列容器</span></span><br><span class="line">    <span class="keyword">private</span> Object items[];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//容量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//入队下标</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> putIndex;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//出队下标</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> takeIndex;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//锁</span></span><br><span class="line">    <span class="keyword">private</span> ReentrantLock reentrantLock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读条件</span></span><br><span class="line">    <span class="keyword">private</span> Condition notEmpty;</span><br><span class="line">    <span class="comment">//写条件</span></span><br><span class="line">    <span class="keyword">private</span> Condition notFull;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DemoBlockingQueue</span><span class="params">(<span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (size &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        items = <span class="keyword">new</span> Object[size];</span><br><span class="line"></span><br><span class="line">        notEmpty = reentrantLock.newCondition();</span><br><span class="line">        notFull = reentrantLock.newCondition();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Object item)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ObjectUtils.isEmpty(item))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取锁</span></span><br><span class="line">            reentrantLock.lock();</span><br><span class="line">            <span class="comment">//队列已满</span></span><br><span class="line">            <span class="keyword">while</span> (size == items.length)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot; 队列已满 &quot;</span> + size);</span><br><span class="line">                <span class="comment">//堵塞</span></span><br><span class="line">                notFull.await();</span><br><span class="line">            &#125;</span><br><span class="line">            items[putIndex] = item;</span><br><span class="line">            <span class="comment">//入队下标移动，同时判断队列是否满了</span></span><br><span class="line">            <span class="keyword">if</span> (++putIndex == items.length)&#123;</span><br><span class="line">                putIndex = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            size++;</span><br><span class="line">            <span class="comment">//唤醒线程</span></span><br><span class="line">            notEmpty.signal();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            notEmpty.signal();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//释放lock</span></span><br><span class="line">            reentrantLock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">take</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            reentrantLock.lock();</span><br><span class="line">            <span class="keyword">while</span> (size == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot; 队列为空 &quot;</span>);</span><br><span class="line">                notEmpty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            Object item = items[takeIndex];</span><br><span class="line">            <span class="comment">//如果到了最后一个元素， 则从头开始</span></span><br><span class="line">            <span class="keyword">if</span> (++takeIndex == items.length)&#123;</span><br><span class="line">                takeIndex = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            size--;</span><br><span class="line">            notFull.signal();</span><br><span class="line">            <span class="keyword">return</span> item;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            notFull.signal();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            reentrantLock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        DemoBlockingQueue demoBlockingQueue = <span class="keyword">new</span> DemoBlockingQueue(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">300</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                demoBlockingQueue.offer(i);</span><br><span class="line">                System.out.println(<span class="string">&quot;线程名&quot;</span> + Thread.currentThread().getName()+<span class="string">&quot;  生产者生产了：&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                Object take = demoBlockingQueue.take();</span><br><span class="line">                System.out.println(<span class="string">&quot;线程名&quot;</span> + Thread.currentThread().getName()+<span class="string">&quot;  ======消费者消费了：&quot;</span>+take);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>Jenkins</title>
-    <url>/2021/07/21/2021-07-jenkins/</url>
-    <content><![CDATA[<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>​    在centos7服务器安装Jenkins及基础配置</p>
-<a id="more"></a>
-
-<h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>服务器：centos7</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>在镜像网站下载rpm文件 地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat/">https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat/</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -c https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat-stable/jenkins-2.289.2-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
-<p>安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -ivh jenkins-2.302-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>Java环境</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/init.d/jenkins</span><br></pre></td></tr></table></figure>
-<p>添加Java路径。注意：是安装目录的/bin下。如    </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_211&#x2F;bin&#x2F;java</span><br></pre></td></tr></table></figure>
-<p>启动</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start jenkins</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><p>查看密码</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /var/lib/jenkins/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure></li>
-<li><p>默认端口修改</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/sysconfig/jenkins</span><br></pre></td></tr></table></figure></li>
-<li><p>插件配置替换为清华源地址</p>
-<p>地址</p>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</span></span><br></pre></td></tr></table></figure></li>
-<li><p>插件无法安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /var/lib/jenkins/updates</span><br></pre></td></tr></table></figure>
-<p>使用sed命令修改default.json文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s#https://updates.jenkins.io/download#https://mirrors.tuna.tsinghua.edu.cn/jenkins#g&#x27; default.json &amp;&amp; sed -i &#x27;s#http://www.google.com#https://www.baidu.com#g&#x27; default.json</span><br></pre></td></tr></table></figure>
-<p>修改后重启Jenkins</p>
-</li>
-</ul>
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>停止运行</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl stop jenkins</span><br></pre></td></tr></table></figure>
-<p>卸载</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">rpm -e jenkins</span><br></pre></td></tr></table></figure>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">rm -rf /etc/sysconfig/jenkins.rpmsave</span><br><span class="line">rm -rf /var/cache/jenkins/</span><br><span class="line">rm -rf /var/lib/jenkins/</span><br><span class="line">rm -rf /var/<span class="built_in">log</span>/jenkins</span><br><span class="line">rm -rf /usr/lib/jenkins</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="解决-jenkins汉化后部分中文"><a href="#解决-jenkins汉化后部分中文" class="headerlink" title="解决 jenkins汉化后部分中文"></a>解决 jenkins汉化后部分中文</h2><p>安装好插件“Locale plugin”和“Localization: Chinese (Simplified)后，先设置为zh_US重新启动，再设置回来</p>
-<p>其他插件重启Jenkins后，又出现了部分中文简体不翻译的情况。</p>
-<p>方法如下，可以完美修复。</p>
-<ul>
-<li><p> 将语言设定为zh_US，Jenkins切换为英文。</p>
-</li>
-<li><p>调用restart重启Jenkins：http://域名/restart。</p>
-</li>
-<li><p>再次语言设定为zh_CN，刷新即可。</p>
-</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>Springboot+Jenkins+Docker自动部署</title>
-    <url>/2021/07/25/Jenkins%E4%B8%8EDocker/</url>
-    <content><![CDATA[<p>使用Jenkins快速打包Springboot项目，制作Docker镜像，并且推送到阿里云镜像仓库。    </p>
-<a id="more"></a>
-
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>Jenkins</li>
-<li>Docker</li>
-<li>Maven</li>
-<li>Gitee/GitLab</li>
-</ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>创建一个简单的Springboot项目，并上传到Git远程仓库。地址：<a href="https://gitee.com/cksspk/jenkins-t1.git">https://gitee.com/cksspk/jenkins-t1.git</a></p>
-<img src="/2021/07/25/Jenkins%E4%B8%8EDocker/1.png" alt="基础图片" style="zoom:75%;">
-
-<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>pom中主要配置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--镜像仓库配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docker.repository</span>&gt;</span>registry.cn-hangzhou.aliyuncs.com<span class="tag">&lt;/<span class="name">docker.repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docker.registry.name</span>&gt;</span>cksspk<span class="tag">&lt;/<span class="name">docker.registry.name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;project.artifactId&#125;-$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--docker镜像相关的配置信息--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--镜像名--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">imageName</span>&gt;</span></span><br><span class="line">                        $&#123;docker.repository&#125;/$&#123;docker.registry.name&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--Dockerfile文件所在目录--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dockerDirectory</span>&gt;</span></span><br><span class="line">                        $&#123;project.basedir&#125;</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">dockerDirectory</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--构建镜像的配置信息--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">include</span>&gt;</span></span><br><span class="line">                                $&#123;project.artifactId&#125;-$&#123;project.version&#125;.jar</span><br><span class="line">                            <span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--Dcoker服务器所在地址，配置文件开启0.0.0.0:2375通信--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.1.114:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--推送阿里云--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">serverId</span>&gt;</span>docker-aliyun<span class="tag">&lt;/<span class="name">serverId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">registryUrl</span>&gt;</span>$&#123;docker.repository&#125;<span class="tag">&lt;/<span class="name">registryUrl</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">pushImage</span>&gt;</span>true<span class="tag">&lt;/<span class="name">pushImage</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><p>docker镜像制作好后自动推送到阿里云镜像仓库，需要在maven中添加配置。</p>
-<p>修改settings.conf文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--maven的pom中可以根据这个id找到这个server节点的配置--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>docker-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--这里是在阿里云注册的账号--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">username</span>&gt;</span>cksspk<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--这里是在阿里云注册的密码--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">password</span>&gt;</span>*****<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--这是在阿里云注册时填写的邮箱--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">email</span>&gt;</span>****@163.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><ol>
-<li><p>在Jenkins控制面板中【新建任务】，选择【构建一个自由风格的软件项目】</p>
-</li>
-<li><p>源码管理 配置项目的Git地址，填写账户认证</p>
-</li>
-<li><p>构建，调用Maven目标</p>
-<p><img src="/2021/07/25/Jenkins%E4%B8%8EDocker/c.png" alt="c"></p>
-<p>保存</p>
-</li>
-<li><p>点击 立即构建，在构建信息中可以通过【控制台输出】查看编译信息</p>
-</li>
-</ol>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
-<li><p>在服务器中执行命令，查看镜像是否制作成功</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></li>
-<li><p>登录阿里云镜像服务查看是否推送成功</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jd-script 青龙面板搭建</title>
-    <url>/2021/08/17/jd-script/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="ac04825545ac9c2747a36c37923c389bb9b0049de316c647a90362c6f61c5a4a">e41fb7cdbe29bd28ec8c3c6eed38c9c3b3a70362bd3a6fd9e60f4e94a713c7e1f54393e7bb4f465ca165a916d061982447bcfb191819d4b5a5b99cff893884b0340c09d853c385936d82ddb6a689f0a90fe01e4e8ed4bc4703545d9765f904b3c7ef9c5b2d0b796af2e1deed90c4e4c2316d72e2c5dcb1b9051c2c6aec18eae8a2aca2ba63f781994213d4d3083bb5c1b635c0fc04d8217cdfc4017d1265ec5b5fc966e474dcbdc139bea4b6b5af13b8b9f278024513ab475e0ef3eb79eea625f64b0f6d0aea50d4a0e15f9f8f20f14946ffba78263b7e4b7153a0fad3cae60a72524597c4308adb604b60eac7926742a047799ecf7c07a2f6777d630d95441ceb330346489bac7cf4e5e83a841659a65ef281dd342799a9eeb83c89ee80c320fb8a784396d7bfeeabf0ac3068dd8c9017aac1fef826ebf7e3517119646cce0963113af86bc15408e6fba04610b9d45a1695ae028a82f82185f5bb8d51c2ba10739389d5e598e00c9fa8b19f8651d763fc0cd7c8b06f4b94c3a1ea55547480a917bc017023a46ce273740c059ea536df2e53e70e38e6fed0031919a30c372d4bfa8c8b14551c2cf95427ffbf4ce1381ec1105529fc12bf29ca29e5030dde477dd6d4f0862b23070c2a28c46ccfa651906f57e12b3bc63d2fd45ae8a245ced066eb9ebe45554a6e37d981f9c7cbe819b20b85ca33fdd27e98df5273f9e25aa6d0bdb3816f19aeefaeb859ee20d1e58bc115544f2eb8d9ae42098c3b4458b0be673ec2311c461bcbaa5e10b5e6901bf0cf0b1ba22cc23311f35751f6b99371de1362240c0d0a9696de3e0608966bb0a0de173da4b89dfe48b82637b5b057d1e8fd9f5af3bd54ae8f515ce72f7671fdd6574a851e21af0ba5cbe5a9b6a7b08b15a3ba6530807f63a7dea466bab71652e2cd0763072afcab807a565d599f0248769a3c9cce38759bbd83e03291bcbdd48202dd443ea92964bf203241d7067b87f5e7d6150a313bd395a2f7f4428f1fec5f2eb9cd2714a0db65186d47d7bd2f33aefb3e157dfcaa3c0872b1ca11416a83dd05a31edfd4f5f50930548dd92d36ec298350bf936cdace1a98f6ba084c02712c05cd5e4fe631d154a69be0c8382b1598c126d4356629b1af6e26181322cd0bdad2c9a65454b66197547fb9e7e03fab27dace66d7c92b853f46a03eb4aaa1106376607943e56b363b0c2bc85fbb080be14bdeeb9e2c7535334593351d8dd15f72c9909331f1ef81ea194bf8acfa6af74e5d3d898e90ce0452257cd5c2d85034183d6ac4a357cf54b9bdd35c3612c5b459945d9dd13f27e1b9804d1215047cf3412b8826fd7c9e1c6f65d09b34cf197af667bb7624150ad7335f52e20c44c2a0da83aff7297240e0a7012cc01df6e609723d0fe164bdadd93fd95fb457e8e3c0489ee8aa34c2ba926a7d70ede5a43cb931b56f2e82eebd0bff3abd7d91f457c82c288f4391da79da06baf9041feb51eb945ee0cb79a9cbd5f85ce3db8290a3f6df5db72f199f454d80fdc8a1215561821500e04ee5839dbf026b67a2f980b5d10c18850774b7e2b773f3f04b9a6e4e7a7f5700c6495a6f40b1bbe14e0ef1aa6366096d9f19820b1bbbd6441893cc45879a105e3255a48f0a9b817593a3918215705f4b8655f391b36fb75f9e53a021af984124223ca63dbe1c8508e83960d31c3e5dfe82b0e1a67c6b5a8a42c9cf432af658950c4e73fe439f03a99291b8b24324510690cbd9f33158edeb797298fbcd85d73eb95dd12f14b99d08c1e41e83e3e11a69ff3774054dc6ad524fd752d428aafc3704df06e06274a6c3439a43665f6d969b8e7c79ddd982a33e96723a2520ca63372ff09c72319834cfd6baa953a7589191354e9307c3e3229c9e9ce553f1f32e200f7088b4cf8e724a3906f9999f723fd835ee4e526a3131872089b85ca641594a68914a6abefd31ef3dffe85bebb699d4f1257604978720e7cb7a9998d7ab843cb71e4b8e905968e4fdbad8417cdc25cb8684715e34298ed5468eb8ece8f54de63566321d8e0e53e9681c2f993e517497d3c503293e8cae7409f2f3ef868b512d568f4c275bca3f313f0271d4cd091e53cd24d0c473dca5e8cc78df893e5a8e0dd77a8dc9529e7aab0597831b4e6c8367c3def1e327a1f4af74b5ef1c6cac9c9c2b3e464abc6f3442d38edf378cf05d3e8035f14bdf0886ac7db574e3e050c26c9ac5b67baab3cb45fbb7a6539c1a9cb230f66e884b7c0182702bf3fea270b51ea197176b93caf02b564d63c34723d147cde0d072daaeef4b8c6a1ed89e3eceb52faa2bf1fa3de190359d874bfe89075d4a740afc5f5ed998d2afe1befe1d5f5765454d45d14bc739e93b33a93844fed50e083d8b4af41e8e20992905076e27e14372bd9c3cca5ea558028fea6311beef087fa25656889bd1bf604cb374626342632a52e0e9a6e9d9424f22e50ee8bbedfc0aace324e70f5b865f1f6d80161dd7cef1892d76b7cec2462801a8ccf26f57e1884301665af5b2b516ed95e73ea0f9dd66654d90660e692a3d4778301852a1746cb6987238b9fec7e94bf6208f5ad421552937e1e2cee24b840d6e1365564ac6f21eb15bc0820da61af5ceb65185a2bc7925438451ca99548a459cae6def79aa7b3f648c37c6213df0bd1fc5d47c71bd8feb1db9841b496b41e9ef4e614b7442f0c757499485a2f3548edc6a9450f3f821ee0b03d301f9e879b75960333bed2e89f98711d5b8baceb6832501b6009dd7bdca8b41a91565054a20db53a92eb78300508329c630bf7a86f05e049188374875aa474df9b67714e3b13036606d217ebea07f173889fb1f3e7f43d869041f114db1d008e076ee0f1b3fa70dbc8aa3f295070f5a9ed7cb2cfc6067a1e3deb930ee419a3e1d28b1a4b1efc7a6471a4cb2f59e5956da9c73198ac1d2f3c6037fdaa34b3b28be76da9e3890ebc6d47262463be2648d0d35bb4b7b994446e0f337a9ca1ea92d6ba914158ea7133a17bdca02700afb34a209b8c3155df4ad6175ff8ef501fbf70ac20ad33c95f6f0c20eb5ed59d509bc2ee73f1eee94087cbd20f9861aad13f48854272a7ac6df5986c0920778d2877610e856f2a32ffe7a5bcc342069d9af47183c82302441582968e3d50b97d6307f4c7474c1088d1e63bfd968a2362c2382d26d71f4b772d851ce7a4a88814f71ae4eae48f3b8f7da2821112c6b4596da9bbc7f040954dff503f98e122914498adc9c84b7cecd31c087dccb8d35664c91693694c0766eeac9e1af96f4456fd1df98011a8407f399a4f39a79f4ce2d3fe20c136c193181c2cf3f19d8b6e30646143b0918bed965df688b4b1b3b7947850ee8254e65cb948b1fbcee702dec0d4c8a7cf241bb460a4880410c1ed0c01cdd898edd3e742ef9a612ccb3262de6e2108e2986387b54dcd6a27d5bf55a33d3db16ee47d0d953a5151f9bd1569b33c0053e26317b5c860c0d08296a236d6c3a2c5d5dda6e3e8a08110eea75ba4c88a8d717faa10bfb36e48325e530432bdfa15333e0cf328bb841fe347e561e320d71352b2fbb639775d20ae4527f401f14ca734004744166ddeb3fdde99f9fa390f9d9a2e2fdb0e3b51db807d54806725f3660192687ec82697201af8f87876dd2cc24ce0093a529c7fda26df45f599ecedbf70d8ec8b6fa77b6bd6b154c370ad28e6b292fac028ef0c5ce542b138c941d6a3d0bad46950846dd7786c276a695f47bbe886e85179aec8357eaead2de50986b749bad82a7abc0306f2c769f68271c053214c5c50a1d78adb47d8301afd2c0bcc9b8045e81b6b71b0dadf4cc73bc7c048b76c4216c1fcc80803a51750a0ec4e988e334a251a4cea74d1154bf03121ce5dfdc29a4045fe6dd6cf144bf566d48d64471174cb8f708f9003f77eff65da44bb1c66e884bdf04231f87e4db7104a8c9b1352d73913fbcabf6e8d47135ba644f2896b54a363f249ae3a272e1f0e31207faa4caa97f786c5f6b6118f77bfc306813a2250ad302076d950255072c061727e42446ccb7d799c68c2a9ffeeab115d6a2e1f577a491c7e6b4d58f5c6162209b7668f31632fe8c0ecbe04e680db414482cdc819a5738437403b40593d230777a71b38fc86641568b7a56e036bfa46741edcc910a20998099f721b9646b40d391a827b259a5f07ea5beb7dd4ef2dbe4a87ef4acd4ee484b5356feb3db0f8edcd490141653f6f5665fdaf7531cb53f4c7173dd00ef85a51a31a10d3880f3b2979b88e95a0859a8b3b0d49b41aa40c8b5afb6707f66a781e0b30eebdf70167cba2b96c68f907829f153eafaca7d7cfc585b0a2b6e51fa688972b27b3c4eb4d14c563b6e2de463b34a4ddc385f9a8415b914a2f3150f09d0e3c2bd6ca6a85f9421b4259b8c5fdf60919d67a7f55d5a3e11eb40e815c2ef616cde09853a0afd1ae9da155d3e8507e58ed3aa48be1399c393d305eb50dcda266201e83469e4c6f7808d0da0792c20513ecb08b8c5f45f3093465a5600d639cc802bf04a37fb77ce7edae65b67917b88af7fe5f2ef9f750eec8c89aacbd555699d073b82e54481a58b2cda5d55ef58c4494c04e991856614c3dc2c6d4fa0cd9b1538fd4542aba5bd9f805d18fd206871e2a80507a32d9203ff5e23896f9f4fb0bc10151e597a399fbc3e0a95dae43875c37c08d278412bb4c7dac6f63f511f5324b9abd66bb30357e1fe537b938398be6b69268a95a6973ba7d4767c5e8114adc932d352155bf7860b0dc531721fdd99254ac0136e293fa7539812fe7624050d4b927b2a917018f2ee199329948e75b188dda915fc68768393e2485bb625cac56d94fbcaeb8b4f935bfa251f9b5963dacfc5c98152e665ca2cf08a83bf5be5315b543dde2b140d0438a4d89678fb020b5118b44db0d393147b7794e4638664e9478835e05031e735126b67c5ca0a3fd8323a8f8e03bc1a2231cdb3d5e7b02d943a279fac66480ffff1708312a7cb20a208858d9fa74f4399a7d266d5ac61d1a672a350e782968f7a859b51917218f69ca93afe74fc499f0efd01f8949f79e8c41c1d493cd89b0d51296fcec912920ea77fbc07dd411cd33a48cfa24258fa86898fa55f1b3af6cfb07fb8d3f5b9f57771d56fc0f83db021ee98d48cab351cbfeafafd5c590f4a2d844d38c75e83f8cf9f94016121e72089e6602dce4b8ad3cd7fe748da8ef199d272912056758d5d217f31c4adad07879d4f0e1fd8a0815daabe4c89ba6746e4d3adafee18cb3b7ad21636e7dd6f02866771405f926d865969559e93872bda010d07b487139280ec80deacf7a059da956c1b3913938d13189946abf784c58db090267eeb6ce05f73246b157814c5b7deb0f2c062fb6a5f21686aeff3586fdcb2074a1e2912a3777dc06d48d1b4e5167bb099455e0d1a68501375f5f8decf4bec11eaa8819758780fe9110cea9c59f5e343f111eca1c8352802a5794fab5f560b57585cfeb32d7e26b3a58c21b02d815b9396ce531e51f90c1faec2fe714f6bd2f9e1e93bd18c6f2caed8836dfb2afff1ddca227119e604b69de0b7f308d4693744d88d71f738c08e6bb8f98eea9da2db3305c473d71bd794135c5fbb54861433c3a15942b12fcb18ff31f63e4c65ca6b8ebc6b28022224fa865ac1de7c9a738dae335fb39501e2dbd7decb25ed861a52a1c2f463ce707671e6a9298f3fe3acef3fe102bfdc36de7d2aaa12ac0d19d5ea763c2a1017b981c3bebe920d9db544fcc742ed0a5bd99c0350a59759d708bb9f660f871541bce252783962c78bb955d51bceed6392afb152c106f410e61fbab1216caf904534580e5a540b5446da0abd3fbbf3adf0f46755fcc6618447c7727c7d1e20d5705aeb56c9559187f056e2aefddbd3c07f8ea8109eabc1e9eec8ad4100e4ded6d9af8ee093c0078d33f66371eaa907095e005210b304586025be94718a8474192307bcf511f0bfd64adc4e34c1a56daba1a56bdc0f3fd6f1f4dd5ce66a06d7d1a4596e04fa3f9cd27aa60e9ec23e72501dc41469be49dc1c3e446109b8e19d032f045e96727438b5b82494151e9aee2437ab26e1389011f57d5f453e2b797a6b02c3cd544e7006483476025e13ee7122995ebd4f8189501e4e65325a1a90698a94869ba6af78480acfa809cba7d080dd48ae47bf37eaa43be83151668f38fbae21968f9ef04f9c80b22afdd062aa1b33e25f5978838c0203df723eb9ea9f33e85d3f0031da806cac19e37b71c8589b298773a206d6b9633572e6998a4216d976f7da1bb76f418328efb8b987c8fe6113dde82f72827f087c6aa48e0ad0ff12b8c92e6399d5b8d00c4ca2e48a062083a07b44ea71075b02c2f3e227ef13e9f4dedadbdcf5fd260363ea5cb4fbc5e221e6fd4492a476c3bca6ecb33251c39b9733c915eca4da1950b01bf73077dc6bfb276993bdc83df1053efaba060bbe2c5ab7fa29029666aaae9e7c4203d09e18ab056ffd354c44d6360b16e835ef3f6d0c3b2a288f92add9773b0252670b396d391429396a686efd5671879c57e07c4ad2c039f8873bbad529b875037ff4c2dd3b0f2301335dce8f4551b15ba65c134e14670c46550c14106fb392a07735bd0c5c18af36f797a185d908b2e6dcc52cae104298b003c257133a13fab67b32e5005e3004d51c77d8295e93e1c659696ba79f99abcf36ce249077daed36f9dc3ee93c10a1fbe506bba82699b01160e5f5391fdf74d0968b2c0444be808f7ccecd8e0e4a587bd57331d92360a58553e2376e1c4fcf4df1157d00030bf7dce8f5c482e3a25f76192a2b981853dc2003e5a234690125ba343f3d40a9654b793ab88d0e6a945f6c599e64cfe4f75f022021fd6760c3e6e0fc1fd1944035ce5004f386be22d3919612611054de6dcfe91deeb11004518186b3484d70d142ce3ef7f41b572c8fd8e2ecbca119fdb6ec89d51ee592341a306e154d8385cbb3951c9b9a7112b42a95caa0e8cca2ef7ceaa4277c421c903daf3c102e38557c63bb7b8ab8ce34b022e8430274ee79929c3c602b56bf6d438e92344293b07fa9f3cb591b2e89944ffd645ff8168fd669bfcaae2be5794553ac296e344ad253983b889fbbf80c514898ce77751dad830e84d0c88aaef139c1eb37886f0f9a45044b3b86ecd6cf5fa66905a1224b0cd9d77b6f04300ae11b53cbcbd4dbd77d409337bbb66933a60e8214d2c080e7c2990132073e5759d976cbc94feff97355f95006e4f12473ec7043e94cc84542d5ae131affe82211398fe99a7820d0e0393b0a987529b681e842894be9a3574a1a88550292ba8ed1538c4c7b9e619cede0c489d11737e849429100a5d0459b58c24658fb72953a77edaac9cfd8d79a941c59e682fbb15e1b82d6562cc38fc4d3b6f98ebf2c141d42d8b21aa330e2bb6b314ebccb1c589af202b1ab4912fbc2b3b7e0fc5f426138fe9652fd8dd51175dd6611e48511206d776f98a0dd5316b3f2e6f1351e7748399d72cbd08f462377829ea9329bdad561bd2e7ef14f35c60c18671d9ff5d9ad78b3e4d0b5f1d419f765c18225a5289ae8ac748594ccacf6a49b12dd280c9c37aa7ba8e353af0f1cd9d77d08688a286e0d4d77b72ab8fc810d64dd45679d29fcbb25688cf49554c80d3d01aec95326c162e5e432c7f4cf45f5c4bca51bc70c9dcebb9690c0888ddfeaf22c165322f9f82a9552b898e0bc2d6c814c7e4a02e52de665a94d14e0ced7b6569b8b2d7d5c2662a279f8ff8f87224224e3ef206591702c0266415e4a25db666d8edccaa57d6d4d948dbcc21207d8f4e6a26ea97d5e2a608b58ea253b909c27c930f2e6acde21cdc46c98e2bfb224fb5316f24f3dbdc0c9ce80ef887b47f6a775d9d8839f6bc724eeb30e0a3a3b9004fe6c4d72d6779613b0f84b64f4575d79596c0a54bb88f2eaecfded5089c77157e0c32d01724d06c71e787671973fc153ba2e9de032a4a6d9d4212708cd6626c796391ace4ad5e922d59a1b7c3abeeefdac6f6cef14613e91bbc28d403677def4b4bea8b3bd58b4305075178df87b568036fd480de14e4296a9d449ef0bd0d0c1addfe2099d9a2075eac544aa7d8ee19a8075f6363f024893fca3b7fe5b087db594d6a3e8a6f1a56fb425b2a4cb5ea798653981873a7a68af3902c8ebbf293e0f0197981795dedc8b7e1087b2acdd62d300a600d66bb32a9d178233a0b158f3c9168f405c5d05beb1e1ce07d6e338c4081f06be4c7bb6c7004cdd680fa3f29be96847e481107a8b845bd7b478f34b6358e1ac45f262edf69a8466a3d222e654ea4ac547398d564299e8e6e85510df8ac6895f4407317b8625e809a74d5d3b2482d7444426b1e722f9d83e18bf16fcdce638b29dccdba209f542fefc0daf05c6066e3254a7a929a951f1b366a721d2dbc149eddf3ef6e0e041a4a4c897c0dd912192774a14dcccff240a85f963dbdd0beeb4df3cf14d48003251b881a485bb72d12824eabf31b33f70a11eb7e5c0b3d83aacedd4de4de22b02d6ea50ed43bdd07fed8a8e6a277485cf8fcf282be197b49fdccca6d454cd7287929704361ec3188f1fb07e2589fbb006eb65b0399a09f04a6f59fea64a1706a4b15879baced9f040a15544f667e5da647bc9338f11049f24d82b5d52911c3ad8158540da61719636c2453a2622420ecbc9c60231dedecdb914e6c7c30b1d89bba3b9ec6f5c3b90d1d3c68b2a45e8de8edb60</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
 </search>
