@@ -1614,8 +1614,14 @@
     <url>/2021/09/18/ideaplug/</url>
     <content><![CDATA[<h3 id="Idea插件"><a href="#Idea插件" class="headerlink" title="Idea插件"></a>Idea插件</h3><a id="more"></a>
 
-<h4 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h4><p>翻译插件</p>
-<h4 id="free-mybatis-plugin"><a href="#free-mybatis-plugin" class="headerlink" title="free mybatis plugin"></a>free mybatis plugin</h4><p>从mapper快速跳转到xml</p>
+<ul>
+<li><p><code>Translation</code>  翻译插件</p>
+</li>
+<li><p><code>Free mybatis plugin</code> 从mapper快速跳转到xml</p>
+</li>
+<li><p><code>.ignore</code> 快速新建 ingore文件</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>开发工具</category>
