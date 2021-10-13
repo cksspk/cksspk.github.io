@@ -1842,4 +1842,136 @@
         <category>tool</category>
       </categories>
   </entry>
+  <entry>
+    <title>使用Docker快速安装开发中常用软件</title>
+    <url>/2021/10/13/soft-docker/</url>
+    <content><![CDATA[<p>使用docker快速安装开发中常用软件, 如 <code>mysql</code> <code>redis</code> </p>
+<a id="more"></a>
+
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="zsh-amp-oh-my-zsh"><a href="#zsh-amp-oh-my-zsh" class="headerlink" title="zsh &amp; oh-my-zsh"></a>zsh &amp; oh-my-zsh</h3><ul>
+<li><p>安装软件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. 安装zsh</span><br><span class="line">sudo yum install zsh</span><br><span class="line">2. 使用zsh替换bash</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">3. 安装oh-my-zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置oh-my-zsh插件</p>
+<ul>
+<li><p>语法高亮 zsh-syntax-highlighting</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure></li>
+<li><p>自动补全插件 zsh-autosuggestions</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure></li>
+<li><p>自动跳转插件 autojump</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># clone 到本地</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/wting/autojump.git <span class="variable">$ZSH_CUSTOM</span>/plugins/autojump</span><br><span class="line"><span class="comment"># 进入clone目录，接着执行安装文件</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$ZSH_CUSTOM</span>/plugins/autojump</span><br><span class="line">./install.py</span><br><span class="line"><span class="comment"># 接着根据安装完成后的提示，在~/.zshrc最后添加下面语句：</span></span><br><span class="line">vim ~/.zshrc    </span><br><span class="line">[[ -s /home/xxxx/.autojump/etc/profile.d/autojump.sh ]] &amp;&amp; <span class="built_in">source</span> /home/xxxx/.autojump/etc/profile.d/autojump.sh</span><br><span class="line"><span class="built_in">autoload</span> -U compinit &amp;&amp; compinit -u</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>安装完后启用插件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 编辑~/.zshrc   </span></span><br><span class="line">vim ~/.zshrc    </span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;ys&quot;</span></span><br><span class="line"><span class="comment"># 在plugins后括号里添加安装的插件名字</span></span><br><span class="line">plugins=(   git </span><br><span class="line">            autojump </span><br><span class="line">            zsh-autosuggestions </span><br><span class="line">            zsh-syntax-highlighting</span><br><span class="line">            )</span><br><span class="line"><span class="comment"># 最后刷新</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装oh-m-zsh导致小键盘失效问题</p>
+<p>在 ~/.zshrc 中将 HOME/END 等键值重新 MAP</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># key bindings</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[1~&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[4~&quot;</span> end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[5~&quot;</span> beginning-of-history</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[6~&quot;</span> end-of-history</span><br><span class="line"></span><br><span class="line"><span class="comment"># for rxvt</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[8~&quot;</span> end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[7~&quot;</span> beginning-of-line</span><br><span class="line"><span class="comment"># for non RH/Debian xterm, can&#x27;t hurt for RH/DEbian xterm</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\eOH&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\eOF&quot;</span> end-of-line</span><br><span class="line"><span class="comment"># for freebsd console</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[H&quot;</span> beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;\e[F&quot;</span> end-of-line</span><br><span class="line"><span class="comment"># completion in the middle of a line</span></span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&#x27;^i&#x27;</span> expand-or-complete-prefix</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fix numeric keypad  </span></span><br><span class="line"><span class="comment"># 0 . Enter  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Op&quot;</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[On&quot;</span> <span class="string">&quot;.&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[OM&quot;</span> <span class="string">&quot;^M&quot;</span></span><br><span class="line"><span class="comment"># 1 2 3  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oq&quot;</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Or&quot;</span> <span class="string">&quot;2&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Os&quot;</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"><span class="comment"># 4 5 6  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ot&quot;</span> <span class="string">&quot;4&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ou&quot;</span> <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ov&quot;</span> <span class="string">&quot;6&quot;</span></span><br><span class="line"><span class="comment"># 7 8 9  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ow&quot;</span> <span class="string">&quot;7&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ox&quot;</span> <span class="string">&quot;8&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oy&quot;</span> <span class="string">&quot;9&quot;</span></span><br><span class="line"><span class="comment"># + - * /  </span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Ol&quot;</span> <span class="string">&quot;+&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Om&quot;</span> <span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oj&quot;</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="built_in">bindkey</span> -s <span class="string">&quot;^[Oo&quot;</span> <span class="string">&quot;/&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>安装dockerDocker安装文档：<a href="https://docs.docker.com/install/linux/docker-ce/centos/">https://docs.docker.com/install/linux/docker-ce/centos/</a></p>
+<ul>
+<li><p>卸载系统之前docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure></li>
+<li><p>安装相关工具类</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure></li>
+<li><p>配置docker仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure></li>
+<li><p>添加国内源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure></li>
+<li><p>安装docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io -y</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure></li>
+<li><p>设置开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure></li>
+<li><p>配置加速</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">&#x27;EOF&#x27;</span> </span><br><span class="line">&#123; </span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://nj684hki.mirror.aliyuncs.com&quot;</span>] </span><br><span class="line">&#125; </span><br><span class="line">EOF </span><br><span class="line">sudo systemctl daemon-reload </span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+<li><p>添加当前用户到Docker组</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> docker</span><br></pre></td></tr></table></figure>
+<p>添加完后需要重新启动Docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="Docker-Mysql"><a href="#Docker-Mysql" class="headerlink" title="Docker-Mysql"></a>Docker-Mysql</h3><ul>
+<li><p>下载镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure></li>
+<li><p>创建实例并启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -p 3306:3306 --name mysql \</span><br><span class="line">-v /mydata/mysql/<span class="built_in">log</span>:/var/<span class="built_in">log</span>/mysql \</span><br><span class="line">-v /mydata/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /mydata/mysql/conf:/etc/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=root \</span><br><span class="line">-d mysql:5.7</span><br></pre></td></tr></table></figure>
+<p>参数说明<br>-p 3306:3306：将容器的 3306 端口映射到主机的 3306 端口<br>-v /mydata/mysql/conf:/etc/mysql：将配置文件夹挂载到主机<br>-v /mydata/mysql/log:/var/log/mysql：将日志文件夹挂载到主机<br>-v /mydata/mysql/data:/var/lib/mysql/：将配置文件夹挂载到主机<br>-e MYSQL_ROOT_PASSWORD=root：初始化 root 用户的密码</p>
+</li>
+<li><p>配置Mysql文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /mydata/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=<span class="string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span> </span><br><span class="line">init_connect=<span class="string">&#x27;SET NAMES utf8&#x27;</span> </span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></li>
+<li><p>通过容器的 mysql 命令行工具连接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mysql mysql -uroot -proot</span><br></pre></td></tr></table></figure></li>
+<li><p>设置 root 远程访问</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grant all privileges on *.* to <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified by <span class="string">&#x27;root&#x27;</span> with grant option;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<h3 id="Docker-Redis"><a href="#Docker-Redis" class="headerlink" title="Docker-Redis"></a>Docker-Redis</h3></li>
+<li><p>下载镜像文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull redis</span><br></pre></td></tr></table></figure></li>
+<li><p>初始化配置文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /mydata/redis/conf</span><br><span class="line">sudo touch /mydata/redis/conf/redis.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data \</span><br><span class="line">-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-d redis redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>Redis配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">redis.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 redis 镜像执行 redis-cli 命令连接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it redis redis-cli</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="Docker-Nacos"><a href="#Docker-Nacos" class="headerlink" title="Docker-Nacos"></a>Docker-Nacos</h3><ul>
+<li><p>下载镜像文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull nacos/nacos-server:1.3.1</span><br></pre></td></tr></table></figure></li>
+<li><p>启动单机模式</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name nacos -p 8848:8848 -e PREFER_HOST_MODE=hostname -e MODE=standalone nacos/nacos-server:1.3.1</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="Nacos-Jar运行"><a href="#Nacos-Jar运行" class="headerlink" title="Nacos Jar运行"></a>Nacos Jar运行</h3><ul>
+<li><p>下载nacos</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://github.com/alibaba/nacos/releases/download/1.3.1/nacos-server-1.3.1.tar.gz</span></span><br></pre></td></tr></table></figure></li>
+<li><p>运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="安装Docker-compose"><a href="#安装Docker-compose" class="headerlink" title="安装Docker-compose"></a>安装Docker-compose</h3><ul>
+<li><p>下载</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -L https://github.com/docker/compose/releases/download/1.25.1/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<li><p>Github速度过慢，使用代理地址</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.1/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<li><p>设置可运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<li><p>查看是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><ul>
+<li><p>添加Nginx到YUM源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Nginx</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>启动Nginx</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl start nginx.service</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+  </entry>
 </search>
