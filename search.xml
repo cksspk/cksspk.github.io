@@ -1837,6 +1837,17 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen       80;</span><br><span class="line">     server_name  localhost;</span><br><span class="line"></span><br><span class="line"> 	<span class="comment"># 监听域名中带有group的，交给FastDFS模块处理</span></span><br><span class="line">     location ~/group([0-9])/ &#123;</span><br><span class="line">         ngx_fastdfs_module;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>重启Nginx</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+<h2 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h2><p>使用自带的client进行测试上传</p>
+<p>复制 配置文件 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp /etc/fdfs/client.conf.sample /etc/fdfs/client.conf</span><br></pre></td></tr></table></figure>
+<p>有两处需要修改的地方</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">base_path = /data/fdfs/client</span><br><span class="line"><span class="comment"># 因为是在本机测试，直接写了本地127</span></span><br><span class="line">tracker_server = 127.0.0.1:22122</span><br></pre></td></tr></table></figure>
+<p>然后新建文件上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello &gt; aa.txt</span><br></pre></td></tr></table></figure>
+<p>上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdfs_test /etc/fdfs/client.conf upload aa.txt</span><br></pre></td></tr></table></figure>
+<p>上传成功如下</p>
+<p><img src="/2021/10/08/fastdfs-1/5.png"></p>
 ]]></content>
       <categories>
         <category>tool</category>
@@ -1848,7 +1859,8 @@
     <content><![CDATA[<p>使用docker快速安装开发中常用软件, 如 <code>mysql</code> <code>redis</code> </p>
 <a id="more"></a>
 
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="zsh-amp-oh-my-zsh"><a href="#zsh-amp-oh-my-zsh" class="headerlink" title="zsh &amp; oh-my-zsh"></a>zsh &amp; oh-my-zsh</h3><ul>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="zsh-amp-oh-my-zsh"><a href="#zsh-amp-oh-my-zsh" class="headerlink" title="zsh &amp; oh-my-zsh"></a>zsh &amp; oh-my-zsh</h3><p>用户帮助提升命令行操作，普通用户和root用户需要单独配置</p>
+<ul>
 <li><p>安装软件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. 安装zsh</span><br><span class="line">sudo yum install zsh</span><br><span class="line">2. 使用zsh替换bash</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">3. 安装oh-my-zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>配置oh-my-zsh插件</p>
@@ -1920,7 +1932,8 @@
 <li><p>启动</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data \</span><br><span class="line">-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-d redis redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></li>
 <li><p>Redis配置文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">redis.conf</span><br></pre></td></tr></table></figure></li>
+<p>配置文件地址：<a href="https://raw.githubusercontent.com/cksspk/data/main/redis.conf">地址</a></p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span></span><br></pre></td></tr></table></figure></li>
 <li><p>使用 redis 镜像执行 redis-cli 命令连接</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it redis redis-cli</span><br></pre></td></tr></table></figure>
 
