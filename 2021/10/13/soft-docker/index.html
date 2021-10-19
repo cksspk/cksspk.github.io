@@ -28,7 +28,7 @@
 <meta property="og:description" content="使用docker快速安装开发中常用软件, 如 mysql redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-13T08:21:03.000Z">
-<meta property="article:modified_time" content="2021-10-13T09:06:15.196Z">
+<meta property="article:modified_time" content="2021-10-18T03:17:44.170Z">
 <meta property="article:author" content="cksspk">
 <meta name="twitter:card" content="summary">
 
@@ -210,10 +210,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-13 16:21:03 / 修改时间：17:06:15" itemprop="dateCreated datePublished" datetime="2021-10-13T16:21:03+08:00">2021-10-13</time>
+              <time title="创建时间：2021-10-13 16:21:03" itemprop="dateCreated datePublished" datetime="2021-10-13T16:21:03+08:00">2021-10-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-18 11:17:44" itemprop="dateModified" datetime="2021-10-18T11:17:44+08:00">2021-10-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -241,7 +247,11 @@
 <h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="zsh-amp-oh-my-zsh"><a href="#zsh-amp-oh-my-zsh" class="headerlink" title="zsh &amp; oh-my-zsh"></a>zsh &amp; oh-my-zsh</h3><p>用户帮助提升命令行操作，普通用户和root用户需要单独配置</p>
 <ul>
 <li><p>安装软件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 安装zsh</span><br><span class="line">sudo yum install zsh</span><br><span class="line">2. 使用zsh替换bash</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">3. 安装oh-my-zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install zsh</span><br></pre></td></tr></table></figure>
+<p>使用zsh替换bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+<p>安装oh-my-zsh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>配置oh-my-zsh插件</p>
 <ul>
 <li><p>语法高亮 zsh-syntax-highlighting</p>
@@ -280,7 +290,7 @@
 <li><p>设置开机自启</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure></li>
 <li><p>配置加速</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">&#x27;EOF&#x27;</span> </span><br><span class="line">&#123; </span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://nj684hki.mirror.aliyuncs.com&quot;</span>] </span><br><span class="line">&#125; </span><br><span class="line">EOF </span><br><span class="line">sudo systemctl daemon-reload </span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://epe5w6qf.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li>
 <li><p>添加当前用户到Docker组</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> docker</span><br></pre></td></tr></table></figure>
 <p>添加完后需要重新启动Docker</p>
@@ -292,13 +302,13 @@
 <h3 id="Docker-Mysql"><a href="#Docker-Mysql" class="headerlink" title="Docker-Mysql"></a>Docker-Mysql</h3><ul>
 <li><p>下载镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure></li>
+<li><p>配置Mysql文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /mydata/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=<span class="string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span> </span><br><span class="line">init_connect=<span class="string">&#x27;SET NAMES utf8&#x27;</span> </span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></li>
 <li><p>创建实例并启动</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306 --name mysql \</span><br><span class="line">-v /mydata/mysql/<span class="built_in">log</span>:/var/<span class="built_in">log</span>/mysql \</span><br><span class="line">-v /mydata/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /mydata/mysql/conf:/etc/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=root \</span><br><span class="line">-d mysql:5.7</span><br></pre></td></tr></table></figure>
 <p>参数说明<br>-p 3306:3306：将容器的 3306 端口映射到主机的 3306 端口<br>-v /mydata/mysql/conf:/etc/mysql：将配置文件夹挂载到主机<br>-v /mydata/mysql/log:/var/log/mysql：将日志文件夹挂载到主机<br>-v /mydata/mysql/data:/var/lib/mysql/：将配置文件夹挂载到主机<br>-e MYSQL_ROOT_PASSWORD=root：初始化 root 用户的密码</p>
 </li>
-<li><p>配置Mysql文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /mydata/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=<span class="string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span> </span><br><span class="line">init_connect=<span class="string">&#x27;SET NAMES utf8&#x27;</span> </span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></li>
 <li><p>通过容器的 mysql 命令行工具连接</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mysql mysql -uroot -proot</span><br></pre></td></tr></table></figure></li>
 <li><p>设置 root 远程访问</p>
@@ -312,9 +322,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data \</span><br><span class="line">-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-d redis redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></li>
 <li><p>Redis配置文件</p>
 <p>配置文件地址：<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/cksspk/data/main/redis.conf">地址</a></p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span></span><br></pre></td></tr></table></figure>
+<p>下载命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O redis.conf https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span><br></pre></td></tr></table></figure></li>
 <li><p>使用 redis 镜像执行 redis-cli 命令连接</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it redis redis-cli</span><br></pre></td></tr></table></figure>
+
+<p>密码验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth $&#123;passwd&#125;</span><br></pre></td></tr></table></figure>
+
 
 
 </li>
@@ -343,7 +359,9 @@
 <li><p>Github速度过慢，使用代理地址</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.1/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
 <li><p>设置可运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>如何不成功，创建软连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
 <li><p>查看是否安装成功</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
 
@@ -379,7 +397,10 @@
     <a href="/2021/10/08/fastdfs-1/" rel="prev" title="fastdfs">
       <i class="fa fa-chevron-left"></i> fastdfs
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/18/prometheus/" rel="next" title="基于docker 搭建Prometheus+Grafana">
+      基于docker 搭建Prometheus+Grafana <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -454,14 +475,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

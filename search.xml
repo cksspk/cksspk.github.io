@@ -1862,7 +1862,11 @@
 <h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="zsh-amp-oh-my-zsh"><a href="#zsh-amp-oh-my-zsh" class="headerlink" title="zsh &amp; oh-my-zsh"></a>zsh &amp; oh-my-zsh</h3><p>用户帮助提升命令行操作，普通用户和root用户需要单独配置</p>
 <ul>
 <li><p>安装软件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. 安装zsh</span><br><span class="line">sudo yum install zsh</span><br><span class="line">2. 使用zsh替换bash</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">3. 安装oh-my-zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install zsh</span><br></pre></td></tr></table></figure>
+<p>使用zsh替换bash</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+<p>安装oh-my-zsh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>配置oh-my-zsh插件</p>
 <ul>
 <li><p>语法高亮 zsh-syntax-highlighting</p>
@@ -1901,7 +1905,7 @@
 <li><p>设置开机自启</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure></li>
 <li><p>配置加速</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">&#x27;EOF&#x27;</span> </span><br><span class="line">&#123; </span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://nj684hki.mirror.aliyuncs.com&quot;</span>] </span><br><span class="line">&#125; </span><br><span class="line">EOF </span><br><span class="line">sudo systemctl daemon-reload </span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://epe5w6qf.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li>
 <li><p>添加当前用户到Docker组</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> docker</span><br></pre></td></tr></table></figure>
 <p>添加完后需要重新启动Docker</p>
@@ -1913,13 +1917,13 @@
 <h3 id="Docker-Mysql"><a href="#Docker-Mysql" class="headerlink" title="Docker-Mysql"></a>Docker-Mysql</h3><ul>
 <li><p>下载镜像</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure></li>
+<li><p>配置Mysql文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /mydata/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=<span class="string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span> </span><br><span class="line">init_connect=<span class="string">&#x27;SET NAMES utf8&#x27;</span> </span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></li>
 <li><p>创建实例并启动</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -p 3306:3306 --name mysql \</span><br><span class="line">-v /mydata/mysql/<span class="built_in">log</span>:/var/<span class="built_in">log</span>/mysql \</span><br><span class="line">-v /mydata/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /mydata/mysql/conf:/etc/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=root \</span><br><span class="line">-d mysql:5.7</span><br></pre></td></tr></table></figure>
 <p>参数说明<br>-p 3306:3306：将容器的 3306 端口映射到主机的 3306 端口<br>-v /mydata/mysql/conf:/etc/mysql：将配置文件夹挂载到主机<br>-v /mydata/mysql/log:/var/log/mysql：将日志文件夹挂载到主机<br>-v /mydata/mysql/data:/var/lib/mysql/：将配置文件夹挂载到主机<br>-e MYSQL_ROOT_PASSWORD=root：初始化 root 用户的密码</p>
 </li>
-<li><p>配置Mysql文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /mydata/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=<span class="string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span> </span><br><span class="line">init_connect=<span class="string">&#x27;SET NAMES utf8&#x27;</span> </span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></li>
 <li><p>通过容器的 mysql 命令行工具连接</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mysql mysql -uroot -proot</span><br></pre></td></tr></table></figure></li>
 <li><p>设置 root 远程访问</p>
@@ -1933,9 +1937,15 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data \</span><br><span class="line">-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-d redis redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></li>
 <li><p>Redis配置文件</p>
 <p>配置文件地址：<a href="https://raw.githubusercontent.com/cksspk/data/main/redis.conf">地址</a></p>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span></span><br></pre></td></tr></table></figure>
+<p>下载命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O redis.conf https://raw.githubusercontent.com/cksspk/data/main/redis.conf</span><br></pre></td></tr></table></figure></li>
 <li><p>使用 redis 镜像执行 redis-cli 命令连接</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it redis redis-cli</span><br></pre></td></tr></table></figure>
+
+<p>密码验证</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">auth $&#123;passwd&#125;</span><br></pre></td></tr></table></figure>
+
 
 
 </li>
@@ -1964,7 +1974,9 @@
 <li><p>Github速度过慢，使用代理地址</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.1/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
 <li><p>设置可运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>如何不成功，创建软连接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
 <li><p>查看是否安装成功</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
 
@@ -1986,5 +1998,70 @@
       <categories>
         <category>tool</category>
       </categories>
+  </entry>
+  <entry>
+    <title>基于docker 搭建Prometheus+Grafana</title>
+    <url>/2021/10/18/prometheus/</url>
+    <content><![CDATA[<h1 id="基于docker-搭建Prometheus-Grafana"><a href="#基于docker-搭建Prometheus-Grafana" class="headerlink" title="基于docker 搭建Prometheus+Grafana"></a>基于docker 搭建Prometheus+Grafana</h1><a id="more"></a>
+
+<p>Prometheus（普罗米修斯）是一套开源的监控&amp;报警&amp;时间序列数据库的组合。</p>
+<p>Prometheus基本原理是通过HTTP协议周期性抓取被监控组件的状态，这样做的好处是任意组件只要提供HTTP接口就可以接入监控系统，不需要任何SDK或者其他的集成过程。这样做非常适合虚拟化环境比如VM或者Docker 。</p>
+<h2 id="使用Docker-compose一键安装"><a href="#使用Docker-compose一键安装" class="headerlink" title="使用Docker-compose一键安装"></a>使用Docker-compose一键安装</h2><h3 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h3><p>编写 <code>docker-compose.yml</code>文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># prometheus</span></span><br><span class="line">  <span class="attr">prometheus:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">prometheus</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">prom/prometheus</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9090:9090&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./prometheus/:/etc/prometheus/</span></span><br><span class="line">  <span class="comment"># node-exporter 监控linux服务器信息</span></span><br><span class="line">  <span class="attr">node-exporter:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">node-exporter</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">prom/node-exporter</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">&quot;host&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/proc:/host/proc:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/sys:/host/sys:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/:/rootfs:ro</span></span><br><span class="line">    <span class="attr">networks:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">host</span></span><br><span class="line">  <span class="comment">#grafana 可视化仪表盘</span></span><br><span class="line">  <span class="attr">grafana:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">grafana</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">grafana/grafana</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3000:3000&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./grafana/grafana-storage:/var/lib/grafana</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./grafana:/var/log/grafana</span></span><br></pre></td></tr></table></figure>
+<h4 id="prometheus-配置"><a href="#prometheus-配置" class="headerlink" title="prometheus 配置"></a>prometheus 配置</h4><p>创建prometheus.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim prometheus.yml</span><br></pre></td></tr></table></figure>
+<p>写入内容，<code>IP</code>需要修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">global:</span><br><span class="line">  scrape_interval:     60s</span><br><span class="line">  evaluation_interval: 60s</span><br><span class="line"> </span><br><span class="line">scrape_configs:</span><br><span class="line">  - job_name: prometheus</span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [<span class="string">&#x27;xxx:9090&#x27;</span>]</span><br><span class="line">        labels:</span><br><span class="line">          instance: prometheus</span><br><span class="line">  - job_name: linux</span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [<span class="string">&#x27;xxx:9100&#x27;</span>]</span><br><span class="line">        labels:</span><br><span class="line">          instance: localhost</span><br></pre></td></tr></table></figure>
+<h4 id="grafana-配置"><a href="#grafana-配置" class="headerlink" title="grafana 配置"></a>grafana 配置</h4><p>创建配置文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p grafana/grafana-storage</span><br></pre></td></tr></table></figure>
+<p>赋予权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 777 -R grafana/grafana-storage</span><br></pre></td></tr></table></figure>
+<h3 id="启动docker-compose"><a href="#启动docker-compose" class="headerlink" title="启动docker-compose"></a>启动docker-compose</h3><p>启动命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d </span><br></pre></td></tr></table></figure>
+<p>即成功</p>
+<h2 id="Docker逐个安装"><a href="#Docker逐个安装" class="headerlink" title="Docker逐个安装"></a>Docker逐个安装</h2><h3 id="安装运行Prometheus-docker版"><a href="#安装运行Prometheus-docker版" class="headerlink" title="安装运行Prometheus(docker版)"></a>安装运行Prometheus(docker版)</h3><h4 id="创建配置文件-1"><a href="#创建配置文件-1" class="headerlink" title="创建配置文件"></a>创建配置文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">touch /mydata/prometheus/prometheus.yml</span><br></pre></td></tr></table></figure>
+<h4 id="运行Docker命令"><a href="#运行Docker命令" class="headerlink" title="运行Docker命令"></a>运行Docker命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker run --name prometheus   \</span><br><span class="line">    -d -p 9090:9090 \</span><br><span class="line">    -v /mydata/prometheus/:/etc/prometheus/ \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
+<h3 id="安装运行node-exporter"><a href="#安装运行node-exporter" class="headerlink" title="安装运行node exporter"></a>安装运行node exporter</h3><p>Prometheus只是一个监控系统，需要配置监控的数据来源。这里使用 <code>node exporter</code>作为数据指标来源</p>
+<h4 id="启动node-exporter"><a href="#启动node-exporter" class="headerlink" title="启动node-exporter"></a>启动node-exporter</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name=node-exporter \</span><br><span class="line">  -v <span class="string">&quot;/proc:/host/proc:ro&quot;</span> \</span><br><span class="line">  -v <span class="string">&quot;/sys:/host/sys:ro&quot;</span> \</span><br><span class="line">  -v <span class="string">&quot;/:/rootfs:ro&quot;</span> \</span><br><span class="line">  --net=<span class="string">&quot;host&quot;</span> \</span><br><span class="line">  prom/node-exporter</span><br></pre></td></tr></table></figure>
+<p>配置监控关联，编辑<code>prometheus</code>配置文件<code>prometheus.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">global:</span><br><span class="line">  scrape_interval:     60s</span><br><span class="line">  evaluation_interval: 60s</span><br><span class="line"> </span><br><span class="line">scrape_configs:</span><br><span class="line">  - job_name: prometheus</span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [<span class="string">&#x27;xxx:9090&#x27;</span>]</span><br><span class="line">        labels:</span><br><span class="line">          instance: prometheus</span><br><span class="line">  - job_name: linux</span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [<span class="string">&#x27;xxx:9100&#x27;</span>]</span><br><span class="line">        labels:</span><br><span class="line">          instance: localhost</span><br></pre></td></tr></table></figure>
+<p>修改配置后，重启 <code>prometheus</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker restart prometheus</span><br></pre></td></tr></table></figure>
+<p> 在浏览器访问界面</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">http://xxxx:9090/targets</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/10/18/prometheus/1.png"></p>
+<h3 id="安装Grafana展示"><a href="#安装Grafana展示" class="headerlink" title="安装Grafana展示"></a>安装Grafana展示</h3><p>使用<code>Grafana</code>进行指标数据可视化</p>
+<h4 id="创建配置文件-2"><a href="#创建配置文件-2" class="headerlink" title="创建配置文件"></a>创建配置文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p /mydata/grafana/grafana-storage</span><br></pre></td></tr></table></figure>
+<p>因为 <code>grafana</code> 用户会写文件，需要给目录设置权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 777 -R /mydata/grafana/grafana-storage</span><br></pre></td></tr></table></figure>
+<h4 id="启动Grafana"><a href="#启动Grafana" class="headerlink" title="启动Grafana"></a>启动Grafana</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name grafana \</span><br><span class="line">    -d -p 3000:3000 \</span><br><span class="line">    -v /mydata/grafana/grafana-storage:/var/lib/grafana \</span><br><span class="line">    grafana/grafana</span><br></pre></td></tr></table></figure>
+<p>默认登录账户和密码都是admin。进入页面如下所示</p>
+<p><img src="/2021/10/18/prometheus/2.png"></p>
+<p>要使用 Grafana，第一步当然是要配置数据源，告诉 Grafana 从哪里取数据，在<strong>Configuration</strong>下点击 <strong>Add data source</strong> 进入数据源的配置页面</p>
+<p><img src="/2021/10/18/prometheus/3.png"></p>
+<p>填入数据</p>
+<ul>
+<li>Name: prometheus</li>
+<li>Type: Prometheus</li>
+<li>URL: <a href="http://localhost/">http://localhost</a>:9090</li>
+<li>Access: Browser</li>
+</ul>
+<p>在<code>Setting</code>右侧点击<code>Dashboards</code>导入模版</p>
+<p><img src="/2021/10/18/prometheus/4.png"></p>
+<p>点击 Promtheus2.0 Status 进入仪表盘</p>
+<p><img src="/2021/10/18/prometheus/6.png"></p>
+<h4 id="导入第三方仪表盘"><a href="#导入第三方仪表盘" class="headerlink" title="导入第三方仪表盘"></a>导入第三方仪表盘</h4><p>在 <code>Import</code>打开导入界面，其中下面的库地址上有很对预置的仪表盘</p>
+<p>库地址： <a href="https://grafana.com/grafana/dashboards/">https://grafana.com/grafana/dashboards/</a></p>
+<p>这里选择编号 8919 使用</p>
+<p><img src="/2021/10/18/prometheus/7.png"></p>
+<p><strong>Load</strong>后如下所示</p>
+<p><img src="/2021/10/18/prometheus/8.png"></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
   </entry>
 </search>
