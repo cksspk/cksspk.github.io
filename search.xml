@@ -1612,16 +1612,13 @@
   <entry>
     <title>Idea 插件</title>
     <url>/2021/09/18/ideaplug/</url>
-    <content><![CDATA[<h3 id="Idea插件"><a href="#Idea插件" class="headerlink" title="Idea插件"></a>Idea插件</h3><a id="more"></a>
+    <content><![CDATA[<h1 id="Idea插件"><a href="#Idea插件" class="headerlink" title="Idea插件"></a>Idea插件</h1><a id="more"></a>
 
-<ul>
-<li><p><code>Translation</code>  翻译插件</p>
-</li>
-<li><p><code>Free mybatis plugin</code> 从mapper快速跳转到xml</p>
-</li>
-<li><p><code>.ignore</code> 快速新建 ingore文件</p>
-</li>
-</ul>
+<h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>翻译插件</p>
+<h2 id="Free-mybatis-plugin"><a href="#Free-mybatis-plugin" class="headerlink" title="Free mybatis plugin"></a>Free mybatis plugin</h2><p>从mapper快速跳转到xml</p>
+<h2 id="ignore"><a href="#ignore" class="headerlink" title=".ignore"></a>.ignore</h2><p>快速新建 ingore文件</p>
+<h1 id="Rainbow-Brackets"><a href="#Rainbow-Brackets" class="headerlink" title="Rainbow Brackets"></a>Rainbow Brackets</h1><p>彩虹括号，增强视觉体验</p>
+<h2 id="Codota"><a href="#Codota" class="headerlink" title="Codota"></a>Codota</h2><p>智能代码提示</p>
 ]]></content>
       <categories>
         <category>开发工具</category>
@@ -2062,6 +2059,29 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker compose搭建nexus私服</title>
+    <url>/2021/10/21/maven%E7%A7%81%E6%9C%8Dnexus3/</url>
+    <content><![CDATA[<p>Sonatype Nexus是一个流行的存储库管理器，使用docker搭建nexus3私服。</p>
+<a id="more"></a>
+
+<h2 id="Docker搭建Nexus3"><a href="#Docker搭建Nexus3" class="headerlink" title="Docker搭建Nexus3"></a>Docker搭建Nexus3</h2><h3 id="配置docker-compose文件"><a href="#配置docker-compose文件" class="headerlink" title="配置docker-compose文件"></a>配置docker-compose文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&quot;3&quot;</span></span><br><span class="line">services:</span><br><span class="line">  nexus:</span><br><span class="line">    container_name: nexus3</span><br><span class="line">    image: sonatype/nexus3</span><br><span class="line">    environment:</span><br><span class="line">      - TZ=Asia/Shanghai</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;8081:8081&quot;</span></span><br><span class="line">    privileged: <span class="literal">true</span> </span><br><span class="line">    volumes:</span><br><span class="line">      - ./nexus-data:/nexus-data</span><br></pre></td></tr></table></figure>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d </span><br></pre></td></tr></table></figure>
+<h3 id="启动后配置文件夹权限"><a href="#启动后配置文件夹权限" class="headerlink" title="启动后配置文件夹权限"></a>启动后配置文件夹权限</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 777 ././nexus-data</span><br></pre></td></tr></table></figure>
+<h2 id="Nexus3配置Maven私服"><a href="#Nexus3配置Maven私服" class="headerlink" title="Nexus3配置Maven私服"></a>Nexus3配置Maven私服</h2><h3 id="仓库类型"><a href="#仓库类型" class="headerlink" title="仓库类型"></a>仓库类型</h3><p>Nexus仓库类型主要分为以下3个：</p>
+<ul>
+<li>proxy(代理仓库)：用来代理远程的公共仓库，默认是从远程中央仓库中寻找数据的仓库。</li>
+<li>hosted(宿主仓库)：用来部署我们自己项目打包的构建，供内部人员下载。它负责上传包</li>
+<li>group(仓库组)：用来合并多个hosted/proxy仓库，都加入到“maven-public”仓库组中，下载时按配置顺序从中依次查找。用于方便开发人员自己设定的仓库。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>Dcoker</tag>
       </tags>
   </entry>
 </search>
